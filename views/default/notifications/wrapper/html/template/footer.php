@@ -1,22 +1,30 @@
 <?php
 
-$params = elgg_extract('params', $vars, []);
-$notification = elgg_extract('notification', $params);
+$email = elgg_extract('email', $vars);
 
-if (!$notification) {
+if (!$email instanceof \Elgg\Email) {
 	return;
 }
 
-$recipient = $notification->getRecipient();
+$to = $email->getTo()->getEmail();
+$users = get_user_by_email($to);
+if (!$users) {
+	return;
+}
+
+$recipient = array_shift($users);
 
 $site = elgg_get_site_entity();
+
 $site_link = elgg_view('output/url', array(
 	'href' => $site->getURL(),
 	'text' => $site->name,
 ));
 
 $settings_link = elgg_view('output/url', array(
-	'href' => "notifications/personal/$recipient->username",
+	'href' => elgg_generate_url('settings:notification:personal', [
+		'username' => $recipient->username,
+	]),
 	'text' => elgg_echo('notifications:footer:link'),
 ));
 

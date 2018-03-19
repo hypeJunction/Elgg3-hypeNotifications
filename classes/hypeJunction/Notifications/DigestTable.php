@@ -2,6 +2,12 @@
 
 namespace hypeJunction\Notifications;
 
+use DatabaseException;
+use Elgg\Application\Database;
+use Elgg\Database\Delete;
+use Elgg\Database\Insert;
+use Elgg\Database\Select;
+use Elgg\Database\Update;
 use stdClass;
 
 /**
@@ -9,23 +15,30 @@ use stdClass;
  */
 class DigestTable {
 
-	private $table;
+	/**
+	 * @var callable
+	 */
 	private $row_callback;
+
+	/**
+	 * @var Database
+	 */
+	protected $db;
 
 	/**
 	 * Constructor
 	 */
-	public function __construct() {
-		$dpbrefix = elgg_get_config('dbprefix');
-		$this->table = "{$dpbrefix}digest";
+	public function __construct(Database $database) {
+		$this->db = $database;
 		$this->row_callback = [$this, 'rowToNotification'];
 	}
 
 	/**
 	 * Convert DB row to an instance of Notification
-	 * 
+	 *
 	 * @param stdClass $row DB row
-	 * @return Notification
+	 *
+	 * @return DigestNotification
 	 */
 	public function rowToNotification(stdClass $row) {
 		return new DigestNotification($row);
@@ -33,71 +46,64 @@ class DigestTable {
 
 	/**
 	 * Get notification by its ID
-	 * 
+	 *
 	 * @param int $id ID
-	 * @return Notification|false
+	 *
+	 * @return DigestNotification|false
+	 * @throws DatabaseException
 	 */
 	public function get($id) {
-		$query = "
-			SELECT * FROM {$this->table}
-			WHERE id = :id
-		";
 
-		$params = [
-			':id' => $id,
-		];
+		$qb = Select::fromTable('digest');
+		$qb->select('*')
+			->where($qb->compare('id', '=', $id, ELGG_VALUE_INTEGER));
 
-		return get_data_row($query, $this->row_callback, $params) ? : false;
+		return $this->db->getDataRow($qb, $this->row_callback) ? : false;
 	}
 
 	/**
 	 * Get user notifications
 	 *
 	 * @param array $options Options
-	 * @return Notification[]|false
+	 *
+	 * @return DigestNotification[]|false
+	 * @throws DatabaseException
 	 */
 	public function getAll(array $options = []) {
 
 		$recipient_guid = elgg_extract('recipient_guid', $options);
 		$time_scheduled = elgg_extract('time_scheduled', $options, time());
-		
-		$query = "
-			SELECT * FROM {$this->table} nt
-			WHERE nt.recipient_guid = :recipient_guid
-			ORDER BY nt.time_created ASC
-			LIMIT 0, 100
-		";
 
-		$params = [
-			':recipient_guid' => (int) $recipient_guid,
-			':time_scheduled' => (int) $time_scheduled,
-		];
+		$qb = Select::fromTable('digest');
+		$qb->select('*')
+			->where($qb->compare('recipient_guid', '=', (int) $recipient_guid, ELGG_VALUE_INTEGER))
+			->orderBy('time_created', 'asc')
+			->setMaxResults(100);
 
-		return get_data($query, $this->row_callback, $params);
+		return $this->db->getData($qb, $this->row_callback);
 	}
 
 	/**
 	 * Get recipients who have pending digest notifications
 	 *
 	 * @param array $options Options
+	 *
 	 * @return array
+	 * @throws DatabaseException
 	 */
 	public function getRecipients(array $options = []) {
 
 		$recipients = [];
 
 		$time_scheduled = elgg_extract('time_scheduled', $options, time());
-		$query = "
-			SELECT recipient_guid FROM {$this->table}
-			WHERE time_scheduled <= :time_scheduled
-			GROUP BY recipient_guid
-		";
 
-		$params = [
-			':time_scheduled' => (int) $time_scheduled,
-		];
+		$qb = Select::fromTable('digest');
+		$qb->select('recipient_guid')
+			->where($qb->compare('time_scheduled', '<=', $time_scheduled, ELGG_VALUE_INTEGER))
+			->groupBy('recipient_guid');
 
-		$data = get_data($query, null, $params);
+		$data = $this->db->getData($qb);
+
 		foreach ($data as $row) {
 			$recipients[] = $row->recipient_guid;
 		}
@@ -109,68 +115,54 @@ class DigestTable {
 	 * Insert row
 	 *
 	 * @param DigestNotification $notification Notification
+	 *
 	 * @return int|false
+	 * @throws DatabaseException
 	 */
 	public function insert(DigestNotification $notification) {
 
-		$query = "
-			INSERT INTO {$this->table}
-			SET recipient_guid = :recipient_guid,
-				time_created = :time_created,
-				time_scheduled = :time_scheduled,
-				data = :data
-		";
+		$qb = Insert::intoTable('digest');
+		$qb->values([
+			'recipient_guid' => $qb->param($notification->recipient_guid, ELGG_VALUE_INTEGER),
+			'time_created' => $qb->param($notification->time_created, ELGG_VALUE_INTEGER),
+			'time_scheduled' => $qb->param($notification->time_scheduled, ELGG_VALUE_INTEGER),
+			'data' => $qb->param(serialize($notification->data), ELGG_VALUE_STRING),
+		]);
 
-		$params = [
-			':recipient_guid' => (int) $notification->recipient_guid,
-			':time_created' => (int) $notification->time_created,
-			':time_scheduled' => $notification->time_scheduled,
-			':data' => serialize($notification->data),
-		];
-
-		return insert_data($query, $params);
+		return $this->db->insertData($qb);
 	}
 
 	/**
 	 * Update database row
 	 *
 	 * @param DigestNotification $notification Notification
+	 *
 	 * @return bool
+	 * @throws DatabaseException
 	 */
 	public function update(DigestNotification $notification) {
 
-		$query = "
-			UPDATE {$this->table}
-			SET time_scheduled = :time_scheduled,
-			WHERE id = :id
-		";
+		$qb = Update::table('digest');
+		$qb->set('time_scheduled', $qb->param($notification->time_scheduled, ELGG_VALUE_INTEGER))
+			->where($qb->compare('id', '=', $notification->id, ELGG_VALUE_INTEGER));
 
-		$params = [
-			':id' => (int) $notification->id,
-			':time_scheduled' => $notification->time_scheduled,
-		];
-
-		return update_data($query, $params);
+		return $this->db->updateData($qb);
 	}
 
 	/**
 	 * Delete row
 	 *
 	 * @param int $id ID
+	 *
 	 * @return bool
+	 * @throws DatabaseException
 	 */
 	public function delete($id) {
 
-		$query = "
-			DELETE FROM {$this->table}
-			WHERE id = :id
-		";
+		$qb = Delete::fromTable('digest');
+		$qb->where($qb->compare('id', '=', $id, ELGG_VALUE_INTEGER));
 
-		$params = [
-			':id' => (int) $id,
-		];
-
-		return delete_data($query, $params);
+		return $this->db->deleteData($qb);
 	}
 
 }

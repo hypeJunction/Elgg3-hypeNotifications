@@ -2,8 +2,13 @@
 /**
  * Template borrowed from https://github.com/mailgun/transactional-email-templates
  */
-$title = elgg_extract('subject', $vars);
-$body = elgg_extract('body', $vars);
+$email = elgg_extract('email', $vars);
+if (!$email instanceof \Elgg\Email) {
+    return;
+}
+
+$title = $email->getSubject();
+$body = $email->getBody();
 $body = elgg_autop($body);
 
 $header = elgg_view('notifications/wrapper/html/template/header', $vars);

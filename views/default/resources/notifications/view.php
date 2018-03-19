@@ -3,6 +3,7 @@
 elgg_gatekeeper();
 
 $id = elgg_extract('id', $vars);
+
 $notification = hypeapps_get_notification_by_id($id);
 
 if (!$notification instanceof \hypeJunction\Notifications\Notification) {

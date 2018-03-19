@@ -54,12 +54,14 @@ class DigestNotification extends ElggData {
 	public function save() {
 		$id = $this->id;
 
-		$svc = DigestService::getInstance();
+		$table = elgg()->{'db.digest'};
+		/* @var $table DigestTable */
+
 		if (!$id) {
 			$this->set('time_created', time());
-			return $svc->getTable()->insert($this);
+			return $table->insert($this);
 		} else {
-			return $svc->getTable()->update($this);
+			return $table->update($this);
 		}
 	}
 
@@ -124,8 +126,10 @@ class DigestNotification extends ElggData {
 	 * {@inheritdoc}
 	 */
 	public function delete() {
-		$svc = DigestService::getInstance();
-		return $svc->getTable()->delete($this->id);
+		$table = elgg()->{'db.digest'};
+		/* @var $table DigestTable */
+
+		return $table->delete($this->id);
 	}
 
 	/**

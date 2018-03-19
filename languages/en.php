@@ -62,10 +62,10 @@ return [
 	'notification:instant:invite:group:default' => 'Someone invites you to join a group',
 	'notification:instant:create:object:comment' => 'Someone comments on your content',
 
-	'notifications:subscriptions' => 'Activity notifications',
-	'notifications:subscriptions:title' => 'Notifications about activity related to you and your content',
-	'notifications:instant' => 'Personal notifications',
-	'notifications:instant:title' => 'Notifications about your friends and groups',
+	'notifications:digest:subscriptions' => 'Activity notifications',
+	'notifications:digest:subscriptions:title' => 'Notifications about activities performed by your friends and groups',
+	'notifications:digest:instant' => 'Personal notifications',
+	'notifications:digest:instant:title' => 'Notifications about activities performed on your content',
 
 	'notifications:settings:digest:success' => 'Notification settings have been saved successfully',
 
@@ -73,15 +73,13 @@ return [
 	'notifications:digest:body_intro' => 'Here is the digest of your email notifications from %s',
 
 	'notifications:settings:enable_html_emails' => 'Enable HTML emails',
-	
+
+	'notifications:settings:empty' => 'This transport does not require further configuration',
 	'notifications:settings:transport_settings' => 'Transport Settings',
-	'notifications:settings:from_email' => 'From Email',
-	'notifications:settings:from_email:help' => 'An email address to use for outgoing email notifications, if different from site email',
-	'notifications:settings:from_name' => 'From Name',
-	'notifications:settings:from_name:help' => 'Name to use for outgoing email notifications, if different from site name',
 	'notifications:settings:transport' => 'Email Transport',
 	'notifications:settings:transport:sendmail' => 'Sendmail',
 	'notifications:settings:transport:file' => 'File Transport',
+	'notifications:settings:transport:file:help' => 'Messages will be stored on disk at %s',
 	'notifications:settings:transport:smtp' => 'SMTP',
 	'notifications:settings:transport:help' => 'Select, which transport should be used to deliver outgoing emails. Use File Transport to disable outgoing emails and'
 	. ' write them to filestore instead. Sendmail is the default transport. Configure your SMTP server details below, if choosing SMTP option',
@@ -115,7 +113,7 @@ return [
 	'notifications:settings:staging_domains:help' => 'Enter one domain per line. Only these domains (in addition to staging emails) will be receiving emails when the site is in the staging mode.',
 
 	'notifications:settings:staging_catch_all' => 'Staging catch-all email address',
-	'notifications:settings:staging_catch_all:help' => 'If provided, all system emails and notifications (to non-whitelisted addresses) will be forwarded to this email address. Leave empty to write emails to disk with the file transport.',
+	'notifications:settings:staging_catch_all:help' => 'If provided, all system emails and notifications (to non-whitelisted addresses) will be forwarded to this email address.',
 
 	'notifications:footer:link' => 'here',
 	'notifications:footer' => 'This email has been sent by %s.<br />You can modify your notification preferences %s.<br />Please do not reply to this email.',
@@ -125,8 +123,8 @@ return [
 
 	'notifications:no_results' => 'You do not have any notifications yet',
 
-	'admin:upgrades:notifications:notifier' => 'Migrate notifier notifications',
-	'admin:upgrades:notifications:notifier:description' => 'Migrate notification entities created by the notifier plugin to the new database table and clean up redundnant entities upon completion',
+	'hypeNotifications:upgrade:2018030800:title' => 'Migrate notifier notifications',
+	'hypeNotifications:upgrade:2018030800:description' => 'Migrate notification entities created by the notifier plugin to the new database table and clean up redundnant entities upon completion',
 
 	'notifications:settings:ticker' => 'Ticker timeout',
 	'notifications:settings:ticker:help' => '
@@ -134,5 +132,13 @@ return [
 		Set to 0 to disable automatic updates.
 		You may need to flush your caches for the changes to take effect.
 	',
+
+	'notifications:settings:sparkpost:api_key' => 'SparkPost API key',
+	'notifications:settings:mailgun:api_key' => 'Mailgun API key',
+	'notifications:settings:mailgun:domain' => 'Mailgun Domain',
+	'notifications:settings:sendgrid:api_key' => 'SendGrid API key',
+
+	'notifications:settings:from_email' => 'From Email',
+	'notifications:settings:from_email:help' => 'Override email from which all emails are sent',
 
 ];

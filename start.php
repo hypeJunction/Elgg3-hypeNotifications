@@ -5,78 +5,56 @@
  *
  * Enhanced on-site and off-site notifications
  *
- * @author Ismayil Khayredinov <info@hypejunction.com>
- * @copyright Copyright (c) 2017, Ismayil Khayredinov
+ * @author    Ismayil Khayredinov <info@hypejunction.com>
+ * @copyright Copyright (c) 2017-2018, Ismayil Khayredinov
  */
 require_once __DIR__ . '/autoloader.php';
 
-use hypeJunction\Notifications\DigestService;
-use hypeJunction\Notifications\EmailNotificationsService;
-use hypeJunction\Notifications\Menus;
-use hypeJunction\Notifications\Router;
-use hypeJunction\Notifications\SiteNotificationsService;
+return function () {
+	elgg_register_event_handler('init', 'system', function () {
 
-elgg_register_event_handler('init', 'system', function() {
+		// Digests
+		elgg_register_plugin_hook_handler('send', 'all', \hypeJunction\Notifications\ScheduleDigest::class, 100);
+		elgg_register_plugin_hook_handler('cron', 'hourly', \hypeJunction\Notifications\SendDigest::class);
 
-	// Router
-	elgg_register_plugin_hook_handler('route', 'notifications', [Router::class, 'routeNotifications']);
+		// Site notifications
+		elgg_register_notification_method('site');
+		elgg_register_plugin_hook_handler('send', 'notification:site', \hypeJunction\Notifications\SendSiteNotification::class, 400);
 
-	// Digests
-	elgg_register_plugin_hook_handler('send', 'all', [DigestService::class, 'scheduleDigest'], 100);
-	elgg_register_plugin_hook_handler('cron', 'hourly', [DigestService::class, 'sendDigest']);
+		elgg_register_event_handler('update', 'all', \hypeJunction\Notifications\SyncEntityUpdate::class, 999);
+		elgg_register_event_handler('delete', 'all', \hypeJunction\Notifications\SyncEntityDelete::class, 999);
+		elgg_register_event_handler('create', 'user', \hypeJunction\Notifications\SyncNewUser::class);
+		elgg_register_event_handler('create', 'relationship', \hypeJunction\Notifications\SyncNewMember::class);
 
-	// Site notifications
-	elgg_register_notification_method('site');
-	elgg_register_plugin_hook_handler('send', 'notification:site', [SiteNotificationsService::class, 'sendNotification'], 400);
-	elgg_register_event_handler('update', 'all', [SiteNotificationsService::class, 'entityUpdateHandler'], 999);
-	elgg_register_event_handler('delete', 'all', [SiteNotificationsService::class, 'entityDeleteHandler'], 999);
-	elgg_register_event_handler('create', 'user', [SiteNotificationsService::class, 'enableSiteNotificationsForNewUser']);
-	elgg_register_event_handler('create', 'relationship', [SiteNotificationsService::class, 'enableSiteNotificationsForNewMembers']);
+		elgg_register_plugin_hook_handler('view', 'profile/details', \hypeJunction\Notifications\DismissProfileNotifications::class);
+		elgg_register_plugin_hook_handler('view', 'groups/profile/layout', \hypeJunction\Notifications\DismissProfileNotifications::class);
 
-	elgg_register_plugin_hook_handler('view', 'profile/details', [SiteNotificationsService::class, 'dismissProfileNotifications']);
-	elgg_register_plugin_hook_handler('view', 'groups/profile/layout', [SiteNotificationsService::class, 'dismissProfileNotifications']);
-	elgg_register_plugin_hook_handler('view', 'object/default', [SiteNotificationsService::class, 'dismissObjectNotifications']);
-	$subtypes = (array) get_registered_entity_types('object');
-	foreach ($subtypes as $subtype) {
-		elgg_register_plugin_hook_handler('view', "object/$subtype", [SiteNotificationsService::class, 'dismissObjectNotifications']);
-	}
-	elgg_register_plugin_hook_handler('elgg.data', 'site', [SiteNotificationsService::class, 'setClientSiteConfig']);
+		elgg_register_plugin_hook_handler('view', 'object/default', \hypeJunction\Notifications\DismissObjectNotifications::class);
+		elgg_register_plugin_hook_handler('view', 'post/elements/full', \hypeJunction\Notifications\DismissObjectNotifications::class);
 
-	// Email notifications and transport
-	elgg_register_plugin_hook_handler('send', 'notification:email', [EmailNotificationsService::class, 'sendNotification'], 400);
-	elgg_register_plugin_hook_handler('email', 'system', [EmailNotificationsService::class, 'sendSystemEmail'], 100);
-	elgg_register_plugin_hook_handler('format', 'notification:email', [EmailNotificationsService::class, 'formatNotification'], 999);
+		$subtypes = (array) get_registered_entity_types('object');
+		foreach ($subtypes as $subtype) {
+			elgg_register_plugin_hook_handler('view', "object/$subtype", \hypeJunction\Notifications\DismissObjectNotifications::class);
+		}
 
-	// Mailgun overrides
-	if (elgg_is_active_plugin('mailgun')) {
-		elgg_unregister_plugin_hook_handler('email', 'system', 'mailgun_email_handler');
-		elgg_unregister_plugin_hook_handler('send', 'notification:email', 'mailgun_send_email_notification');
-	}
+		elgg_register_plugin_hook_handler('elgg.data', 'site', \hypeJunction\Notifications\SetClientConfig::class);
 
-	// Actions
-	elgg_register_action('admin/notifications/methods', __DIR__ . '/actions/admin/notifications/methods.php', 'admin');
-	elgg_register_action('admin/notifications/test_email', __DIR__ . '/actions/admin/notifications/test_email.php', 'admin');
-	elgg_register_action('notifications/mark_all_read', __DIR__ . '/actions/notifications/mark_all_read.php');
-	elgg_register_action('notifications/mark_read', __DIR__ . '/actions/notifications/mark_read.php');
-	elgg_register_action('notifications/settings/digest', __DIR__ . '/actions/notifications/settings/digest.php');
-	elgg_register_action('upgrade/notifications/notifier', __DIR__ . '/actions/upgrade/notifications/notifier.php', 'admin');
+		// Email notifications and transport
+		elgg_set_email_transport(elgg()->{'email.transport'}->build());
+		elgg_register_plugin_hook_handler('format', 'notification:email', \hypeJunction\Notifications\FormatEmailNotification::class, 999);
+		elgg_register_plugin_hook_handler('prepare', 'system:email', \hypeJunction\Notifications\PrepareEmail::class, 999);
+		elgg_register_plugin_hook_handler('validate', 'system:email', \hypeJunction\Notifications\ValidateEmail::class);
+		elgg_register_plugin_hook_handler('zend:message', 'system:email', \hypeJunction\Notifications\AddHtmlEmailPart::class);
 
-	// Menus
-	elgg_register_plugin_hook_handler('register', 'menu:topbar', [Menus::class, 'setupTopbarMenu']);
-	elgg_register_plugin_hook_handler('register', 'menu:page', [Menus::class, 'setupPageMenu']);
+		// Menus
+		elgg_register_plugin_hook_handler('register', 'menu:topbar', \hypeJunction\Notifications\TopbarMenu::class);
+		elgg_register_plugin_hook_handler('register', 'menu:page', \hypeJunction\Notifications\PageMenu::class);
 
-	// Views
-	elgg_extend_view('page/elements/topbar', 'notifications/popup');
+		// Views
+		elgg_extend_view('page/elements/topbar', 'notifications/popup');
 
-	elgg_extend_view('elgg.css', 'notifications.css'); // core notifications
-	elgg_extend_view('elgg.css', 'notifications/notifications.css');
-	elgg_extend_view('admin.css', 'notifications/notifications.css');
+		elgg_extend_view('elgg.css', 'notifications/notifications.css');
+		elgg_extend_view('admin.css', 'notifications/notifications.css');
 
-});
-
-elgg_register_event_handler('upgrade', 'system', function() {
-	if (!elgg_is_admin_logged_in()) {
-		return;
-	}
-	require __DIR__ . '/lib/upgrades.php';
-});
+	});
+};

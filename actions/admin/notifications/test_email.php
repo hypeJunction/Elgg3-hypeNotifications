@@ -21,7 +21,7 @@ if (!empty($uploads)) {
 	}
 }
 
-$result = elgg_send_email($site->email, $recipient, $subject, $body, array(
+$result = elgg_send_email(null, $recipient, $subject, $body, array(
 	'attachments' => $attachments,
 		), 'email');
 

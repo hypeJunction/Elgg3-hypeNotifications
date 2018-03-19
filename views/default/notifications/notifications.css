@@ -1,11 +1,29 @@
+.elgg-menu-topbar .elgg-menu-item-notifications .elgg-badge:empty {
+	display: none;
+}
+
+.elgg-menu-topbar .elgg-menu-item-notifications .elgg-badge {
+	font-size: 8px;
+	padding: 2px;
+	min-width: 1rem;
+	height: 1rem;
+	line-height: calc(1rem - 4px);
+	right:  10px;
+}
+
 .elgg-notifications-popup {
-	width: 400px;
-	max-width: 100%;
+	width: 100%;
 	padding: 0;
 }
 
+@media $(media-tablet-up) {
+	.elgg-notifications-popup {
+		width: 25rem;
+	}
+}
+
 .elgg-notifications-popup .elgg-foot {
-	border-top: 1px solid #dddddd;
+	border-top: 1px solid $(border-color-mild);
 }
 
 .elgg-notifications-popup .elgg-foot a {
@@ -15,7 +33,6 @@
     padding: 4px;
     display: inline-block;
     width: 100%;
-    text-align: center;
 }
 
 .elgg-notifications-popup .notifications-list {
@@ -25,11 +42,11 @@
     overflow-y: auto;
 }
 
-.elgg-notifications-popup .notifications-list > li {
+.notifications-list > li {
 	padding: 0 !important;
 }
 
-.elgg-notifications-popup .notifications-list .elgg-image-block {
+.notifications-list .elgg-image-block {
 	padding: 10px;
 }
 
@@ -54,10 +71,11 @@
 }
 
 .notification-new {
-    background: #ecf0f7;
+    background: $(state-notice-background-color);
 }
 
 .notification-time {
-    color: #999;
+    color: $(text-color-mild);
     font-size: 90%;
+	margin: 0;
 }

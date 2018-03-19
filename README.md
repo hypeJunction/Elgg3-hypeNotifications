@@ -1,6 +1,6 @@
 # hypeNotifications for Elgg
 
-![Elgg 2.2](https://img.shields.io/badge/Elgg-2.2-orange.svg?style=flat-square)
+![Elgg 3.0](https://img.shields.io/badge/Elgg-3.0-orange.svg?style=flat-square)
 
 ![Popup](https://raw.github.com/hypeJunction/hypeNotifications/master/screenshots/popup.png "Popup")
 ![Digest](https://raw.github.com/hypeJunction/hypeNotifications/master/screenshots/digest.png "Email Digest")
@@ -11,7 +11,7 @@
  * Email digest: users can specify at which interval they receive notifications for each type
  * A tool to update preferred notification methods for all site users
  * Leverages `Zend_Mail` (email library used in core) to send out HTML emails
- * Allows to configure email transports (Sendmail, SMTP, File Transport)
+ * Allows to configure email transports (Sendmail, SMTP, File Transport, SendGrid, Mailgun, SparkPost)
  * Allows to send file attachments
  * Inlines CSS styles for improved email client experience
  * Simpler testing experience: catch all email address, email/domain whitelist

@@ -3,10 +3,8 @@ define(function(require) {
 
     $(document).on('change', '.notifications-transport-selector', function() {
 
-        if ($(this).val() === 'smtp') {
-            $('.notifications-smtp-settings').removeClass('hidden');
-        } else {
-            $('.notifications-smtp-settings').addClass('hidden');
-        }
+    	var val = $(this).val();
+
+        $('.notifications-settings-tabs').find('[rel="' + val + '"]').trigger('click');
     });
 });

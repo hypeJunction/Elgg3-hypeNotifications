@@ -33,22 +33,12 @@ class DigestService {
 	private $table;
 
 	/**
-	 * Constructor 
+	 * Constructor
+	 *
 	 * @param DigestTable $table DB table
 	 */
 	public function __construct(DigestTable $table) {
 		$this->table = $table;
-	}
-
-	/**
-	 * Returns a singleton
-	 * @return self
-	 */
-	public static function getInstance() {
-		if (is_null(self::$_instance)) {
-			self::$_instance = new self(new DigestTable());
-		}
-		return self::$_instance;
 	}
 
 	/**
@@ -64,7 +54,14 @@ class DigestService {
 	 * @return array
 	 */
 	public static function getNotificationEvents() {
-		$ignored_events = ['send', 'enqueue', 'admin_approval'];
+		$ignored_events = [
+			'send',
+			'enqueue',
+			'admin_approval',
+			'unban',
+			'make_admin',
+			'remove_admin',
+		];
 
 		$subscriptions = _elgg_services()->notifications->getEvents();
 
@@ -102,118 +99,10 @@ class DigestService {
 	}
 
 	/**
-	 * Respect user notification event preferences
-	 *
-	 * @param string $hook   "send"
-	 * @param string $type   "all"
-	 * @param array  $return Subscriptions
-	 * @param array  $params Hook params
-	 * @return array
-	 */
-	public static function scheduleDigest($hook, $type, $return, $params) {
-
-		list($prefix, $method) = explode(':', $type);
-
-		if ($prefix !== 'notification') {
-			return;
-		}
-
-		$event = elgg_extract('event', $params);
-		if (!$event instanceof NotificationEvent) {
-			return;
-		}
-
-		$notification = elgg_extract('notification', $params);
-		if (!$notification instanceof Notification) {
-			return;
-		}
-
-		$action = $event->getAction();
-		$object = $event->getObject();
-		$recipient_guid = $notification->getRecipientGUID();
-
-		if ($object instanceof ElggEntity && !$object instanceof ElggObject) {
-			$entity_type = $object->getType();
-			$entity_subtype = 'default';
-		} else if ($object instanceof ElggData) {
-			$entity_type = $object->getType();
-			$entity_subtype = $object->getSubtype();
-		}
-
-		$event_type = $event instanceof InstantNotificationEvent ? 'instant' : 'subscriptions';
-		$setting_name = "$event_type:$action:$entity_type:$entity_subtype";
-		$setting_value = elgg_get_plugin_user_setting($setting_name, $recipient_guid, 'hypeNotifications', self::INSTANT);
-		
-		if ($setting_value == self::NEVER) {
-			// set notification as sent
-			return true;
-		}
-
-		if ($method != 'email' || $setting_value == self::INSTANT || !$setting_value) {
-			// let the handler deliver it
-			return;
-		}
-
-		// Store in the database
-		$time_schedule = self::getNextDeliveryTime($setting_value);
-
-		$digest_notification = new DigestNotification();
-		$digest_notification->setRecipient($notification->getRecipient());
-		$digest_notification->setData((array) $notification->toObject());
-		$digest_notification->setTimeScheduled($time_schedule);
-		
-		if ($digest_notification->save()) {
-			return true;
-		}
-	}
-
-	/**
-	 * Send digests when cron runs
-	 *
-	 * @return void
-	 */
-	public static function sendDigest() {
-
-		$dt = new DateTime();
-		$time = $dt->getTimestamp();
-
-		$svc = self::getInstance();
-		$recipients = $svc->getTable()->getRecipients([
-			'time_scheduled' => $time,
-		]);
-		
-		if (empty($recipients)) {
-			return;
-		}
-		
-		foreach ($recipients as $recipient) {
-			$notifications = $svc->getTable()->getAll([
-				'recipient_guid' => $recipient,
-				'time_scheduled' => $time,
-			]);
-
-			if (empty($notifications)) {
-				return;
-			}
-			
-			$subject = elgg_echo('notifications:digest:subject');
-			$message = elgg_view('notifications/digest', [
-				'notifications' => $notifications,
-			]);
-
-			$sent = notify_user($recipient, 0, $subject, $message, [], 'email');
-			if ($sent) {
-				foreach ($notifications as $notification) {
-					$notification->delete();
-				}
-			}
-		}
-	}
-
-	/**
 	 * Get the time of the next digest delivery
-	 * 
+	 *
 	 * @param string $interval Interval
+	 *
 	 * @return int
 	 */
 	public function getNextDeliveryTime($interval = null) {

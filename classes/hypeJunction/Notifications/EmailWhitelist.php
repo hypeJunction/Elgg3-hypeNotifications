@@ -26,6 +26,11 @@ class EmailWhitelist {
 			return false;
 		}
 
+		$catch_all = elgg_get_plugin_setting('staging_catch_all', 'hypeNotifications');
+		if ($email === $catch_all) {
+			return true;
+		}
+
 		$emails = self::getWhiteListedEmails();
 		$domains = self::getWhiteListedDomains();
 		

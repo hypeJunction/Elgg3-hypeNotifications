@@ -10,15 +10,18 @@ if ($username) {
 	$user = elgg_get_logged_in_user_entity();
 }
 
-if (!$user || !$user->canEdit()) {
-	forward('', '404');
+elgg_entity_gatekeeper($user->guid);
+
+if (!$user->canEdit()) {
+	throw new \Elgg\EntityPermissionsException();
 }
 
 elgg_register_menu_item('title', [
 	'name' => 'mark_all_read',
 	'text' => elgg_echo('notifications:mark_all_read'),
-	'href' => 'action/notifications/mark_all_read?guid=' . $user->guid,
-	'is_action' => true,
+	'href' => elgg_generate_action_url('notifications/mark_all_read', [
+		'guid' => $user->guid,
+	]),
 	'class' => 'elgg-button elgg-button-action',
 ]);
 

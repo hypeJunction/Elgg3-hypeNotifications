@@ -10,24 +10,18 @@
 	<version type="dist">1.4.0</version>
 
 	<author>Ismayil Khayredinov (info@hypejunction.com)</author>
-	<website></website>
+	<website>http://hypejunction.com/</website>
 	<copyright>(c) 2017 Ismayil Khayredinov</copyright>
 	<license>GNU General Public License version 2</license>
 
 	<requires>
 		<type>elgg_release</type>
-		<version>2.2</version>
+		<version>3.0</version>
 	</requires>
 
 	<conflicts>
 		<type>plugin</type>
 		<name>site_notifications</name>
 	</conflicts>
-
-	<suggests>
-		<type>priority</type>
-		<plugin>mailgun</plugin>
-		<priority>after</priority>
-	</suggests>
 
 </plugin_manifest>

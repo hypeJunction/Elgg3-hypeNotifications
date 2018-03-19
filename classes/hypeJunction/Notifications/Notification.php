@@ -16,7 +16,7 @@ use stdClass;
  * @property-read int    $id
  * @property-read string $action
  * @property-read string $object_type
- * $property-read string $object_subtype
+ * @property-read string $object_subtype
  * @property-read int    $object_id
  * @property-read int    $actor_guid
  * @property-read int    $time_created
@@ -74,7 +74,8 @@ class Notification extends ElggData {
 	public function save() {
 		$id = $this->id;
 
-		$svc = SiteNotificationsService::getInstance();
+		$svc = elgg()->{'notifications.site'};
+		/* @var $svc SiteNotificationsService */
 		if (!$id) {
 			if (!$this->get('time_created')) {
 				$this->set('time_created', time());
@@ -321,7 +322,8 @@ class Notification extends ElggData {
 	 * {@inheritdoc}
 	 */
 	public function delete() {
-		$svc = SiteNotificationsService::getInstance();
+		$svc = elgg()->{'notifications.site'};
+		/* @var $svc SiteNotificationsService */
 
 		return $svc->getTable()->delete($this->id);
 	}
@@ -337,14 +339,16 @@ class Notification extends ElggData {
 	 * {@inheritdoc}
 	 */
 	public function getExportableValues() {
-		return array_key($this->attributes);
+		return array_keys($this->attributes);
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
 	public function getObjectFromID($id) {
-		$svc = SiteNotificationsService::getInstance();
+		$svc = elgg()->{'notifications.site'};
+		/* @var $svc SiteNotificationsService */
+
 		$svc->getTable()->get($id);
 	}
 
@@ -382,7 +386,9 @@ class Notification extends ElggData {
 			return false;
 		}
 
-		return elgg_normalize_url("notifications/view/$id");
+		return elgg_generate_url('view:notification', [
+			'id' => $id,
+		]);
 	}
 
 	/**

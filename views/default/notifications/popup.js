@@ -41,7 +41,7 @@ define(function (require) {
         $('#notifications-messages').html($loader);
 
         var ajax = new Ajax(false);
-        ajax.path('notifications/view', {
+        ajax.path('notifications/all', {
             data: {
                 view: 'json'
             }

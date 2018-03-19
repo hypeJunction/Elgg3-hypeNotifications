@@ -21,7 +21,7 @@ $frequency_options = [
 ];
 
 $subscriptions = '';
-$subscriptions .= elgg_format_element('p', ['class' => 'margin-none'], elgg_echo('notifications:subscriptions:title'));
+$subscriptions .= elgg_format_element('p', ['class' => 'margin-none'], elgg_echo('notifications:digest:subscriptions:title'));
 foreach ($subscription_events as $entity_type => $entity_subtypes) {
 	foreach ($entity_subtypes as $entity_subtype => $events) {
 		foreach ($events as $event) {
@@ -38,11 +38,11 @@ foreach ($subscription_events as $entity_type => $entity_subtypes) {
 	}
 }
 if ($subscriptions) {
-	echo elgg_view_module('info', elgg_echo('notifications:subscriptions'), $subscriptions);
+	echo elgg_view_module('info', elgg_echo('notifications:digest:subscriptions'), $subscriptions);
 }
 
 $instant = '';
-$instant .= elgg_format_element('p', ['class' => 'margin-none'], elgg_echo('notifications:instant:title'));
+$instant .= elgg_format_element('p', ['class' => 'margin-none'], elgg_echo('notifications:digest:instant:title'));
 foreach ($instant_events as $entity_type => $entity_subtypes) {
 	foreach ($entity_subtypes as $entity_subtype => $events) {
 		foreach ($events as $event) {
@@ -59,7 +59,7 @@ foreach ($instant_events as $entity_type => $entity_subtypes) {
 	}
 }
 if ($instant) {
-	echo elgg_view_module('info', elgg_echo('notifications:instant'), $instant);
+	echo elgg_view_module('info', elgg_echo('notifications:digest:instant'), $instant);
 }
 
 echo elgg_view_field([
