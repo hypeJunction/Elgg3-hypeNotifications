@@ -1,3 +1,13 @@
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/compare/2.0.0...2.0.1) (2018-03-20)
+
+
+### Bug Fixes
+
+* **sql:** fix SQL query that returned partial rows ([28f0861](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/commit/28f0861))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/compare/1.4.0...2.0.0) (2018-03-19)
 
