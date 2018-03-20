@@ -76,6 +76,7 @@ class Notification extends ElggData {
 
 		$svc = elgg()->{'notifications.site'};
 		/* @var $svc SiteNotificationsService */
+
 		if (!$id) {
 			if (!$this->get('time_created')) {
 				$this->set('time_created', time());
@@ -114,6 +115,7 @@ class Notification extends ElggData {
 
 			return;
 		}
+
 		$this->$name = $value;
 	}
 
@@ -129,10 +131,10 @@ class Notification extends ElggData {
 		if ($this->id) {
 			throw new LogicException('Can not change the recipient of the notification once it is saved');
 		}
-		$this->set('recipient_guid', (int)$recipient->guid);
+		$this->set('recipient_guid', (int) $recipient->guid);
 		if (null == $this->access_guid) {
-			$this->set('access_guid', (int)$recipient->guid);
-			$this->set('access_owner_guid', (int)$recipient->guid);
+			$this->set('access_guid', (int) $recipient->guid);
+			$this->set('access_owner_guid', (int) $recipient->guid);
 			$this->set('access_id', ACCESS_PRIVATE);
 		}
 	}
@@ -163,7 +165,7 @@ class Notification extends ElggData {
 
 			return;
 		}
-		$this->set('actor_guid', (int)$actor->guid);
+		$this->set('actor_guid', (int) $actor->guid);
 	}
 
 	/**
@@ -187,7 +189,7 @@ class Notification extends ElggData {
 		if ($this->id) {
 			throw new LogicException('Can not change the action of the notification once it is saved');
 		}
-		$this->set('action', (string)$action);
+		$this->set('action', (string) $action);
 	}
 
 	/**
@@ -209,8 +211,8 @@ class Notification extends ElggData {
 		}
 
 		if ($object instanceof ElggData) {
-			$this->set('object_type', (string)$object->getType());
-			$this->set('object_subtype', (string)$object->getSubtype());
+			$this->set('object_type', (string) $object->getType());
+			$this->set('object_subtype', (string) $object->getSubtype());
 		}
 
 		while ($object instanceof \ElggComment) {
@@ -323,6 +325,7 @@ class Notification extends ElggData {
 	 */
 	public function delete() {
 		$svc = elgg()->{'notifications.site'};
+
 		/* @var $svc SiteNotificationsService */
 
 		return $svc->getTable()->delete($this->id);
@@ -423,7 +426,7 @@ class Notification extends ElggData {
 	 * {@inheritdoc}
 	 */
 	public function toObject() {
-		return (object)$this->attributes;
+		return (object) $this->attributes;
 	}
 
 	/**
@@ -532,7 +535,7 @@ class Notification extends ElggData {
 		}
 
 		if (!$summary) {
-			$summary = $this->data['summary'] ?: $this->data['subject'];
+			$summary = $this->data['summary'] ? : $this->data['subject'];
 			if (!preg_match_all('/<a.*\/a>/i', $summary)) {
 				$summary = elgg_view('output/url', [
 					'text' => $summary,

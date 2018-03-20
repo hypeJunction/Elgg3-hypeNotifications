@@ -123,7 +123,7 @@ class SiteNotificationsTable {
 
 			return 0;
 		} else {
-			$qb->select('*');
+			$qb->select('nt.*');
 
 			$qb->orderBy('nt.time_created', 'desc');
 
