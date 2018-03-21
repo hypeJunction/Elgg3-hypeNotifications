@@ -79,3 +79,18 @@
     font-size: 90%;
 	margin: 0;
 }
+
+
+.elgg-menu-notification-container {
+	display: inline-block;
+	margin-left: 0.5rem;
+}
+
+.elgg-menu-notification > li > a {
+	font-size: 90%;
+	font-weight: 600;
+}
+
+.notification-extras {
+	margin: 0;
+}

@@ -141,4 +141,6 @@ return [
 	'notifications:settings:from_email' => 'From Email',
 	'notifications:settings:from_email:help' => 'Override email from which all emails are sent',
 
+	'notifications:link:confirm' => 'Confirm',
+	'notifications:link:view_profile' => 'View Profile',
 ];

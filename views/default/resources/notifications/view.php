@@ -38,6 +38,11 @@ $content = elgg_view('notifications/notification', [
 	'full_view' => true,
 		]);
 
+if (elgg_is_xhr()) {
+	echo $content;
+	return;
+}
+
 $layout = elgg_view_layout('content', [
 	'title' => $title,
 	'content' => $content,

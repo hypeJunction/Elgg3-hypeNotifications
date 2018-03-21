@@ -43,13 +43,32 @@ if ($full) {
 	$class[] = 'notification-summary-listing';
 }
 
-$content .= elgg_format_element('div', [
+$extras = elgg_format_element('span', [
 	'class' => 'notification-time',
 ], elgg_view_friendly_time($notification->time_created));
 
-$menu = elgg_view_menu('notification', $vars);
+$params = $vars;
 
-echo elgg_view_image_block($icon, $content . $menu, [
+$data = $notification->getData();
+if (!empty($data['links']) && !$notification->isRead()) {
+	foreach ($data['links'] as $name => $link) {
+		$params['items'][] = [
+			'name' => $name,
+			'text' => elgg_echo("notifications:link:$name"),
+			'href' => $link
+		];
+	}
+}
+
+$params['class'] = 'elgg-menu-hz';
+
+$extras .= elgg_view_menu('notification', $params);
+
+$content .= elgg_format_element('div', [
+	'class' => 'notification-extras',
+], $extras);
+
+echo elgg_view_image_block($icon, $content, [
 	'class' => $class,
 	'data-id' => $notification->id,
 ]);

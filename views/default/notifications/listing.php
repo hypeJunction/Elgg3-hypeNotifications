@@ -24,5 +24,5 @@ echo elgg_view('notifications/list', [
 	'pagination' => true,
 	'offset' => $offset,
 	'limit' => $limit,
-	'full_view' => true,
+	'full_view' => false,
 ]);
