@@ -1,3 +1,13 @@
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/compare/2.0.1...2.0.2) (2018-03-27)
+
+
+### Features
+
+* **links:** add support for providing links through notify_user() ([711cc1f](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/commit/711cc1f))
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/compare/2.0.0...2.0.1) (2018-03-20)
 
