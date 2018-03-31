@@ -5,7 +5,7 @@ return [
 		'admin/notifications/methods' => [
 			'access' => 'admin',
 		],
-		'admin/notifications/test_email', [
+		'admin/notifications/test_email' => [
 			'access' => 'admin',
 		],
 		'notifications/mark_all_read' => [],
