@@ -87,6 +87,7 @@ class SendGridEmailTransport implements TransportInterface {
 				throw new Mail\Exception\RuntimeException($response->body(), $response->statusCode());
 			}
 		} catch (\Exception $ex) {
+			elgg_log("SendGrid: " . $ex->getMessage(), 'ERROR');
 			throw new Mail\Exception\RuntimeException($ex->getMessage(), $ex->getCode());
 		}
 
