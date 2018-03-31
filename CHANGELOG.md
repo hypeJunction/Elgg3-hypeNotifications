@@ -1,3 +1,14 @@
+<a name="2.0.3"></a>
+## [2.0.3](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/compare/2.0.2...2.0.3) (2018-03-31)
+
+
+### Bug Fixes
+
+* **actions:** fix test email action registration ([29a100c](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/commit/29a100c))
+* **logs:** log error messages on failed send ([6b52a97](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/commit/6b52a97))
+
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/compare/2.0.1...2.0.2) (2018-03-27)
 
