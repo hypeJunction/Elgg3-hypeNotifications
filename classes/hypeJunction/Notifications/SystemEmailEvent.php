@@ -112,14 +112,15 @@ class SystemEmailEvent implements NotificationEvent {
 	 * Export the notification event into a serializable object
 	 * This method is mainly used for logging purposes
 	 *
+	 * @param array $params Export params
 	 * @return stdClass
 	 */
-	public function toObject() {
+	public function toObject(array $params = []) {
 		$obj = new stdClass();
 		$vars = get_object_vars($this);
 		foreach ($vars as $key => $value) {
 			if (is_object($value) && is_callable([$value, 'toObject'])) {
-				$obj->$key = $value->toObject();
+				$obj->$key = $value->toObject($params);
 			} else {
 				$obj->$key = $value;
 			}

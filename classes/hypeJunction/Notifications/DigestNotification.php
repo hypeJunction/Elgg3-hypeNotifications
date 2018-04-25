@@ -178,7 +178,7 @@ class DigestNotification extends ElggData {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function toObject() {
+	public function toObject(array $params = []) {
 		return (object) $this->attributes;
 	}
 
