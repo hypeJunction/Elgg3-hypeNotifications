@@ -1,3 +1,22 @@
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/compare/2.0.0...2.1.0) (2018-06-29)
+
+
+### Bug Fixes
+
+* **actions:** fix test email action registration ([29a100c](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/commit/29a100c))
+* **api:** update method signatures to match core ([7635336](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/commit/7635336))
+* **logs:** log error messages on failed send ([6b52a97](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/commit/6b52a97))
+* **sql:** fix SQL query that returned partial rows ([28f0861](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/commit/28f0861))
+
+
+### Features
+
+* **core:** updates and fixes ([4cfcd6d](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/commit/4cfcd6d))
+* **links:** add support for providing links through notify_user() ([711cc1f](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/commit/711cc1f))
+
+
+
 <a name="2.0.4"></a>
 ## [2.0.4](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/compare/2.0.3...2.0.4) (2018-04-25)
 
