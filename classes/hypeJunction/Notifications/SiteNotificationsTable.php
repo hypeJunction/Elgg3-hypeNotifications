@@ -269,7 +269,8 @@ class SiteNotificationsTable {
 				$qb->compare('actor_guid', '=', $guid, ELGG_VALUE_INTEGER),
 				$qb->merge([
 					$qb->compare('object_id', '=', $guid, ELGG_VALUE_INTEGER),
-					$qb->compare('object_type', 'IN', ['object', 'user', 'site', 'group'], ELGG_VALUE_STRING),
+					// @todo: Oddly, using IN with an array fatals here. PDO with delete issue?
+					$qb->compare('object_type', 'IN', "'object', 'user', 'site', 'group'"),
 				], 'AND')
 			], 'OR')
 		);

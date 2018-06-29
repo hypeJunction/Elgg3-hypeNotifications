@@ -7,7 +7,7 @@ return [
 	'db.notifications' => \DI\object(\hypeJunction\Notifications\SiteNotificationsTable::class)
 		->constructor(\DI\get('db')),
 
-	'db.digest' => \DI\object(\hypeJunction\Notifications\DigestService::class)
+	'db.digest' => \DI\object(\hypeJunction\Notifications\DigestTable::class)
 		->constructor(\DI\get('db')),
 
 	'notifications.site' => \DI\object(\hypeJunction\Notifications\SiteNotificationsService::class)
