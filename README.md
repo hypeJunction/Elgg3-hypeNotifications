@@ -43,21 +43,21 @@ this will instead write email as txt files to the filestore under `/notification
 To use GMail as your SMTP relay, you will likely need to Allow less secure apps:
 https://support.google.com/accounts/answer/6010255?hl=en
 
-Host: smtp.gmail.com
-Port: 587
-Secure Connection: TLS
-Auth: SMTP with AUTH LOGIN
-Username: <your gmail email>
-Password: <your gmail password>
+- Host: smtp.gmail.com
+- Port: 587
+- Secure Connection: TLS
+- Auth: SMTP with AUTH LOGIN
+- Username: <your gmail email>
+- Password: <your gmail password>
 
 ### Sample SMTP config for SendGrid
 
-Host: smtp.sendgrid.com
-Port: 587
-Secure Connection: TLS
-Auth: SMTP with AUTH LOGIN
-Username: apikey
-Password: <your api key>
+- Host: smtp.sendgrid.com
+- Port: 587
+- Secure Connection: TLS
+- Auth: SMTP with AUTH LOGIN
+- Username: apikey
+- Password: <your api key>
 
 
 ### File Attachments
