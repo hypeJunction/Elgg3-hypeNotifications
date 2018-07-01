@@ -1,3 +1,14 @@
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/compare/2.1.0...2.1.1) (2018-07-01)
+
+
+### Bug Fixes
+
+* **email:** fix email styling ([403b2f3](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/commit/403b2f3))
+* **template:** do not use header_logo view in notification header ([444ab7b](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/commit/444ab7b))
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/compare/2.0.0...2.1.0) (2018-06-29)
 
