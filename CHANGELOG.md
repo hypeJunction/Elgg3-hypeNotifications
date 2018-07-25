@@ -1,3 +1,13 @@
+<a name="2.1.2"></a>
+## [2.1.2](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/compare/2.1.1...2.1.2) (2018-07-25)
+
+
+### Bug Fixes
+
+* **css:** only use necessary components ([7f9056f](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/commit/7f9056f))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/compare/2.1.0...2.1.1) (2018-07-01)
 
