@@ -2,12 +2,12 @@
 
 namespace hypeJunction\Notifications;
 
-use Zend\Mail;
-use Zend\Mail\Transport\TransportInterface;
+use Laminas\Mail;
+use Laminas\Mail\Transport\TransportInterface;
 use SparkPost\SparkPost;
 use GuzzleHttp\Client;
 use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
-use Zend\Mime\Mime;
+use Laminas\Mime\Mime;
 
 class SparkPostEmailTransport implements TransportInterface {
 
@@ -28,7 +28,7 @@ class SparkPostEmailTransport implements TransportInterface {
 	/**
 	 * Send a mail message
 	 *
-	 * @param \Zend\Mail\Message $message
+	 * @param \Laminas\Mail\Message $message
 	 *
 	 * @return void
 	 */

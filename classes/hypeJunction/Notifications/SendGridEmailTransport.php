@@ -5,9 +5,9 @@ namespace hypeJunction\Notifications;
 use Elgg\Email;
 use SendGrid\Attachment;
 use SendGrid\Content;
-use Zend\Mail;
-use Zend\Mail\Transport\TransportInterface;
-use Zend\Mime\Mime;
+use Laminas\Mail;
+use Laminas\Mail\Transport\TransportInterface;
+use Laminas\Mime\Mime;
 
 class SendGridEmailTransport implements TransportInterface {
 
@@ -28,7 +28,7 @@ class SendGridEmailTransport implements TransportInterface {
 	/**
 	 * Send a mail message
 	 *
-	 * @param \Zend\Mail\Message $message
+	 * @param \Laminas\Mail\Message $message
 	 *
 	 * @return void
 	 */

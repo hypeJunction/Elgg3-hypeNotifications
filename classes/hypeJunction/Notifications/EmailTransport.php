@@ -5,11 +5,11 @@ namespace hypeJunction\Notifications;
 use Elgg\Config;
 use Elgg\PluginHooksService;
 use hypeJunction\Embed\File;
-use Zend\Mail\Transport\FileOptions;
-use Zend\Mail\Transport\Sendmail;
-use Zend\Mail\Transport\Smtp;
-use Zend\Mail\Transport\SmtpOptions;
-use Zend\Mail\Transport\TransportInterface;
+use Laminas\Mail\Transport\FileOptions;
+use Laminas\Mail\Transport\Sendmail;
+use Laminas\Mail\Transport\Smtp;
+use Laminas\Mail\Transport\SmtpOptions;
+use Laminas\Mail\Transport\TransportInterface;
 
 class EmailTransport {
 

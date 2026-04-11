@@ -4,9 +4,9 @@ namespace hypeJunction\Notifications;
 
 use Mailgun\Exception\HttpClientException;
 use Mailgun\Mailgun;
-use Zend\Mail;
-use Zend\Mail\Transport\TransportInterface;
-use Zend\Mime\Mime;
+use Laminas\Mail;
+use Laminas\Mail\Transport\TransportInterface;
+use Laminas\Mime\Mime;
 
 class MailgunEmailTransport implements TransportInterface {
 
@@ -33,7 +33,7 @@ class MailgunEmailTransport implements TransportInterface {
 	/**
 	 * Send a mail message
 	 *
-	 * @param \Zend\Mail\Message $message
+	 * @param \Laminas\Mail\Message $message
 	 *
 	 * @return void
 	 */

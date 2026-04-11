@@ -3,9 +3,9 @@
 namespace hypeJunction\Notifications;
 
 use Elgg\Hook;
-use Zend\Mail\Message;
-use Zend\Mime\Mime;
-use Zend\Mime\Part;
+use Laminas\Mail\Message;
+use Laminas\Mime\Mime;
+use Laminas\Mime\Part;
 
 class AddHtmlEmailPart {
 

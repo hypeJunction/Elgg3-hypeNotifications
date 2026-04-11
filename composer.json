@@ -22,8 +22,8 @@
 	"require": {
 		"php": ">=5.5",
 		"composer/installers": "~1.0",
-		"zendframework/zend-mail": "~2.4",
-		"zendframework/zend-servicemanager": "~2.4",
+		"laminas/laminas-mail": "^2.10",
+		"laminas/laminas-servicemanager": "^3.4",
 		"pelago/emogrifier": "~1.0",
 		"sendgrid/sendgrid": "^6.0",
 		"guzzlehttp/guzzle": "^6.3",
