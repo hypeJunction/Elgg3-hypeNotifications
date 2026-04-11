@@ -3,7 +3,7 @@
 namespace hypeJunction\Notifications;
 
 use Elgg\Hook;
-use Elgg\TimeUsing;
+use Elgg\Traits\TimeUsing;
 
 class SendDigest {
 

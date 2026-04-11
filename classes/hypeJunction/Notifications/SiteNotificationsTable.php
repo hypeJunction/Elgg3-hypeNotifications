@@ -8,7 +8,7 @@ use Elgg\Database\Delete;
 use Elgg\Database\Insert;
 use Elgg\Database\Select;
 use Elgg\Database\Update;
-use Elgg\TimeUsing;
+use Elgg\Traits\TimeUsing;
 use ElggData;
 use ElggEntity;
 use ElggExtender;
