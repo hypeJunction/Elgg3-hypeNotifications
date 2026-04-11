@@ -14,7 +14,7 @@ class DismissProfileNotifications {
 	 * @param Hook $hook Hook
 	 *
 	 * @return void
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function __invoke(Hook $hook) {
 

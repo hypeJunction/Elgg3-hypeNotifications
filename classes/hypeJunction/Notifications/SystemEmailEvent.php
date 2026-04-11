@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Notifications;
 
-use Elgg\Notifications\EventSerialization;
+use Elgg\Notifications\SubscriptionNotificationEventSerialization;
 use Elgg\Notifications\NotificationEvent;
 use ElggData;
 use ElggEntity;

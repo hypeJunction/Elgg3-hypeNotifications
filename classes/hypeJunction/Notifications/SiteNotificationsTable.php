@@ -56,7 +56,7 @@ class SiteNotificationsTable {
 	 * @param int $id ID
 	 *
 	 * @return Notification|false
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function get($id) {
 		$qb = Select::fromTable('site_notifications');
@@ -72,7 +72,7 @@ class SiteNotificationsTable {
 	 * @param array $options Options
 	 *
 	 * @return Notification[]|false|int
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function getAll(array $options = []) {
 
@@ -140,7 +140,7 @@ class SiteNotificationsTable {
 	 * @param array $options
 	 *
 	 * @return int
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function count(array $options = []) {
 
@@ -155,7 +155,7 @@ class SiteNotificationsTable {
 	 * @param Notification $notification Notification
 	 *
 	 * @return int|false
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function insert(Notification $notification) {
 
@@ -185,7 +185,7 @@ class SiteNotificationsTable {
 	 * @param Notification $notification Notification
 	 *
 	 * @return bool
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function update(Notification $notification) {
 
@@ -206,7 +206,7 @@ class SiteNotificationsTable {
 	 * @param ElggData $object Object
 	 *
 	 * @return bool
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function updateAccess(ElggData $object) {
 
@@ -242,7 +242,7 @@ class SiteNotificationsTable {
 	 * @param int $id ID
 	 *
 	 * @return bool
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function delete($id) {
 
@@ -258,7 +258,7 @@ class SiteNotificationsTable {
 	 * @param int $guid GUID
 	 *
 	 * @return bool
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function deleteByEntityGUID($guid) {
 
@@ -285,7 +285,7 @@ class SiteNotificationsTable {
 	 * @param string $type Object type
 	 *
 	 * @return bool
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function deleteByExtenderID($id, $type) {
 
@@ -302,7 +302,7 @@ class SiteNotificationsTable {
 	 * @param int $recipient_guid Recipient GUID
 	 *
 	 * @return bool
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function markAllRead($recipient_guid) {
 
@@ -323,7 +323,7 @@ class SiteNotificationsTable {
 	 * @param int $recipient_guid Recipient GUID (defaults to logged in user)
 	 *
 	 * @return bool
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function markReadByEntityGUID($guid, $recipient_guid = null) {
 
@@ -352,7 +352,7 @@ class SiteNotificationsTable {
 	 * @param int    $recipient_guid Recipient GUID (defaults to logged in user)
 	 *
 	 * @return bool
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function markReadByExtenderID($id, $type, $recipient_guid = null) {
 

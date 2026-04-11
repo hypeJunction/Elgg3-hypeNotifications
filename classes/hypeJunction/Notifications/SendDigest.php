@@ -16,7 +16,7 @@ class SendDigest {
 	 *
 	 * @param Hook $hook Hook
 	 * @return void
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 * @throws \NotificationException
 	 */
 	public function __invoke(Hook $hook) {

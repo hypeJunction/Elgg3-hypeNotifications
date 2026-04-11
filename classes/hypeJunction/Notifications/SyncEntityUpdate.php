@@ -16,7 +16,7 @@ class SyncEntityUpdate {
 	 * @param Event $event Event
 	 *
 	 * @return void
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function __invoke(Event $event) {
 		$svc = elgg()->{'notifications.site'};

@@ -13,7 +13,7 @@ class TopbarMenu {
 	 * @param Hook $hook Hook
 	 *
 	 * @return ElggMenuItem[]|null
-	 * @throws \DatabaseException
+	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function __invoke(Hook $hook) {
 

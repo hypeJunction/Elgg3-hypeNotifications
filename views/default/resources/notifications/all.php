@@ -13,7 +13,7 @@ if ($username) {
 elgg_entity_gatekeeper($user->guid);
 
 if (!$user->canEdit()) {
-	throw new \Elgg\EntityPermissionsException();
+	throw new \Elgg\Exceptions\Http\EntityPermissionsException();
 }
 
 elgg_register_menu_item('title', [
