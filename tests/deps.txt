@@ -1,0 +1,1 @@
+# hypenotifications has no required sibling plugins for the smoke.
