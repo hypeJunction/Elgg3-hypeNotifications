@@ -6,6 +6,22 @@ use Elgg\DefaultPluginBootstrap;
 
 class Bootstrap extends DefaultPluginBootstrap {
 
+	public function activate() {
+		$sql_file = $this->getPlugin()->getPath() . 'install/mysql.sql';
+		if (!file_exists($sql_file)) {
+			return;
+		}
+
+		$prefix = \elgg()->db->prefix;
+		$sql = file_get_contents($sql_file);
+		$sql = str_replace('prefix_', $prefix, $sql);
+
+		$connection = \elgg()->db->getConnection('write');
+		foreach (array_filter(array_map('trim', explode(';', $sql))) as $stmt) {
+			$connection->executeStatement($stmt);
+		}
+	}
+
 	public function init() {
 		// Site notifications
 		\elgg_register_notification_method('site');

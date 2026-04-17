@@ -90,11 +90,14 @@ class SiteNotificationsTable {
 		$access->owner_guid_column = 'access_owner_guid';
 		$access->use_enabled_clause = false;
 
-		$qb->andWhere($access->prepare($qb, 'nt'));
+		$access_where = $access->prepare($qb, 'nt');
+		if (!empty($access_where)) {
+			$qb->andWhere($access_where);
+		}
 
 		switch ($status) {
 			case 'read' :
-				$qb->andWhere($qb->compare('nt.time_read', 'IS NOT NULL'));
+				$qb->andWhere($qb->compare('nt.time_read', '>', 0, ELGG_VALUE_INTEGER));
 				break;
 			case 'unread' :
 				$qb->andWhere($qb->merge([
@@ -103,7 +106,7 @@ class SiteNotificationsTable {
 				], 'OR'));
 				break;
 			case 'seen' :
-				$qb->andWhere($qb->compare('nt.time_seen', 'IS NOT NULL'));
+				$qb->andWhere($qb->compare('nt.time_seen', '>', 0, ELGG_VALUE_INTEGER));
 				break;
 			case 'unseen' :
 				$qb->andWhere($qb->merge([

@@ -71,7 +71,7 @@ class Notification extends ElggData {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function save() {
+	public function save(): bool {
 		$id = $this->id;
 
 		$svc = elgg()->{'notifications.site'};
@@ -82,7 +82,12 @@ class Notification extends ElggData {
 				$this->set('time_created', time());
 			}
 
-			return $svc->getTable()->insert($this);
+			$new_id = $svc->getTable()->insert($this);
+			if ($new_id) {
+				$this->set('id', $new_id);
+				return true;
+			}
+			return false;
 		} else {
 			return $svc->getTable()->update($this);
 		}
