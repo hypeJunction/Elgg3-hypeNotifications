@@ -1,3 +1,15 @@
+<a name="3.0.0"></a>
+# 3.0.0 (2026-04-17)
+
+### Breaking Changes
+
+* **elgg:** raise minimum to Elgg 4.x (PHP 7.4+). Plugins on Elgg 3.x must stay on hypeNotifications 2.1.2.
+
+### Migration (3.x → 4.x)
+
+* **plugin id:** lowercased plugin id from `hypeNotifications` to `hypenotifications` everywhere — plugin settings calls, the `views/default/plugins/` subdir, composer name.
+* **upgrade:** `Elgg\Upgrade\Batch` (`MigratePluginId`) copies all plugin settings (ticker, mode, staging_emails, transport config, etc.) from the orphaned 3.x entity (`title='hypeNotifications'`) to the 4.x entity (`title='hypenotifications'`). Without this script, all admin-configured notification transport settings are lost on upgrade.
+
 <a name="2.1.2"></a>
 ## [2.1.2](https://github.com/hypeJunctionPro/Elgg3-hypeNotifications/compare/2.1.1...2.1.2) (2018-07-25)
 

@@ -79,7 +79,7 @@ class SparkPostEmailTransport implements TransportInterface {
 
 		$options = [];
 
-		if (elgg_get_plugin_setting('mode', 'hypeNotifications') == 'staging') {
+		if (elgg_get_plugin_setting('mode', 'hypenotifications') == 'staging') {
 			$options['sandbox'] = true;
 		}
 

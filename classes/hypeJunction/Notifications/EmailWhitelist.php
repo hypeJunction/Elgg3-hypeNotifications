@@ -26,7 +26,7 @@ class EmailWhitelist {
 			return false;
 		}
 
-		$catch_all = elgg_get_plugin_setting('staging_catch_all', 'hypeNotifications');
+		$catch_all = elgg_get_plugin_setting('staging_catch_all', 'hypenotifications');
 		if ($email === $catch_all) {
 			return true;
 		}
@@ -57,7 +57,7 @@ class EmailWhitelist {
 	 */
 	public static function getWhiteListedEmails() {
 		if (!isset(self::$emails)) {
-			$setting = elgg_get_plugin_setting('staging_emails', 'hypeNotifications', '');
+			$setting = elgg_get_plugin_setting('staging_emails', 'hypenotifications', '');
 			$emails = explode(PHP_EOL, $setting);
 			$emails = array_map([EmailWhitelist::class, 'normalize'], $emails);
 			$emails = array_filter($emails, function($email) {
@@ -74,7 +74,7 @@ class EmailWhitelist {
 	 */
 	public static function getWhiteListedDomains() {
 		if (!isset(self::$domains)) {
-			$setting = elgg_get_plugin_setting('staging_domains', 'hypeNotifications', '');
+			$setting = elgg_get_plugin_setting('staging_domains', 'hypenotifications', '');
 			$domains = explode(PHP_EOL, $setting);
 			$domains = array_map([EmailWhitelist::class, 'normalize'], $domains);
 			$domains = array_filter($domains);

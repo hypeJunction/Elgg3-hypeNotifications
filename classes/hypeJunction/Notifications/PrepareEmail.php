@@ -23,18 +23,18 @@ class PrepareEmail {
 			return null;
 		}
 
-		if (elgg_get_plugin_setting('mode', 'hypeNotifications') == 'staging') {
+		if (elgg_get_plugin_setting('mode', 'hypenotifications') == 'staging') {
 			$to_address = $email->getTo()->getEmail();
 
 			if (!EmailWhitelist::isWhitelisted($to_address)) {
-				$catch_all = elgg_get_plugin_setting('staging_catch_all', 'hypeNotifications');
+				$catch_all = elgg_get_plugin_setting('staging_catch_all', 'hypenotifications');
 				if ($catch_all) {
 					$email->setTo(new Address($catch_all));
 				}
 			}
 		}
 
-		if ($from_email = elgg_get_plugin_setting('from_email', 'hypeNotifications')) {
+		if ($from_email = elgg_get_plugin_setting('from_email', 'hypenotifications')) {
 			$from = $email->getFrom();
 
 			$params = $email->getParams();

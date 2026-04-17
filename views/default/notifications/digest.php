@@ -9,7 +9,7 @@ if (empty($notifications)) {
 $site = elgg_get_site_entity();
 $intro = elgg_echo('notifications:digest:body_intro', [$site->name]);
 
-if (elgg_get_plugin_setting('enable_html_emails', 'hypeNotifications')) {
+if (elgg_get_plugin_setting('enable_html_emails', 'hypenotifications')) {
 
 	echo elgg_format_element('p', [], $intro);
 

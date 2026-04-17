@@ -23,7 +23,7 @@ class FormatEmailNotification {
 			return null;
 		}
 
-		if (!elgg_get_plugin_setting('enable_html_emails', 'hypeNotifications')) {
+		if (!elgg_get_plugin_setting('enable_html_emails', 'hypenotifications')) {
 			return null;
 		}
 

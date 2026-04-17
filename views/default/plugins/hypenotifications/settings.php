@@ -222,4 +222,4 @@ echo elgg_view('page/components/tabs', [
 	]
 ]);
 
-elgg_require_js('plugins/hypeNotifications/settings');
+elgg_require_js('plugins/hypenotifications/settings');

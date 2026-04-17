@@ -36,6 +36,7 @@ return [
 	],
 	'upgrades' => [
 		\hypeJunction\Notifications\MigrateNotifier::class,
+		\hypeJunction\Notifications\Upgrades\MigratePluginId::class,
 	],
 	'hooks' => [
 		'send' => [
