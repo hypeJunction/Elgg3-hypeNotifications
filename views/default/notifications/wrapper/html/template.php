@@ -68,7 +68,7 @@ $footer = strip_tags($footer, implode('', $allowed));
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title><?php echo $title ?></title>
     <style type="text/css">
-        <?= elgg_view('elements/fonts.css') ?>
+        <?php echo elgg_view('elements/fonts.css') ?>
     </style>
 </head>
 <body itemscope itemtype="http://schema.org/EmailMessage">

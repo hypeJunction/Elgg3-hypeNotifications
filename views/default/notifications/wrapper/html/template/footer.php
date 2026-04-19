@@ -22,7 +22,7 @@ $site_link = elgg_view('output/url', array(
 ));
 
 $settings_link = elgg_view('output/url', array(
-	'href' => elgg_generate_url('settings:notification:personal', [
+'href' => elgg_generate_url('settings:notification:personal', [
 		'username' => $recipient->username,
 	]),
 	'text' => elgg_echo('notifications:footer:link'),

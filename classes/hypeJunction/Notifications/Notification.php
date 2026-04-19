@@ -364,7 +364,7 @@ class Notification extends ElggData {
 	 * {@inheritdoc}
 	 */
 	public function getSubtype() {
-		return implode(':', array_filter([
+return implode(':', array_filter([
 			$this->action,
 			$this->object_type,
 			$this->object_subtype,
@@ -394,7 +394,7 @@ class Notification extends ElggData {
 			return false;
 		}
 
-		return elgg_generate_url('view:notification', [
+return elgg_generate_url('view:notification', [
 			'id' => $id,
 		]);
 	}
@@ -455,7 +455,7 @@ class Notification extends ElggData {
 
 		$subject_link = '';
 		if ($actor) {
-			$subject_link = elgg_view('output/url', [
+$subject_link = elgg_view('output/url', [
 				'href' => $actor->getURL(),
 				'text' => $actor->getDisplayName(),
 			]);
@@ -465,7 +465,7 @@ class Notification extends ElggData {
 			$object = $object->getEntity();
 		}
 		if ($object instanceof ElggEntity) {
-			$object_link = elgg_view('output/url', [
+$object_link = elgg_view('output/url', [
 				'href' => $object->getURL(),
 				'text' => $object->getDisplayName(),
 			]);
@@ -515,7 +515,7 @@ class Notification extends ElggData {
 
 		$subject_link = '';
 		if ($actor) {
-			$subject_link = elgg_view('output/url', [
+$subject_link = elgg_view('output/url', [
 				'href' => $actor->getURL(),
 				'text' => $actor->getDisplayName(),
 			]);
@@ -525,7 +525,7 @@ class Notification extends ElggData {
 			$object = $object->getEntity();
 		}
 		if ($object instanceof ElggEntity) {
-			$object_link = elgg_view('output/url', [
+$object_link = elgg_view('output/url', [
 				'href' => $object->getURL(),
 				'text' => $object->getDisplayName(),
 			]);

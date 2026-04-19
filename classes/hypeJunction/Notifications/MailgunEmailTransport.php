@@ -74,7 +74,7 @@ class MailgunEmailTransport implements TransportInterface {
 		}
 
 		try {
-			$mailgun->messages()->send($this->domain, [
+$mailgun->messages()->send($this->domain, [
 				'from' => $message->getSender()->getEmail(),
 				'to' => implode(',', $recipients),
 				'subject' => $message->getSubject(),

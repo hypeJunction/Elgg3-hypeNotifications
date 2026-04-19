@@ -29,7 +29,7 @@ if (!$notification->isRead()) {
 }
 
 if ($full) {
-	$content = elgg_view('output/longtext', [
+$content = elgg_view('output/longtext', [
 		'value' => $notification->getBody(),
 	]);
 	if (!$notification->isRead()) {
@@ -37,7 +37,7 @@ if ($full) {
 	}
 	$class[] = 'notification-full-listing';
 } else {
-	$content = elgg_view('output/longtext', [
+$content = elgg_view('output/longtext', [
 		'value' => $notification->getSummary(),
 	]);
 	$class[] = 'notification-summary-listing';

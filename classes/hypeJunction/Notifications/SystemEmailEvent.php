@@ -101,7 +101,7 @@ class SystemEmailEvent implements NotificationEvent {
 			return $this->action;
 		}
 
-		return implode(':', [
+return implode(':', [
 			$this->action,
 			$this->object->getType(),
 			$this->object->getSubtype(),

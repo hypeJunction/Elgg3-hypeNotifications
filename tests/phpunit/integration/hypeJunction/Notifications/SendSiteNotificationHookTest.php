@@ -29,16 +29,16 @@ class SendSiteNotificationHookTest extends IntegrationTestCase {
 		$notification = new ElggNotification($actor, $recipient, 'en', 'subject', 'body', '', []);
 		$event = new NotificationEvent($object, 'create', $actor);
 
-		$result = \elgg_trigger_plugin_hook('send', 'notification:site', [
+$result = \elgg_trigger_plugin_hook('send', 'notification:site', [
 			'notification' => $notification,
 			'event' => $event,
 		], false);
 
 		$this->assertTrue($result, 'Hook should signal delivery success');
 
-		\elgg_call(ELGG_IGNORE_ACCESS, function () use ($recipient, $object) {
+\elgg_call(ELGG_IGNORE_ACCESS, function () use ($recipient, $object) {
 			\elgg_get_session()->setLoggedInUser($recipient);
-			$rows = \elgg()->{'notifications.site'}->getTable()->getAll([
+$rows = \elgg()->{'notifications.site'}->getTable()->getAll([
 				'recipient_guid' => $recipient->guid,
 			]);
 			\elgg_get_session()->removeLoggedInUser();
@@ -60,15 +60,15 @@ class SendSiteNotificationHookTest extends IntegrationTestCase {
 		$notification = new ElggNotification($actor, $recipient, 'en', 's', 'b', '', []);
 
 		// Pass true as initial value: another handler "already sent it"
-		$result = \elgg_trigger_plugin_hook('send', 'notification:site', [
+$result = \elgg_trigger_plugin_hook('send', 'notification:site', [
 			'notification' => $notification,
 		], true);
 
 		$this->assertTrue($result);
 
-		\elgg_call(ELGG_IGNORE_ACCESS, function () use ($recipient) {
+\elgg_call(ELGG_IGNORE_ACCESS, function () use ($recipient) {
 			\elgg_get_session()->setLoggedInUser($recipient);
-			$count = \elgg()->{'notifications.site'}->getTable()->count([
+$count = \elgg()->{'notifications.site'}->getTable()->count([
 				'recipient_guid' => $recipient->guid,
 			]);
 			\elgg_get_session()->removeLoggedInUser();

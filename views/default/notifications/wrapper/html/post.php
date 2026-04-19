@@ -17,7 +17,7 @@ if (!$file->exists()) {
 
 $icon = elgg_view('output/url', [
 	'href' => $actor->getURL(),
-	'text' => elgg_view('output/img', [
+'text' => elgg_view('output/img', [
 		'src' => elgg_get_inline_url($file, false),
 		'alt' => $actor->getDisplayName(),
 	]),
@@ -29,10 +29,10 @@ $body = elgg_autop($notification->body);
 <table class="image-block">
 	<tr>
 		<td>
-			<?= $icon ?>
+			<?php echo $icon ?>
 		</td>
 		<td>
-			<?= $body ?>
+			<?php echo $body ?>
 		</td>
 	</tr>
 </table>

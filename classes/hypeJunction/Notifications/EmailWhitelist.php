@@ -60,7 +60,7 @@ class EmailWhitelist {
 			$setting = elgg_get_plugin_setting('staging_emails', 'hypenotifications', '');
 			$emails = explode(PHP_EOL, $setting);
 			$emails = array_map([EmailWhitelist::class, 'normalize'], $emails);
-			$emails = array_filter($emails, function($email) {
+$emails = array_filter($emails, function($email) {
 				return (bool) filter_var($email, FILTER_VALIDATE_EMAIL);
 			});
 			self::$emails = $emails;

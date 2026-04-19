@@ -27,7 +27,7 @@ class SendDigest {
 		$svc = elgg()->{'notifications.digest'};
 		/* @var $svc DigestService */
 
-		$recipients = $svc->getTable()->getRecipients([
+$recipients = $svc->getTable()->getRecipients([
 			'time_scheduled' => $time,
 		]);
 
@@ -36,7 +36,7 @@ class SendDigest {
 		}
 
 		foreach ($recipients as $recipient) {
-			$notifications = $svc->getTable()->getAll([
+$notifications = $svc->getTable()->getAll([
 				'recipient_guid' => $recipient,
 				'time_scheduled' => $time,
 			]);
@@ -46,7 +46,7 @@ class SendDigest {
 			}
 
 			$subject = elgg_echo('notifications:digest:subject');
-			$message = elgg_view('notifications/digest', [
+$message = elgg_view('notifications/digest', [
 				'notifications' => $notifications,
 			]);
 

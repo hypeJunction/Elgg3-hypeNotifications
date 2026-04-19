@@ -68,7 +68,7 @@ class EmailTransport {
 					'host' => $this->config->{'email.smtp_host'},
 					'port' => $this->config->{'email.smtp_port'},
 					'connection_class' => $this->config->{'email.smtp_connection'},
-					'connection_config' => array_filter([
+    'connection_config' => array_filter([
 						'username' => $this->config->{'email.smtp_username'},
 						'password' => $this->config->{'email.smtp_password'},
 						'ssl' => $this->config->{'email.smtp_ssl'},

@@ -163,7 +163,7 @@ class SiteNotificationsTable {
 	public function insert(Notification $notification) {
 
 		$qb = Insert::intoTable('site_notifications');
-		$qb->values([
+$qb->values([
 			'recipient_guid' => $qb->param($notification->recipient_guid, ELGG_VALUE_INTEGER),
 			'actor_guid' => $qb->param($notification->actor_guid, ELGG_VALUE_INTEGER),
 			'object_id' => $qb->param($notification->object_id, ELGG_VALUE_INTEGER),
@@ -266,8 +266,8 @@ class SiteNotificationsTable {
 	public function deleteByEntityGUID($guid) {
 
 		$qb = Delete::fromTable('site_notifications');
-		$qb->where(
-			$qb->merge([
+$qb->where(
+$qb->merge([
 				$qb->compare('recipient_guid', '=', $guid, ELGG_VALUE_INTEGER),
 				$qb->compare('actor_guid', '=', $guid, ELGG_VALUE_INTEGER),
 				$qb->merge([

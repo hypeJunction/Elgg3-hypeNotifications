@@ -103,7 +103,7 @@ class SiteNotificationsTableTest extends IntegrationTestCase {
 		$ids[] = $this->table()->insert($this->makeNotification($a));
 		$ids[] = $this->table()->insert($this->makeNotification($b));
 
-		\elgg_call(ELGG_IGNORE_ACCESS | ELGG_SHOW_DISABLED_ENTITIES, function () use ($a, $b) {
+\elgg_call(ELGG_IGNORE_ACCESS | ELGG_SHOW_DISABLED_ENTITIES, function () use ($a, $b) {
 			\elgg_get_session()->setLoggedInUser($a);
 			$forA = $this->table()->getAll(['recipient_guid' => $a->guid]);
 			$forB = $this->table()->getAll(['recipient_guid' => $b->guid]);
@@ -124,7 +124,7 @@ class SiteNotificationsTableTest extends IntegrationTestCase {
 			$ids[] = $this->table()->insert($this->makeNotification($recipient));
 		}
 
-		\elgg_call(ELGG_IGNORE_ACCESS, function () use ($recipient) {
+\elgg_call(ELGG_IGNORE_ACCESS, function () use ($recipient) {
 			\elgg_get_session()->setLoggedInUser($recipient);
 			$count = $this->table()->count(['recipient_guid' => $recipient->guid]);
 			\elgg_get_session()->removeLoggedInUser();
@@ -145,13 +145,13 @@ class SiteNotificationsTableTest extends IntegrationTestCase {
 		$n1 = $this->table()->get($id1);
 		$n1->markAsRead();
 
-		\elgg_call(ELGG_IGNORE_ACCESS, function () use ($recipient) {
+\elgg_call(ELGG_IGNORE_ACCESS, function () use ($recipient) {
 			\elgg_get_session()->setLoggedInUser($recipient);
-			$unread = $this->table()->getAll([
+$unread = $this->table()->getAll([
 				'recipient_guid' => $recipient->guid,
 				'status' => 'unread',
 			]);
-			$read = $this->table()->getAll([
+$read = $this->table()->getAll([
 				'recipient_guid' => $recipient->guid,
 				'status' => 'read',
 			]);

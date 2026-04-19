@@ -83,7 +83,7 @@ class SparkPostEmailTransport implements TransportInterface {
 			$options['sandbox'] = true;
 		}
 
-		$promise = $sparky->transmissions->post([
+$promise = $sparky->transmissions->post([
 			'content' => [
 				'from' => [
 					'name' => $sender_name,

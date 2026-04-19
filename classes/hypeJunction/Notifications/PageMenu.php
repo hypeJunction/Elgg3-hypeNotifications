@@ -24,7 +24,7 @@ class PageMenu {
 				$menu[] = ElggMenuItem::factory([
 					'name' => 'notifications:digest',
 					'text' => elgg_echo('notifications:settings:digest'),
-					'href' => elgg_generate_url('settings:notification:digest', [
+    'href' => elgg_generate_url('settings:notification:digest', [
 						'username' => $page_owner->username,
 					]),
 					'section' => 'notifications',
@@ -32,7 +32,7 @@ class PageMenu {
 			}
 		}
 
-		$menu[] = ElggMenuItem::factory([
+$menu[] = ElggMenuItem::factory([
 			'name' => 'notifications',
 			'text' => elgg_echo('admin:notifications'),
 			'href' => '#',
@@ -40,7 +40,7 @@ class PageMenu {
 			'context' => ['admin'],
 		]);
 
-		$menu[] = ElggMenuItem::factory([
+$menu[] = ElggMenuItem::factory([
 			'name' => 'notifications:settings',
 			'text' => elgg_echo('settings'),
 			'href' => 'admin/plugin_settings/hypeNotifications',
@@ -49,7 +49,7 @@ class PageMenu {
 			'context' => ['admin'],
 		]);
 
-		$menu[] = ElggMenuItem::factory([
+$menu[] = ElggMenuItem::factory([
 			'name' => 'notifications:methods',
 			'text' => elgg_echo('admin:notifications:methods'),
 			'href' => 'admin/notifications/methods',
@@ -58,7 +58,7 @@ class PageMenu {
 			'context' => ['admin'],
 		]);
 
-		$menu[] = ElggMenuItem::factory([
+$menu[] = ElggMenuItem::factory([
 			'name' => 'notifications:test_email',
 			'text' => elgg_echo('admin:notifications:test_email'),
 			'href' => 'admin/notifications/test_email',

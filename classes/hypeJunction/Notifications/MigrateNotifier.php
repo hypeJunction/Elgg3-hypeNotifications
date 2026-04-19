@@ -62,7 +62,7 @@ class MigrateNotifier implements Batch {
 	 * @return int
 	 */
 	public function countItems() {
-		$count = elgg_get_entities([
+$count = elgg_get_entities([
 			'types' => 'object',
 			'subtypes' => 'notification',
 			'count' => true,
@@ -84,7 +84,7 @@ class MigrateNotifier implements Batch {
 	 */
 	public function run(Result $result, $offset) {
 
-		$entities = elgg_get_entities([
+$entities = elgg_get_entities([
 			'types' => 'object',
 			'subtypes' => 'notification',
 			'offset' => $offset,

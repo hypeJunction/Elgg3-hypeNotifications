@@ -6,7 +6,7 @@ $text = $site->getDisplayName();
 
 foreach (['png', 'gif', 'jpg'] as $ext) {
 	if (elgg_view_exists("theme/logo.$ext")) {
-		$text = elgg_format_element('img', [
+$text = elgg_format_element('img', [
 			'src' => elgg_get_simplecache_url("theme/logo.$ext"),
 			'alt' => 'Logo',
 		]);

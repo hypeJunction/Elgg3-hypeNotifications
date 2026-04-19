@@ -19,12 +19,12 @@ if (elgg_get_plugin_setting('enable_html_emails', 'hypenotifications')) {
 			continue;
 		}
 
-		$items[] = elgg_format_element('li', [
+$items[] = elgg_format_element('li', [
 			'class' => 'elgg-item',
 				], $notification->data['body']);
 	}
 
-	echo elgg_format_element('ul', [
+echo elgg_format_element('ul', [
 		'class' => 'elgg-list',
 			], implode('', $items));
 } else {

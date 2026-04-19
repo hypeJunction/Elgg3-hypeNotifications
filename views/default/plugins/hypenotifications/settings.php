@@ -74,7 +74,7 @@ echo elgg_view_field([
 	'name' => 'params[transport]',
 	'value' => elgg()->config->{'email.transport'},
 	'class' => 'notifications-transport-selector',
-	'options_values' => array_filter([
+'options_values' => array_filter([
 		'sendmail' => elgg_echo('notifications:settings:transport:sendmail'),
 		'file' => elgg_echo('notifications:settings:transport:file'),
 		'smtp' => elgg_echo('notifications:settings:transport:smtp'),
@@ -180,7 +180,7 @@ echo elgg_view('page/components/tabs', [
 		[
 			'rel' => 'sendmail',
 			'text' => elgg_echo('notifications:settings:transport:sendmail'),
-			'content' => elgg_format_element('p', [
+'content' => elgg_format_element('p', [
 				'class' => 'elgg-no-results',
 			], elgg_echo('notifications:settings:empty')),
 			'selected' => elgg()->config->{'email.transport'} == 'sendmail' || !elgg()->config->{'email.transport'},
@@ -188,9 +188,9 @@ echo elgg_view('page/components/tabs', [
 		[
 			'rel' => 'file',
 			'text' => elgg_echo('notifications:settings:transport:file'),
-			'content' => elgg_format_element('p', [
+'content' => elgg_format_element('p', [
 				'class' => 'elgg-no-results',
-			], elgg_echo('notifications:settings:transport:file:help', [
+], elgg_echo('notifications:settings:transport:file:help', [
 				\Elgg\Project\Paths::sanitize(elgg()->config->dataroot . 'notifications_log/zend/')
 			])),
 			'selected' => elgg()->config->{'email.transport'} == 'file',

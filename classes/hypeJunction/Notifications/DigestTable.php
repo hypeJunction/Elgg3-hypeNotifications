@@ -122,7 +122,7 @@ class DigestTable {
 	public function insert(DigestNotification $notification) {
 
 		$qb = Insert::intoTable('digest');
-		$qb->values([
+$qb->values([
 			'recipient_guid' => $qb->param($notification->recipient_guid, ELGG_VALUE_INTEGER),
 			'time_created' => $qb->param($notification->time_created, ELGG_VALUE_INTEGER),
 			'time_scheduled' => $qb->param($notification->time_scheduled, ELGG_VALUE_INTEGER),

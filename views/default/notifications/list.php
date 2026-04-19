@@ -52,7 +52,7 @@ $list_items = '';
 foreach ($items as $item) {
 	$item_view_vars = $vars;
 	$item_view_vars['list_item_index'] = $index;
-	$item_view = elgg_view('notifications/notification', [
+$item_view = elgg_view('notifications/notification', [
 		'item' => $item,
 		'full_view' => $full,
 	]);
