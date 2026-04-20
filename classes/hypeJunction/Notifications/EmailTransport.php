@@ -4,7 +4,7 @@ namespace hypeJunction\Notifications;
 
 use Elgg\Config;
 use Elgg\PluginHooksService;
-use hypeJunction\Embed\File;
+use Laminas\Mail\Transport\File;
 use Laminas\Mail\Transport\FileOptions;
 use Laminas\Mail\Transport\Sendmail;
 use Laminas\Mail\Transport\Smtp;
