@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Notifications;
 
-use Elgg\Hook;
+use Elgg\Event;
 
 class FormatEmailNotification {
 
@@ -16,8 +16,8 @@ class FormatEmailNotification {
 	 *
 	 * @return \Elgg\Notifications\Notification|null
 	 */
-	public function __invoke(Hook $hook) {
-		$notification = $hook->getValue();
+	public function __invoke(Event $event) {
+		$notification = $event->getValue();
 
 		if (!$notification instanceof \Elgg\Notifications\Notification) {
 			return null;

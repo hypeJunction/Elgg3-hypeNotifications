@@ -5,13 +5,17 @@ elgg_gatekeeper();
 $username = elgg_extract('username', $vars);
 
 if ($username) {
-	$user = get_user_by_username($username);
+	$user = elgg_get_user_by_username($username);
 } else {
 	$user = elgg_get_logged_in_user_entity();
 }
 
-if (!$user || !$user->canEdit()) {
-	forward('', '404');
+if (!$user) {
+	throw new \Elgg\Exceptions\Http\EntityNotFoundException();
+}
+
+if (!$user->canEdit()) {
+	throw new \Elgg\Exceptions\Http\EntityPermissionsException();
 }
 
 elgg_set_context('settings');
@@ -27,10 +31,10 @@ $content = elgg_view_form('notifications/settings/digest', [], [
 	'entity' => $user,
 ]);
 
-$layout = elgg_view_layout('content', [
+$layout = elgg_view_layout('default', [
 	'title' => $title,
 	'content' => $content,
 	'filter' => '',
-		]);
+]);
 
 echo elgg_view_page($title, $layout);

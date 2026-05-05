@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Notifications;
 
-use Elgg\Hook;
+use Elgg\Event;
 
 class SetClientConfig {
 
@@ -15,8 +15,8 @@ class SetClientConfig {
 	 *
 	 * @return array
 	 */
-	public function __invoke(Hook $hook) {
-		$return = $hook->getValue();
+	public function __invoke(Event $event) {
+		$return = $event->getValue();
 
 		$return['notifications']['ticker'] = (int) elgg_get_plugin_setting('ticker', 'hypenotifications', 60);
 

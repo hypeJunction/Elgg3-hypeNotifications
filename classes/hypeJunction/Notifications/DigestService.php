@@ -95,7 +95,7 @@ class DigestService {
 			$notification_events['instant']['group']['default'][] = 'invite';
 		}
 
-		return elgg_trigger_plugin_hook('notification_events', 'notifications', null, $notification_events);
+		return elgg_trigger_event_results('notification_events', 'notifications', [], $notification_events);
 	}
 
 	/**

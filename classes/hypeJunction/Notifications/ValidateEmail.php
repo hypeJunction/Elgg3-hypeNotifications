@@ -3,7 +3,7 @@
 namespace hypeJunction\Notifications;
 
 use Elgg\Email;
-use Elgg\Hook;
+use Elgg\Event;
 
 class ValidateEmail {
 
@@ -13,9 +13,9 @@ class ValidateEmail {
 	 * @param Hook $hook Hook
 	 * @return bool|null
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$email = $hook->getParam('email');
+		$email = $event->getParam('email');
 
 		if (!$email instanceof Email) {
 			return null;

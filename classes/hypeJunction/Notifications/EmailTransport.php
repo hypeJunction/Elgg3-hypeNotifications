@@ -3,7 +3,7 @@
 namespace hypeJunction\Notifications;
 
 use Elgg\Config;
-use Elgg\PluginHooksService;
+use Elgg\EventsService;
 use Laminas\Mail\Transport\File;
 use Laminas\Mail\Transport\FileOptions;
 use Laminas\Mail\Transport\Sendmail;
@@ -19,19 +19,19 @@ class EmailTransport {
 	protected $config;
 
 	/**
-	 * @var PluginHooksService
+	 * @var EventsService
 	 */
-	protected $hooks;
+	protected $events;
 
 	/**
 	 * Constructor
 	 *
-	 * @param Config             $config Config
-	 * @param PluginHooksService $hooks  Hook
+	 * @param Config        $config Config
+	 * @param EventsService $events Events service
 	 */
-	public function __construct(Config $config, PluginHooksService $hooks) {
+	public function __construct(Config $config, EventsService $events) {
 		$this->config = $config;
-		$this->hooks = $hooks;
+		$this->events = $events;
 	}
 
 	/**
@@ -68,7 +68,7 @@ class EmailTransport {
 					'host' => $this->config->{'email.smtp_host'},
 					'port' => $this->config->{'email.smtp_port'},
 					'connection_class' => $this->config->{'email.smtp_connection'},
-    'connection_config' => array_filter([
+					'connection_config' => array_filter([
 						'username' => $this->config->{'email.smtp_username'},
 						'password' => $this->config->{'email.smtp_password'},
 						'ssl' => $this->config->{'email.smtp_ssl'},
@@ -90,6 +90,6 @@ class EmailTransport {
 				break;
 		}
 
-		return $this->hooks->trigger('email:transport', 'system', null, $transport);
+		return $this->events->triggerResults('email:transport', 'system', [], $transport);
 	}
 }

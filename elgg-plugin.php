@@ -2,7 +2,7 @@
 
 return [
 	'plugin' => [
-		'version' => '4.0.0',
+		'version' => '5.0.0',
 	],
 	'bootstrap' => \hypeJunction\Notifications\Bootstrap::class,
 	'actions' => [
@@ -41,7 +41,7 @@ return [
 		\hypeJunction\Notifications\MigrateNotifier::class,
 		\hypeJunction\Notifications\Upgrades\MigratePluginId::class,
 	],
-	'hooks' => [
+	'events' => [
 		'send' => [
 			'all' => [
 				\hypeJunction\Notifications\ScheduleDigest::class => ['priority' => 100],
@@ -102,8 +102,7 @@ return [
 				\hypeJunction\Notifications\PageMenu::class => [],
 			],
 		],
-	],
-	'events' => [
+		'update' => [
 		'update' => [
 			'all' => [
 				\hypeJunction\Notifications\SyncEntityUpdate::class => ['priority' => 999],

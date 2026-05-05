@@ -7,7 +7,7 @@ if (!$email instanceof \Elgg\Email) {
 }
 
 $to = $email->getTo()->getEmail();
-$users = get_user_by_email($to);
+$users = elgg_get_user_by_email($to);
 if (!$users) {
 	return;
 }

@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Notifications;
 
-use Elgg\Hook;
+use Elgg\Event;
 use ElggMenuItem;
 use ElggUser;
 
@@ -14,9 +14,9 @@ class PageMenu {
 	 * @param Hook $hook Hook
 	 * @return ElggMenuItem[]
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$menu = $hook->getValue();
+		$menu = $event->getValue();
 
 		if (elgg_in_context('settings')) {
 			$page_owner = elgg_get_page_owner_entity();

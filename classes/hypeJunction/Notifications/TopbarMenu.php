@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Notifications;
 
-use Elgg\Hook;
+use Elgg\Event;
 use ElggMenuItem;
 
 class TopbarMenu {
@@ -15,14 +15,14 @@ class TopbarMenu {
 	 * @return ElggMenuItem[]|null
 	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
 		$user = elgg_get_logged_in_user_entity();
 		if (!$user) {
 			return null;
 		}
 
-		$menu = $hook->getValue();
+		$menu = $event->getValue();
 
 		$counter = '';
 

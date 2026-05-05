@@ -26,13 +26,12 @@ class Bootstrap extends DefaultPluginBootstrap {
 		// Site notifications
 		\elgg_register_notification_method('site');
 
-		// Dynamic view hook registrations for object subtypes
+		// Dynamic event handler registrations for object subtypes
 		$subtypes = (array) \get_registered_entity_types('object');
 		foreach ($subtypes as $subtype) {
-			\elgg_register_plugin_hook_handler('view', "object/$subtype", DismissObjectNotifications::class);
+			\elgg_register_event_handler('view', "object/$subtype", DismissObjectNotifications::class);
 		}
 
-		// Email notifications and transport
-		\elgg_set_email_transport(\elgg()->{'email.transport'}->build());
+		// Email transport is wired via elgg-services.php DI override (no call needed here)
 	}
 }

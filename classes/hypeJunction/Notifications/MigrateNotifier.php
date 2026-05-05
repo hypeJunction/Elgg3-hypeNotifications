@@ -2,10 +2,10 @@
 
 namespace hypeJunction\Notifications;
 
-use Elgg\Upgrade\Batch;
+use Elgg\Upgrade\AsynchronousUpgrade;
 use Elgg\Upgrade\Result;
 
-class MigrateNotifier implements Batch {
+class MigrateNotifier extends AsynchronousUpgrade {
 
 	/**
 	 * Version of the upgrade
@@ -21,7 +21,7 @@ class MigrateNotifier implements Batch {
 	 *
 	 * @return int E.g. 2016123101
 	 */
-	public function getVersion() {
+	public function getVersion(): int {
 		return 20180308000;
 	}
 
@@ -32,59 +32,45 @@ class MigrateNotifier implements Batch {
 	 *
 	 * @return bool
 	 */
-	public function shouldBeSkipped() {
+	public function shouldBeSkipped(): bool {
 		return !$this->countItems();
 	}
 
 	/**
 	 * Should the run() method receive an offset representing all processed items?
 	 *
-	 * If true, run() will receive as $offset the number of items already processed. This is useful
-	 * if you are only modifying data, and need to use the $offset in a function like elgg_get_entities*()
-	 * to know how many to skip over.
-	 *
-	 * If false, run() will receive as $offset the total number of failures. This should be used if your
-	 * process deletes or moves data out of the way of the process. E.g. if you delete 50 objects on each
-	 * run(), you may still use the $offset to skip objects that already failed once.
-	 *
 	 * @return bool
 	 */
-	public function needsIncrementOffset() {
+	public function needsIncrementOffset(): bool {
 		return true;
 	}
 
 	/**
 	 * The total number of items to process during the upgrade
 	 *
-	 * If unknown, Batch::UNKNOWN_COUNT should be returned, and run() must manually mark the result
-	 * as complete.
-	 *
 	 * @return int
 	 */
-	public function countItems() {
-$count = elgg_get_entities([
+	public function countItems(): int {
+		$count = elgg_get_entities([
 			'types' => 'object',
 			'subtypes' => 'notification',
 			'count' => true,
 		]);
 
-		return $count;
+		return (int) $count;
 	}
 
 	/**
 	 * Runs upgrade on a single batch of items
-	 *
-	 * If countItems() returns Batch::UNKNOWN_COUNT, this method must call $result->markCompleted()
-	 * when the upgrade is complete.
 	 *
 	 * @param Result $result Result of the batch (this must be returned)
 	 * @param int    $offset Number to skip when processing
 	 *
 	 * @return Result Instance of \Elgg\Upgrade\Result
 	 */
-	public function run(Result $result, $offset) {
+	public function run(Result $result, $offset): Result {
 
-$entities = elgg_get_entities([
+		$entities = elgg_get_entities([
 			'types' => 'object',
 			'subtypes' => 'notification',
 			'offset' => $offset,
@@ -92,6 +78,7 @@ $entities = elgg_get_entities([
 
 		foreach ($entities as $entity) {
 			$objects = $entity->getEntitiesFromRelationship(['relationship' => 'hasObject']);
+			$object = null;
 			if ($objects) {
 				$object = array_shift($objects);
 			}

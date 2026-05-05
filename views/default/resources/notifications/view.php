@@ -7,12 +7,15 @@ $id = elgg_extract('id', $vars);
 $notification = hypeapps_get_notification_by_id($id);
 
 if (!$notification instanceof \hypeJunction\Notifications\Notification) {
-	forward('', '404');
+	throw new \Elgg\Exceptions\Http\EntityNotFoundException();
 }
 
 $user = $notification->getRecipient();
-if (!$user || !$user->canEdit()) {
-	forward('', '404');
+if (!$user) {
+	throw new \Elgg\Exceptions\Http\EntityNotFoundException();
+}
+if (!$user->canEdit()) {
+	throw new \Elgg\Exceptions\Http\EntityPermissionsException();
 }
 
 elgg_push_breadcrumb(elgg_echo('notifications'), 'notifications/all');
@@ -30,23 +33,24 @@ if (!$notification->isRead()) {
 
 $target = $notification->getTargetURL();
 if ($target) {
-	forward($target);
+	elgg_redirect_response($target);
+	return;
 }
 
 $content = elgg_view('notifications/notification', [
 	'item' => $notification,
 	'full_view' => true,
-		]);
+]);
 
 if (elgg_is_xhr()) {
 	echo $content;
 	return;
 }
 
-$layout = elgg_view_layout('content', [
+$layout = elgg_view_layout('default', [
 	'title' => $title,
 	'content' => $content,
 	'filter' => '',
-		]);
+]);
 
 echo elgg_view_page($title, $layout);

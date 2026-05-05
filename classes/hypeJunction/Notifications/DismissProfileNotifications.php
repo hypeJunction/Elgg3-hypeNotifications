@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Notifications;
 
-use Elgg\Hook;
+use Elgg\Event;
 
 class DismissProfileNotifications {
 
@@ -16,9 +16,9 @@ class DismissProfileNotifications {
 	 * @return void
 	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$return = $hook->getValue();
+		$return = $event->getValue();
 
 		if (empty($return)) {
 			return;
@@ -28,7 +28,7 @@ class DismissProfileNotifications {
 			return;
 		}
 
-		$vars = $hook->getParam('vars');
+		$vars = $event->getParam('vars');
 
 		$entity = elgg_extract('entity', $vars);
 		if (!$entity) {

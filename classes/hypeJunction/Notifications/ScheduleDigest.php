@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Notifications;
 
-use Elgg\Hook;
+use Elgg\Event;
 use Elgg\Notifications\InstantNotificationEvent;
 use Elgg\Notifications\NotificationEvent;
 use ElggEntity;
@@ -18,9 +18,9 @@ class ScheduleDigest {
 	 *
 	 * @return bool|null
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$type = $hook->getType();
+		$type = $event->getType();
 
 		list($prefix, $method) = explode(':', $type);
 
@@ -28,13 +28,13 @@ class ScheduleDigest {
 			return null;
 		}
 
-		$event = $hook->getParam('event');
+		$event = $event->getParam('event');
 
 		if (!$event instanceof NotificationEvent) {
 			return null;
 		}
 
-		$notification = $hook->getParam('notification');
+		$notification = $event->getParam('notification');
 
 		if (!$notification instanceof Notification) {
 			return null;

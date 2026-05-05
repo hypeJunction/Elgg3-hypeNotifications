@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Notifications;
 
-use Elgg\Hook;
+use Elgg\Event;
 use Laminas\Mail\Message;
 use Laminas\Mime\Mime;
 use Laminas\Mime\Part;
@@ -15,15 +15,15 @@ class AddHtmlEmailPart {
 	 * @param Hook $hook Hook
 	 * @return Message
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$message = $hook->getValue();
+		$message = $event->getValue();
 		/* @var $message Message */
 
 		if (elgg_get_plugin_setting('enable_html_emails', 'hypenotifications')) {
 
 $html_body = elgg_view('notifications/wrapper/html', [
-				'email' => $hook->getParam('email'),
+				'email' => $event->getParam('email'),
 			]);
 
 			if ($html_body) {

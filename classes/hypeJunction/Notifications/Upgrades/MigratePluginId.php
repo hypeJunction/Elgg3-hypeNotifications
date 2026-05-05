@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Notifications\Upgrades;
 
-use Elgg\Upgrade\Batch;
+use Elgg\Upgrade\AsynchronousUpgrade;
 use Elgg\Upgrade\Result;
 
 /**
@@ -15,7 +15,7 @@ use Elgg\Upgrade\Result;
  * upgrade and all admin-configured settings (ticker, mode, staging_emails, etc.)
  * become inaccessible.
  */
-class MigratePluginId implements Batch {
+class MigratePluginId extends AsynchronousUpgrade {
 
 	const OLD_ID = 'hypeNotifications';
 	const NEW_ID = 'hypenotifications';
@@ -33,7 +33,7 @@ class MigratePluginId implements Batch {
 	}
 
 	public function countItems(): int {
-		return Batch::UNKNOWN_COUNT;
+		return AsynchronousUpgrade::UNKNOWN_COUNT;
 	}
 
 	public function run(Result $result, $offset): Result {
@@ -73,7 +73,7 @@ class MigratePluginId implements Batch {
 	}
 
 	private function getOldPluginEntity(): ?\ElggPlugin {
-$entities = elgg_get_entities([
+		$entities = elgg_get_entities([
 			'type' => 'object',
 			'subtype' => 'plugin',
 			'metadata_name_value_pairs' => [

@@ -424,7 +424,7 @@ return elgg_generate_url('view:notification', [
 			'notification' => $this,
 		];
 
-		return elgg_trigger_plugin_hook('target:url', 'notification', $params, $url);
+		return elgg_trigger_event_results('target:url', 'notification', $params, $url);
 	}
 
 	/**
@@ -491,7 +491,7 @@ $object_link = elgg_view('output/url', [
 			'notification' => $this,
 		];
 
-		return elgg_trigger_plugin_hook('format:body', 'notification', $params, $summary);
+		return elgg_trigger_event_results('format:body', 'notification', $params, $summary);
 	}
 
 	/**
@@ -554,7 +554,7 @@ $object_link = elgg_view('output/url', [
 			'notification' => $this,
 		];
 
-		return elgg_trigger_plugin_hook('format:summary', 'notification', $params, $summary);
+		return elgg_trigger_event_results('format:summary', 'notification', $params, $summary);
 	}
 
 }

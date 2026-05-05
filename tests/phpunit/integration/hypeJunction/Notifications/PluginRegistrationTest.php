@@ -6,9 +6,9 @@ use Elgg\IntegrationTestCase;
 
 /**
  * Verifies the plugin's elgg-plugin.php registrations are wired up:
- * service container entries, hook handlers, event handlers, routes,
- * actions, and the 'site' notification method. These tests catch
- * "the migration silently dropped a registration" regressions.
+ * service container entries, event handlers, routes, actions, and the
+ * 'site' notification method. These tests catch "the migration silently
+ * dropped a registration" regressions.
  */
 class PluginRegistrationTest extends IntegrationTestCase {
 
@@ -56,13 +56,13 @@ class PluginRegistrationTest extends IntegrationTestCase {
 		$this->assertArrayHasKey('hypeNotifications/settings/save', $actions);
 	}
 
-	public function testSendSiteNotificationHookRegistered(): void {
-		$registered = \_elgg_services()->hooks->hasHandler('send', 'notification:site');
-		$this->assertTrue($registered, 'send/notification:site hook must be registered');
+	public function testSendSiteNotificationHandlerRegistered(): void {
+		$registered = \_elgg_services()->events->hasHandler('send', 'notification:site');
+		$this->assertTrue($registered, 'send/notification:site event handler must be registered');
 	}
 
-	public function testFormatEmailHookRegistered(): void {
-		$this->assertTrue(\_elgg_services()->hooks->hasHandler('format', 'notification:email'));
+	public function testFormatEmailHandlerRegistered(): void {
+		$this->assertTrue(\_elgg_services()->events->hasHandler('format', 'notification:email'));
 	}
 
 	public function testEntitySyncEventsRegistered(): void {

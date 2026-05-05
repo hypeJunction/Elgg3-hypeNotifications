@@ -5,7 +5,7 @@ elgg_gatekeeper();
 $username = elgg_extract('username', $vars);
 
 if ($username) {
-	$user = get_user_by_username($username);
+	$user = elgg_get_user_by_username($username);
 } else {
 	$user = elgg_get_logged_in_user_entity();
 }
@@ -37,10 +37,10 @@ $content = elgg_view('notifications/listing', [
 	'entity' => $user,
 		]);
 
-$layout = elgg_view_layout('content', [
+$layout = elgg_view_layout('default', [
 	'title' => elgg_echo('notifications'),
 	'content' => $content,
 	'filter' => '',
-		]);
+]);
 
 echo elgg_view_page($title, $layout);

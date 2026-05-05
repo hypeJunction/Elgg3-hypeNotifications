@@ -4,7 +4,7 @@ namespace hypeJunction\Notifications;
 
 use Elgg\Email;
 use Elgg\Email\Address;
-use Elgg\Hook;
+use Elgg\Event;
 
 class PrepareEmail {
 
@@ -15,9 +15,9 @@ class PrepareEmail {
 	 *
 	 * @return bool|null
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$email = $hook->getValue();
+		$email = $event->getValue();
 
 		if (!$email instanceof Email) {
 			return null;

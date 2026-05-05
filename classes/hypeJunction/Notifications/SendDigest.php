@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Notifications;
 
-use Elgg\Hook;
+use Elgg\Event;
 use Elgg\Traits\TimeUsing;
 
 class SendDigest {
@@ -19,7 +19,7 @@ class SendDigest {
 	 * @throws \Elgg\Exceptions\DatabaseException
 	 * @throws \NotificationException
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
 
 		$time = $this->getCurrentTime()->getTimestamp();

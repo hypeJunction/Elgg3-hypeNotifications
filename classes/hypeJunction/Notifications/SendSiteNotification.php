@@ -2,7 +2,7 @@
 
 namespace hypeJunction\Notifications;
 
-use Elgg\Hook;
+use Elgg\Event;
 use Elgg\Notifications\NotificationEvent;
 
 class SendSiteNotification {
@@ -16,19 +16,19 @@ class SendSiteNotification {
 	 *
 	 * @return bool|null
 	 */
-	public function __invoke(Hook $hook) {
+	public function __invoke(Event $event) {
 
-		$is_sent = $hook->getValue();
+		$is_sent = $event->getValue();
 
 		if ($is_sent === true) {
 			// another handler sent the notification
 			return true;
 		}
 
-		$notification = $hook->getParam('notification');
+		$notification = $event->getParam('notification');
 		/* @var $notification \Elgg\Notifications\Notification */
 
-		$event = $hook->getParam('event');
+		$event = $event->getParam('event');
 		/* @var $event NotificationEvent */
 
 		$site_notification = new Notification();

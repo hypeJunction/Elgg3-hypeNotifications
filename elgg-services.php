@@ -2,7 +2,7 @@
 
 return [
 	'email.transport' => \DI\create(\hypeJunction\Notifications\EmailTransport::class)
-		->constructor(\DI\get('config'), \DI\get('hooks')),
+		->constructor(\DI\get('config'), \DI\get('events')),
 
 	'db.notifications' => \DI\create(\hypeJunction\Notifications\SiteNotificationsTable::class)
 		->constructor(\DI\get('db')),
