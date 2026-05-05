@@ -10,7 +10,6 @@ $site = elgg_get_site_entity();
 $intro = elgg_echo('notifications:digest:body_intro', [$site->name]);
 
 if (elgg_get_plugin_setting('enable_html_emails', 'hypenotifications')) {
-
 	echo elgg_format_element('p', [], $intro);
 
 	$items = [];
@@ -19,14 +18,14 @@ if (elgg_get_plugin_setting('enable_html_emails', 'hypenotifications')) {
 			continue;
 		}
 
-$items[] = elgg_format_element('li', [
+		$items[] = elgg_format_element('li', [
 			'class' => 'elgg-item',
-				], $notification->data['body']);
+		], $notification->data['body']);
 	}
 
-echo elgg_format_element('ul', [
+	echo elgg_format_element('ul', [
 		'class' => 'elgg-list',
-			], implode('', $items));
+	], implode('', $items));
 } else {
 	$hr = PHP_EOL . '----------------------------------------------' . PHP_EOL;
 

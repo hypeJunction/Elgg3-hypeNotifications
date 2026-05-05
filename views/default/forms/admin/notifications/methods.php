@@ -4,7 +4,7 @@ elgg_require_js('forms/admin/notifications/methods');
 
 echo elgg_format_element('p', [
 	'class' => 'elgg-text-help',
-		], elgg_echo('admin:notifications:methods:help'));
+], elgg_echo('admin:notifications:methods:help'));
 
 $methods = elgg_get_notification_methods();
 $options = [];
@@ -69,6 +69,6 @@ echo elgg_view_field([
 $footer = elgg_view_field([
 	'#type' => 'submit',
 	'value' => elgg_echo('save'),
-		]);
+]);
 
 elgg_set_form_footer($footer);

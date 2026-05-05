@@ -41,5 +41,4 @@ class DismissObjectNotifications {
 
 		$svc->getTable()->markReadByEntityGUID($entity->guid);
 	}
-
 }

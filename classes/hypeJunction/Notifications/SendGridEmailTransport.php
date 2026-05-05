@@ -52,15 +52,15 @@ class SendGridEmailTransport implements TransportInterface {
 		foreach ($parts as $part) {
 			$type = $part->getType();
 			switch ($type) {
-				case Mime::TYPE_TEXT :
+				case Mime::TYPE_TEXT:
 					$text = new Content($type, $part->getContent());
 					break;
 
-				case Mime::TYPE_HTML :
+				case Mime::TYPE_HTML:
 					$html = new Content($type, $part->getContent());
 					break;
 
-				default :
+				default:
 					$attachment = new Attachment();
 					$attachment->setFilename($part->getFileName());
 					$attachment->setType($part->getType());
@@ -87,9 +87,8 @@ class SendGridEmailTransport implements TransportInterface {
 				throw new Mail\Exception\RuntimeException($response->body(), $response->statusCode());
 			}
 		} catch (\Exception $ex) {
-			elgg_log("SendGrid: " . $ex->getMessage(), 'ERROR');
+			elgg_log('SendGrid: ' . $ex->getMessage(), 'ERROR');
 			throw new Mail\Exception\RuntimeException($ex->getMessage(), $ex->getCode());
 		}
-
 	}
 }

@@ -16,19 +16,19 @@ $recipient = array_shift($users);
 
 $site = elgg_get_site_entity();
 
-$site_link = elgg_view('output/url', array(
+$site_link = elgg_view('output/url', [
 	'href' => $site->getURL(),
 	'text' => $site->name,
-));
+]);
 
-$settings_link = elgg_view('output/url', array(
-'href' => elgg_generate_url('settings:notification:personal', [
+$settings_link = elgg_view('output/url', [
+	'href' => elgg_generate_url('settings:notification:personal', [
 		'username' => $recipient->username,
 	]),
 	'text' => elgg_echo('notifications:footer:link'),
-));
+]);
 
-echo elgg_echo('notifications:footer', array(
+echo elgg_echo('notifications:footer', [
 	$site_link,
 	$settings_link,
-));
+]);

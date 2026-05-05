@@ -14,6 +14,7 @@ $user = $notification->getRecipient();
 if (!$user) {
 	throw new \Elgg\Exceptions\Http\EntityNotFoundException();
 }
+
 if (!$user->canEdit()) {
 	throw new \Elgg\Exceptions\Http\EntityPermissionsException();
 }

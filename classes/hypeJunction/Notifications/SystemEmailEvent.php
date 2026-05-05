@@ -15,7 +15,6 @@ class SystemEmailEvent implements NotificationEvent {
 	const DEFAULT_ACTION_NAME = 'system_email';
 
 	/* @var string The name of the action/event */
-
 	protected $action;
 
 	/* @var string Action's object */
@@ -40,7 +39,7 @@ class SystemEmailEvent implements NotificationEvent {
 			$this->actor = _elgg_services()->session->getLoggedInUser();
 		}
 
-		$this->action = $action ? : self::DEFAULT_ACTION_NAME;
+		$this->action = $action ?: self::DEFAULT_ACTION_NAME;
 	}
 
 	/**
@@ -101,7 +100,7 @@ class SystemEmailEvent implements NotificationEvent {
 			return $this->action;
 		}
 
-return implode(':', [
+		return implode(':', [
 			$this->action,
 			$this->object->getType(),
 			$this->object->getSubtype(),
@@ -125,6 +124,7 @@ return implode(':', [
 				$obj->$key = $value;
 			}
 		}
+
 		return $obj;
 	}
 }

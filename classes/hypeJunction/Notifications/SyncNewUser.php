@@ -27,5 +27,4 @@ class SyncNewUser {
 		$metaname = 'collections_notifications_preferences_site';
 		$user->$metaname = -1; // enable for new friends
 	}
-
 }

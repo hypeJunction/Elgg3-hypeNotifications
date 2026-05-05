@@ -111,13 +111,13 @@ class DigestService {
 		$dt = new DateTime();
 
 		switch ($interval) {
-			case self::HOUR :
+			case self::HOUR:
 				$dt->modify('+1 hour');
 				$h = $dt->format('H');
 				$dt->setTime($h, 0, 0);
 				break;
 
-			case self::SIX_HOURS :
+			case self::SIX_HOURS:
 				foreach ([0, 6, 12, 18, 24] as $h) {
 					$dt->setTime($h, 0, 0);
 					if ($dt->getTimestamp() > $now->getTimestamp()) {
@@ -126,7 +126,7 @@ class DigestService {
 				}
 				break;
 
-			case self::TWELVE_HOURS :
+			case self::TWELVE_HOURS:
 				foreach ([0, 12, 24] as $h) {
 					$dt->setTime($h, 0, 0);
 					if ($dt->getTimestamp() > $now->getTimestamp()) {
@@ -135,7 +135,7 @@ class DigestService {
 				}
 				break;
 
-			case self::DAY :
+			case self::DAY:
 				$dt->modify('+1 day');
 				$dt->setTime(0, 0, 0);
 				break;

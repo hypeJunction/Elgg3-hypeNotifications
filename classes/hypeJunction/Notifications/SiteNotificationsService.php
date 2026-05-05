@@ -20,7 +20,7 @@ class SiteNotificationsService {
 	private $table;
 
 	/**
-	 * Constructor 
+	 * Constructor
 	 * @param SiteNotificationsTable $table DB table
 	 */
 	public function __construct(SiteNotificationsTable $table) {

@@ -16,7 +16,7 @@ class EmailWhitelist {
 
 	/**
 	 * Check if email address is whitelisted
-	 * 
+	 *
 	 * @param string $email Email address
 	 * @return bool
 	 */
@@ -41,7 +41,7 @@ class EmailWhitelist {
 
 	/**
 	 * Normalize emails/domains (trim, lowercase etc)
-	 * 
+	 *
 	 * @param string $email Email/domain
 	 * @return string
 	 */
@@ -59,12 +59,13 @@ class EmailWhitelist {
 		if (!isset(self::$emails)) {
 			$setting = elgg_get_plugin_setting('staging_emails', 'hypenotifications', '');
 			$emails = explode(PHP_EOL, $setting);
-			$emails = array_map([EmailWhitelist::class, 'normalize'], $emails);
-$emails = array_filter($emails, function($email) {
+			$emails = array_map([self::class, 'normalize'], $emails);
+			$emails = array_filter($emails, function($email) {
 				return (bool) filter_var($email, FILTER_VALIDATE_EMAIL);
 			});
 			self::$emails = $emails;
 		}
+
 		return self::$emails;
 	}
 
@@ -76,11 +77,11 @@ $emails = array_filter($emails, function($email) {
 		if (!isset(self::$domains)) {
 			$setting = elgg_get_plugin_setting('staging_domains', 'hypenotifications', '');
 			$domains = explode(PHP_EOL, $setting);
-			$domains = array_map([EmailWhitelist::class, 'normalize'], $domains);
+			$domains = array_map([self::class, 'normalize'], $domains);
 			$domains = array_filter($domains);
 			self::$domains = $domains;
 		}
+
 		return self::$domains;
 	}
-	
 }

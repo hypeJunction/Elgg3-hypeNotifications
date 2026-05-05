@@ -27,7 +27,7 @@ class FormatEmailNotification {
 			return null;
 		}
 
-$body = elgg_view('notifications/wrapper/html/post', [
+		$body = elgg_view('notifications/wrapper/html/post', [
 			'notification' => $notification,
 		]);
 

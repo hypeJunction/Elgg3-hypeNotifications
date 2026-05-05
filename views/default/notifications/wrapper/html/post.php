@@ -17,12 +17,12 @@ if (!$file->exists()) {
 
 $icon = elgg_view('output/url', [
 	'href' => $actor->getURL(),
-'text' => elgg_view('output/img', [
+	'text' => elgg_view('output/img', [
 		'src' => elgg_get_inline_url($file, false),
 		'alt' => $actor->getDisplayName(),
 	]),
 	'class' => 'user-icon',
-		]);
+]);
 
 $body = elgg_autop($notification->body);
 ?>

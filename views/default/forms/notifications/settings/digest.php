@@ -27,7 +27,7 @@ foreach ($subscription_events as $entity_type => $entity_subtypes) {
 		foreach ($events as $event) {
 			$setting = "subscriptions:{$event}:{$entity_type}:{$entity_subtype}";
 			$value = elgg_get_plugin_user_setting($setting, $user->guid, 'hypenotifications', DigestService::INSTANT);
-$subscriptions .= elgg_view_field([
+			$subscriptions .= elgg_view_field([
 				'#type' => 'select',
 				'#label' => elgg_echo("notification:subscriptions:$event:$entity_type:$entity_subtype"),
 				'name' => "params[$setting]",
@@ -37,6 +37,7 @@ $subscriptions .= elgg_view_field([
 		}
 	}
 }
+
 if ($subscriptions) {
 	echo elgg_view_module('info', elgg_echo('notifications:digest:subscriptions'), $subscriptions);
 }
@@ -48,7 +49,7 @@ foreach ($instant_events as $entity_type => $entity_subtypes) {
 		foreach ($events as $event) {
 			$setting = "instant:{$event}:{$entity_type}:{$entity_subtype}";
 			$value = elgg_get_plugin_user_setting($setting, $user->guid, 'hypenotifications', DigestService::INSTANT);
-$instant .= elgg_view_field([
+			$instant .= elgg_view_field([
 				'#type' => 'select',
 				'#label' => elgg_echo("notification:instant:$event:$entity_type:$entity_subtype"),
 				'name' => "params[$setting]",
@@ -58,6 +59,7 @@ $instant .= elgg_view_field([
 		}
 	}
 }
+
 if ($instant) {
 	echo elgg_view_module('info', elgg_echo('notifications:digest:instant'), $instant);
 }

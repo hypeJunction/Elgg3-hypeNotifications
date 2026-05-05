@@ -1,3 +1,26 @@
+<a name="5.0.0"></a>
+# 5.0.0 (2026-05-05)
+
+### Breaking Changes
+
+* **elgg:** raise minimum to Elgg 5.x (PHP 8.2+). Plugins on Elgg 4.x must stay on hypenotifications 4.x.
+
+### Migration (4.x → 5.x)
+
+* **composer:** updated `elgg/elgg ^5.0`, `php >=8.2`. Removed `php-http/guzzle6-adapter`; Guzzle 7 is now used directly.
+* **deps:** bumped `laminas/laminas-mail ^2.26`, `laminas/laminas-servicemanager ^3.22`, `pelago/emogrifier ^7.0`, `sendgrid/sendgrid ^8.0`, `guzzlehttp/guzzle ^7.0`, `mailgun/mailgun-php ^4.0`.
+* **hooks→events:** `'hooks'` key in `elgg-plugin.php` merged into `'events'`. All handler classes updated from `use Elgg\Hook` + `__invoke(Hook $hook)` to `use Elgg\Event` + `__invoke(Event $event)`.
+* **elgg_register_event_handler:** `elgg_register_plugin_hook_handler()` → `elgg_register_event_handler()` in Bootstrap.
+* **email transport:** `elgg_set_email_transport()` removed in 5.x. Email transport is now fully wired via the DI container override in `elgg-services.php`. `EmailTransport` uses `EventsService` instead of removed `PluginHooksService`.
+* **removed APIs:** `get_user_by_email()` → `elgg_get_user_by_email()`; `get_user_by_username()` → `elgg_get_user_by_username()`.
+* **removed APIs:** `elgg_trigger_plugin_hook()` → `elgg_trigger_event_results()` in `Notification::getTargetURL()`, `Notification::getBody()`, `Notification::getSummary()`, `DigestService::getNotificationEvents()`.
+* **forward():** All `forward()` calls replaced with `throw new EntityNotFoundException()`, `EntityPermissionsException()`, or `elgg_redirect_response()`.
+* **layout:** `elgg_view_layout('content', ...)` → `elgg_view_layout('default', ...)` (content layout removed in 5.x).
+* **upgrade classes:** `implements Batch` → `extends AsynchronousUpgrade` for both `MigratePluginId` and `MigrateNotifier`. PHP 8.2 strict return types added.
+* **LSP fixes:** `Notification::getURL()`, `delete()`, `getSubtype()`, `getSystemLogID()`, `getType()`, `getObjectFromID()` given explicit return types matching parent class.
+* **security:** `unserialize()` updated to `unserialize($value, ['allowed_classes' => false])` in `Notification` and `DigestNotification` to prevent object injection.
+* **docker:** updated to `php:8.2-apache`, MySQL 8.0, Elgg 5.x install script.
+
 <a name="3.0.0"></a>
 # 3.0.0 (2026-04-17)
 

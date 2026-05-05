@@ -17,7 +17,7 @@ $icon = elgg_view_entity_icon($actor, $size, [
 	'use_hover' => false,
 	'use_link' => false,
 	'href' => false,
-		]);
+]);
 
 if (!$notification->isSeen()) {
 	$notification->markAsSeen();
@@ -29,15 +29,16 @@ if (!$notification->isRead()) {
 }
 
 if ($full) {
-$content = elgg_view('output/longtext', [
+	$content = elgg_view('output/longtext', [
 		'value' => $notification->getBody(),
 	]);
 	if (!$notification->isRead()) {
 		$notification->markAsRead();
 	}
+
 	$class[] = 'notification-full-listing';
 } else {
-$content = elgg_view('output/longtext', [
+	$content = elgg_view('output/longtext', [
 		'value' => $notification->getSummary(),
 	]);
 	$class[] = 'notification-summary-listing';

@@ -1,16 +1,18 @@
-# hypeNotifications plugin architecture (Elgg 4.x)
+# hypeNotifications plugin architecture (Elgg 5.x)
 
-Provides enhanced on-site and off-site notification functionality for Elgg 4.x, including
+Provides enhanced on-site and off-site notification functionality for Elgg 5.x, including
 Facebook-style site notifications, configurable email digest scheduling, multiple email
 transport backends (SMTP, SendGrid, Mailgun, SparkPost), and admin tools for managing
 notification methods.
+
+**Elgg version:** 5.x (PHP 8.2+). See CHANGELOG.md for the 4.x→5.x migration summary.
 
 ## Layout
 
 ```
 hypenotifications/
 ├── composer.json                    Plugin metadata & dependencies
-├── elgg-plugin.php                  Declarative hooks, actions, routes, upgrades
+├── elgg-plugin.php                  Declarative events, actions, routes, upgrades
 ├── elgg-services.php                DI container service definitions
 ├── classes/hypeJunction/Notifications/
 │   ├── Bootstrap.php                Plugin initialization & activation
@@ -87,24 +89,24 @@ hypenotifications/
 └── docker/                          Docker test environment
 ```
 
-## Registered hooks/events (elgg-plugin.php)
+## Registered events (elgg-plugin.php)
 
-| Kind | Identifier | Handler |
+| Event | Identifier | Handler |
 |------|------------|---------|
-| hook | send:all | ScheduleDigest |
-| hook | send:notification:site | SendSiteNotification (priority 400) |
-| hook | cron:hourly | SendDigest |
-| hook | view:profile/details | DismissProfileNotifications |
-| hook | view:groups/profile/layout | DismissProfileNotifications |
-| hook | view:object/default | DismissObjectNotifications |
-| hook | view:post/elements/full | DismissObjectNotifications |
-| hook | elgg.data:site | SetClientConfig |
-| hook | format:notification:email | FormatEmailNotification (priority 999) |
-| hook | prepare:system:email | PrepareEmail (priority 999) |
-| hook | validate:system:email | ValidateEmail |
-| hook | zend:message:system:email | AddHtmlEmailPart |
-| hook | register:menu:topbar | TopbarMenu |
-| hook | register:menu:page | PageMenu |
+| event | send:all | ScheduleDigest |
+| event | send:notification:site | SendSiteNotification (priority 400) |
+| event | cron:hourly | SendDigest |
+| event | view:profile/details | DismissProfileNotifications |
+| event | view:groups/profile/layout | DismissProfileNotifications |
+| event | view:object/default | DismissObjectNotifications |
+| event | view:post/elements/full | DismissObjectNotifications |
+| event | elgg.data:site | SetClientConfig |
+| event | format:notification:email | FormatEmailNotification (priority 999) |
+| event | prepare:system:email | PrepareEmail (priority 999) |
+| event | validate:system:email | ValidateEmail |
+| event | zend:message:system:email | AddHtmlEmailPart |
+| event | register:menu:topbar | TopbarMenu |
+| event | register:menu:page | PageMenu |
 | event | update:all | SyncEntityUpdate (priority 999) |
 | event | delete:all | SyncEntityDelete (priority 999) |
 | event | create:user | SyncNewUser |
@@ -112,7 +114,7 @@ hypenotifications/
 
 Additional registrations in `Bootstrap::init()`:
 - `elgg_register_notification_method('site')` — registers site notification channel
-- Dynamic `view:object/{subtype}` hooks looped over registered subtypes → `DismissObjectNotifications`
+- Dynamic `view:object/{subtype}` event handlers were removed in 5.x (object/default handles the common case)
 - Email transport via DI container (`elgg-services.php`)
 
 ## Routes

@@ -21,9 +21,9 @@ if (!empty($uploads)) {
 	}
 }
 
-$result = elgg_send_email(null, $recipient, $subject, $body, array(
+$result = elgg_send_email(null, $recipient, $subject, $body, [
 	'attachments' => $attachments,
-		), 'email');
+], 'email');
 
 foreach ($attachments as $attachment) {
 	$attachment->delete();

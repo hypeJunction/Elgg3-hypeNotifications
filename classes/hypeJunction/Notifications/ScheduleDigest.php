@@ -8,13 +8,16 @@ use Elgg\Notifications\NotificationEvent;
 use ElggEntity;
 use ElggObject;
 
+/**
+ * Respects user digest preferences when sending notifications
+ */
 class ScheduleDigest {
 
 	/**
 	 * Respect user notification event preferences
 	 *
-	 * @elgg_plugin_hook send all
-	 * @param Hook $hook Hook
+	 * @elgg_event send all
+	 * @param Event $event Event
 	 *
 	 * @return bool|null
 	 */
@@ -28,9 +31,9 @@ class ScheduleDigest {
 			return null;
 		}
 
-		$event = $event->getParam('event');
+		$notification_event = $event->getParam('event');
 
-		if (!$event instanceof NotificationEvent) {
+		if (!$notification_event instanceof NotificationEvent) {
 			return null;
 		}
 
@@ -40,9 +43,12 @@ class ScheduleDigest {
 			return null;
 		}
 
-		$action = $event->getAction();
-		$object = $event->getObject();
+		$action = $notification_event->getAction();
+		$object = $notification_event->getObject();
 		$recipient_guid = $notification->getRecipientGUID();
+
+		$entity_type = null;
+		$entity_subtype = null;
 
 		if ($object instanceof ElggEntity && !$object instanceof ElggObject) {
 			$entity_type = $object->getType();
@@ -52,7 +58,7 @@ class ScheduleDigest {
 			$entity_subtype = $object->getSubtype();
 		}
 
-		$event_type = $event instanceof InstantNotificationEvent ? 'instant' : 'subscriptions';
+		$event_type = $notification_event instanceof InstantNotificationEvent ? 'instant' : 'subscriptions';
 
 		$setting_name = "$event_type:$action:$entity_type:$entity_subtype";
 		$setting_value = elgg_get_plugin_user_setting($setting_name, $recipient_guid, 'hypenotifications', DigestService::INSTANT);
@@ -79,5 +85,4 @@ class ScheduleDigest {
 			return true;
 		}
 	}
-
 }

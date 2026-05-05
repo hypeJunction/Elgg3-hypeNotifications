@@ -96,19 +96,19 @@ class SiteNotificationsTable {
 		}
 
 		switch ($status) {
-			case 'read' :
+			case 'read':
 				$qb->andWhere($qb->compare('nt.time_read', '>', 0, ELGG_VALUE_INTEGER));
 				break;
-			case 'unread' :
+			case 'unread':
 				$qb->andWhere($qb->merge([
 					$qb->compare('nt.time_read', 'IS NULL'),
 					$qb->compare('nt.time_read', '=', 0, ELGG_VALUE_INTEGER),
 				], 'OR'));
 				break;
-			case 'seen' :
+			case 'seen':
 				$qb->andWhere($qb->compare('nt.time_seen', '>', 0, ELGG_VALUE_INTEGER));
 				break;
-			case 'unseen' :
+			case 'unseen':
 				$qb->andWhere($qb->merge([
 					$qb->compare('nt.time_seen', 'IS NULL'),
 					$qb->compare('nt.time_seen', '=', 0, ELGG_VALUE_INTEGER),
@@ -163,7 +163,7 @@ class SiteNotificationsTable {
 	public function insert(Notification $notification) {
 
 		$qb = Insert::intoTable('site_notifications');
-$qb->values([
+		$qb->values([
 			'recipient_guid' => $qb->param($notification->recipient_guid, ELGG_VALUE_INTEGER),
 			'actor_guid' => $qb->param($notification->actor_guid, ELGG_VALUE_INTEGER),
 			'object_id' => $qb->param($notification->object_id, ELGG_VALUE_INTEGER),
@@ -266,16 +266,16 @@ $qb->values([
 	public function deleteByEntityGUID($guid) {
 
 		$qb = Delete::fromTable('site_notifications');
-$qb->where(
-$qb->merge([
-				$qb->compare('recipient_guid', '=', $guid, ELGG_VALUE_INTEGER),
-				$qb->compare('actor_guid', '=', $guid, ELGG_VALUE_INTEGER),
-				$qb->merge([
-					$qb->compare('object_id', '=', $guid, ELGG_VALUE_INTEGER),
+		$qb->where(
+		$qb->merge([
+			$qb->compare('recipient_guid', '=', $guid, ELGG_VALUE_INTEGER),
+			$qb->compare('actor_guid', '=', $guid, ELGG_VALUE_INTEGER),
+			$qb->merge([
+				$qb->compare('object_id', '=', $guid, ELGG_VALUE_INTEGER),
 					// @todo: Oddly, using IN with an array fatals here. PDO with delete issue?
-					$qb->compare('object_type', 'IN', "'object', 'user', 'site', 'group'"),
-				], 'AND')
-			], 'OR')
+				$qb->compare('object_type', 'IN', "'object', 'user', 'site', 'group'"),
+			], 'AND')
+		], 'OR')
 		);
 
 		return $this->db->deleteData($qb);
@@ -344,7 +344,6 @@ $qb->merge([
 			->where($qb->compare('recipient_guid', '=', $recipient_guid, ELGG_VALUE_INTEGER));
 
 		return $this->db->updateData($qb);
-
 	}
 
 	/**
@@ -374,5 +373,4 @@ $qb->merge([
 
 		return $this->db->updateData($qb);
 	}
-
 }

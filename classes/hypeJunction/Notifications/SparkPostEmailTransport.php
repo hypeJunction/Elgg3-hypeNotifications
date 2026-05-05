@@ -46,15 +46,15 @@ class SparkPostEmailTransport implements TransportInterface {
 		foreach ($parts as $part) {
 			$type = $part->getType();
 			switch ($type) {
-				case Mime::TYPE_TEXT :
+				case Mime::TYPE_TEXT:
 					$text = $part->getContent();
 					break;
 
-				case Mime::TYPE_HTML :
+				case Mime::TYPE_HTML:
 					$html = $part->getContent();
 					break;
 
-				default :
+				default:
 					$attachments[] = [
 						'name' => $part->getFileName(),
 						'type' => $part->getType(),
@@ -83,7 +83,7 @@ class SparkPostEmailTransport implements TransportInterface {
 			$options['sandbox'] = true;
 		}
 
-$promise = $sparky->transmissions->post([
+		$promise = $sparky->transmissions->post([
 			'content' => [
 				'from' => [
 					'name' => $sender_name,
@@ -105,9 +105,8 @@ $promise = $sparky->transmissions->post([
 				throw new Mail\Exception\RuntimeException($response->getBody(), $code);
 			}
 		} catch (\Exception $e) {
-			elgg_log("SparkPost: " . $e->getMessage(), 'ERROR');
+			elgg_log('SparkPost: ' . $e->getMessage(), 'ERROR');
 			throw new Mail\Exception\RuntimeException($e->getMessage(), $e->getCode());
 		}
-
 	}
 }

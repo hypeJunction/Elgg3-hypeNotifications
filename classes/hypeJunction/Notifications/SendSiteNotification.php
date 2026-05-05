@@ -46,5 +46,4 @@ class SendSiteNotification {
 			return true;
 		}
 	}
-
 }

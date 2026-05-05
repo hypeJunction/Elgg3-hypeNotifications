@@ -12,7 +12,7 @@ $users = elgg_get_entities([
 	'limit' => $limit,
 	'offset' => $offset,
 	'batch' => true,
-		]);
+]);
 
 $i = 0;
 
@@ -27,7 +27,7 @@ foreach ($users as $user) {
 		$metaname = 'collections_notifications_preferences_' . $method;
 		$user->$metaname = -1; // enable for new friends
 		
-$friends = elgg_get_entities([
+		$friends = elgg_get_entities([
 			'types' => 'user',
 			'relationship' => 'friend',
 			'relationship_guid' => $user->guid,
@@ -44,7 +44,7 @@ $friends = elgg_get_entities([
 	}
 
 	if (!empty($groups_methods)) {
-$groups = elgg_get_entities([
+		$groups = elgg_get_entities([
 			'types' => 'group',
 			'relationship' => 'member',
 			'relationship_guid' => $user->guid,

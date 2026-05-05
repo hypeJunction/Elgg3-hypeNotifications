@@ -61,8 +61,10 @@ class Notification extends ElggData {
 		if ($row instanceof stdClass) {
 			foreach ($row as $key => $value) {
 				if ($key == 'data' && !empty($value)) {
-					$value = unserialize($value);
+					// Restrict unserialize to scalar values only to prevent object injection
+					$value = unserialize($value, ['allowed_classes' => false]);
 				}
+
 				$this->set($key, $value);
 			}
 		}
@@ -87,6 +89,7 @@ class Notification extends ElggData {
 				$this->set('id', $new_id);
 				return true;
 			}
+
 			return false;
 		} else {
 			return $svc->getTable()->update($this);
@@ -136,6 +139,7 @@ class Notification extends ElggData {
 		if ($this->id) {
 			throw new LogicException('Can not change the recipient of the notification once it is saved');
 		}
+
 		$this->set('recipient_guid', (int) $recipient->guid);
 		if (null == $this->access_guid) {
 			$this->set('access_guid', (int) $recipient->guid);
@@ -165,11 +169,13 @@ class Notification extends ElggData {
 		if ($this->id) {
 			throw new LogicException('Can not change the actor of the notification once it is saved');
 		}
+
 		if (!isset($actor)) {
 			$this->set('actor_guid', null);
 
 			return;
 		}
+
 		$this->set('actor_guid', (int) $actor->guid);
 	}
 
@@ -194,6 +200,7 @@ class Notification extends ElggData {
 		if ($this->id) {
 			throw new LogicException('Can not change the action of the notification once it is saved');
 		}
+
 		$this->set('action', (string) $action);
 	}
 
@@ -209,6 +216,7 @@ class Notification extends ElggData {
 		if ($this->id) {
 			throw new LogicException('Can not change the object of the notification once it is saved');
 		}
+
 		if ($object instanceof ElggEntity) {
 			$this->set('object_id', $object->guid);
 		} else if ($object instanceof ElggData) {
@@ -242,16 +250,16 @@ class Notification extends ElggData {
 	 */
 	public function getObject() {
 		switch ($this->object_type) {
-			case 'object' :
-			case 'user' :
-			case 'group' :
-			case 'site' :
+			case 'object':
+			case 'user':
+			case 'group':
+			case 'site':
 				return get_entity($this->object_id);
-			case 'annotation' :
+			case 'annotation':
 				return elgg_get_annotation_from_id($this->object_id);
-			case 'metadata' :
+			case 'metadata':
 				return elgg_get_metadata_from_id($this->object_id);
-			case 'relationship' :
+			case 'relationship':
 				return get_relationship($this->object_id);
 		}
 	}
@@ -286,6 +294,7 @@ class Notification extends ElggData {
 		if (!isset($timestamp)) {
 			$timestamp = time();
 		}
+
 		$this->set('time_seen', $timestamp);
 		if ($this->id) {
 			$this->save();
@@ -311,6 +320,7 @@ class Notification extends ElggData {
 		if (!isset($timestamp)) {
 			$timestamp = time();
 		}
+
 		$this->set('time_read', $timestamp);
 		if ($this->id) {
 			$this->save();
@@ -328,12 +338,12 @@ class Notification extends ElggData {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function delete() {
+	public function delete(): bool {
 		$svc = elgg()->{'notifications.site'};
 
 		/* @var $svc SiteNotificationsService */
 
-		return $svc->getTable()->delete($this->id);
+		return (bool) $svc->getTable()->delete($this->id);
 	}
 
 	/**
@@ -353,18 +363,18 @@ class Notification extends ElggData {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getObjectFromID($id) {
+	public function getObjectFromID(int $id): mixed {
 		$svc = elgg()->{'notifications.site'};
 		/* @var $svc SiteNotificationsService */
 
-		$svc->getTable()->get($id);
+		return $svc->getTable()->get($id);
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getSubtype() {
-return implode(':', array_filter([
+	public function getSubtype(): string {
+		return implode(':', array_filter([
 			$this->action,
 			$this->object_type,
 			$this->object_subtype,
@@ -374,27 +384,27 @@ return implode(':', array_filter([
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getSystemLogID() {
-		return $this->id;
+	public function getSystemLogID(): int {
+		return (int) $this->id;
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getType() {
-		return $this->type;
+	public function getType(): string {
+		return (string) $this->type;
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getURL() {
+	public function getURL(): string {
 		$id = $this->id;
 		if (!$id) {
-			return false;
+			return '';
 		}
 
-return elgg_generate_url('view:notification', [
+		return elgg_generate_url('view:notification', [
 			'id' => $id,
 		]);
 	}
@@ -455,17 +465,19 @@ return elgg_generate_url('view:notification', [
 
 		$subject_link = '';
 		if ($actor) {
-$subject_link = elgg_view('output/url', [
+			$subject_link = elgg_view('output/url', [
 				'href' => $actor->getURL(),
 				'text' => $actor->getDisplayName(),
 			]);
 		}
+
 		$object_link = '';
 		if ($object instanceof ElggExtender) {
 			$object = $object->getEntity();
 		}
+
 		if ($object instanceof ElggEntity) {
-$object_link = elgg_view('output/url', [
+			$object_link = elgg_view('output/url', [
 				'href' => $object->getURL(),
 				'text' => $object->getDisplayName(),
 			]);
@@ -515,17 +527,19 @@ $object_link = elgg_view('output/url', [
 
 		$subject_link = '';
 		if ($actor) {
-$subject_link = elgg_view('output/url', [
+			$subject_link = elgg_view('output/url', [
 				'href' => $actor->getURL(),
 				'text' => $actor->getDisplayName(),
 			]);
 		}
+
 		$object_link = '';
 		if ($object instanceof ElggExtender) {
 			$object = $object->getEntity();
 		}
+
 		if ($object instanceof ElggEntity) {
-$object_link = elgg_view('output/url', [
+			$object_link = elgg_view('output/url', [
 				'href' => $object->getURL(),
 				'text' => $object->getDisplayName(),
 			]);
@@ -540,7 +554,7 @@ $object_link = elgg_view('output/url', [
 		}
 
 		if (!$summary) {
-			$summary = $this->data['summary'] ? : $this->data['subject'];
+			$summary = $this->data['summary'] ?: $this->data['subject'];
 			if (!preg_match_all('/<a.*\/a>/i', $summary)) {
 				$summary = elgg_view('output/url', [
 					'text' => $summary,
@@ -556,5 +570,4 @@ $object_link = elgg_view('output/url', [
 
 		return elgg_trigger_event_results('format:summary', 'notification', $params, $summary);
 	}
-
 }

@@ -50,15 +50,15 @@ class MailgunEmailTransport implements TransportInterface {
 		foreach ($parts as $part) {
 			$type = $part->getType();
 			switch ($type) {
-				case Mime::TYPE_TEXT :
+				case Mime::TYPE_TEXT:
 					$text = $part->getContent();
 					break;
 
-				case Mime::TYPE_HTML :
+				case Mime::TYPE_HTML:
 					$html = $part->getContent();
 					break;
 
-				default :
+				default:
 					$attachments[] = [
 						'filename' => $part->getFileName(),
 						'mimetype' => $part->getType(),
@@ -74,7 +74,7 @@ class MailgunEmailTransport implements TransportInterface {
 		}
 
 		try {
-$mailgun->messages()->send($this->domain, [
+			$mailgun->messages()->send($this->domain, [
 				'from' => $message->getSender()->getEmail(),
 				'to' => implode(',', $recipients),
 				'subject' => $message->getSubject(),
@@ -84,10 +84,9 @@ $mailgun->messages()->send($this->domain, [
 			]);
 		} catch (HttpClientException $ex) {
 			$body = $ex->getResponseBody();
-			elgg_log("Mailgun: " . $ex->getMessage() . ' ' .json_encode($body), 'ERROR');
+			elgg_log('Mailgun: ' . $ex->getMessage() . ' ' .json_encode($body), 'ERROR');
 
 			throw new Mail\Exception\RuntimeException($ex->getMessage() . ' ' .json_encode($body), $ex->getCode());
 		}
-
 	}
 }

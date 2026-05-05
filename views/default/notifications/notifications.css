@@ -27,19 +27,19 @@
 }
 
 .elgg-notifications-popup .elgg-foot a {
-    text-align: center;
-    font-size: 12px;
-    min-width: 30px;
-    padding: 4px;
-    display: inline-block;
-    width: 100%;
+	text-align: center;
+	font-size: 12px;
+	min-width: 30px;
+	padding: 4px;
+	display: inline-block;
+	width: 100%;
 }
 
 .elgg-notifications-popup .notifications-list {
 	margin: 0;
 	padding: 0;
 	max-height: 300px;
-    overflow-y: auto;
+	overflow-y: auto;
 }
 
 .notifications-list > li {
@@ -71,12 +71,12 @@
 }
 
 .notification-new {
-    background: $(state-notice-background-color);
+	background: $(state-notice-background-color);
 }
 
 .notification-time {
-    color: $(text-color-mild);
-    font-size: 90%;
+	color: $(text-color-mild);
+	font-size: 90%;
 	margin: 0;
 }
 

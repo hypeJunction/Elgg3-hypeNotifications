@@ -103,7 +103,6 @@ return [
 			],
 		],
 		'update' => [
-		'update' => [
 			'all' => [
 				\hypeJunction\Notifications\SyncEntityUpdate::class => ['priority' => 999],
 			],

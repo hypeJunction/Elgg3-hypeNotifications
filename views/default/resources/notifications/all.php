@@ -19,7 +19,7 @@ if (!$user->canEdit()) {
 elgg_register_menu_item('title', [
 	'name' => 'mark_all_read',
 	'text' => elgg_echo('notifications:mark_all_read'),
-'href' => elgg_generate_action_url('notifications/mark_all_read', [
+	'href' => elgg_generate_action_url('notifications/mark_all_read', [
 		'guid' => $user->guid,
 	]),
 	'class' => 'elgg-button elgg-button-action',
@@ -35,7 +35,7 @@ $title = elgg_echo('notifications');
 
 $content = elgg_view('notifications/listing', [
 	'entity' => $user,
-		]);
+]);
 
 $layout = elgg_view_layout('default', [
 	'title' => elgg_echo('notifications'),

@@ -62,7 +62,7 @@ function hypeapps_get_notification_by_id($id) {
 
 	/* @var $svc SiteNotificationsService */
 
-	return $svc->getTable()->get($id) ? : false;
+	return $svc->getTable()->get($id) ?: false;
 }
 
 /**

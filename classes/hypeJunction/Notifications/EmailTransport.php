@@ -44,15 +44,16 @@ class EmailTransport {
 		$name = $this->config->{'email.transport'};
 
 		switch ($name) {
-			default :
+			default:
 				$transport = new Sendmail();
 				break;
 
-			case 'file' :
+			case 'file':
 				$dirname = $this->config->dataroot . 'notifications_log/zend/';
 				if (!is_dir($dirname)) {
 					mkdir($dirname, 0700, true);
 				}
+
 				$options = [
 					'path' => $dirname,
 					'callback' => function () {
@@ -62,7 +63,7 @@ class EmailTransport {
 				$transport = new File(new FileOptions($options));
 				break;
 
-			case 'smtp' :
+			case 'smtp':
 				$options = array_filter([
 					'name' => $this->config->{'email.smtp_host_name'},
 					'host' => $this->config->{'email.smtp_host'},
@@ -77,15 +78,15 @@ class EmailTransport {
 				$transport = new Smtp(new SmtpOptions($options));
 				break;
 
-			case 'sparkpost' :
+			case 'sparkpost':
 				$transport = new SparkPostEmailTransport($this->config->{'email.sparkpost_apikey'});
 				break;
 
-			case 'mailgun' :
+			case 'mailgun':
 				$transport = new MailgunEmailTransport($this->config->{'email.mailgun_apikey'}, $this->config->{'email.mailgun_domain'});
 				break;
 
-			case 'sendgrid' :
+			case 'sendgrid':
 				$transport = new SendGridEmailTransport($this->config->{'email.sendgrid_apikey'});
 				break;
 		}

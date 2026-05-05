@@ -26,7 +26,7 @@ class TopbarMenu {
 
 		$counter = '';
 
-$count = hypeapps_count_notifications([
+		$count = hypeapps_count_notifications([
 			'status' => 'unseen',
 			'recipient_guid' => $user->guid,
 		]);
@@ -36,13 +36,13 @@ $count = hypeapps_count_notifications([
 				$count = '99+';
 			}
 
-$counter = elgg_format_element('span', [
+			$counter = elgg_format_element('span', [
 				'id' => 'notifications-new',
 				'class' => $count ? 'notifications-unread-count messages-new' : 'notifications-unread-count messages-new hidden',
 			], $count);
 		}
 
-$menu[] = ElggMenuItem::factory([
+		$menu[] = ElggMenuItem::factory([
 			'name' => 'notifications',
 			'href' => 'notifications/all#notifications-popup',
 			'text' => '',
@@ -52,7 +52,7 @@ $menu[] = ElggMenuItem::factory([
 			'tooltip' => elgg_echo('notifications:thread:unread', [$count]),
 			'rel' => 'popup',
 			'id' => 'notifications-popup-link',
-'data-position' => json_encode([
+			'data-position' => json_encode([
 				'my' => 'center top',
 				'at' => 'center bottom',
 				'of' => '#notifications-popup-link',

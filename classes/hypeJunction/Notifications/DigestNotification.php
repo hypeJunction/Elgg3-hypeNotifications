@@ -41,8 +41,10 @@ class DigestNotification extends ElggData {
 		if ($row instanceof stdClass) {
 			foreach ($row as $key => $value) {
 				if ($key == 'data' && !empty($value)) {
-					$value = unserialize($value);
+					// Restrict unserialize to scalar values only to prevent object injection
+					$value = unserialize($value, ['allowed_classes' => false]);
 				}
+
 				$this->set($key, $value);
 			}
 		}
@@ -79,6 +81,7 @@ class DigestNotification extends ElggData {
 		if (array_key_exists($name, $this->attributes)) {
 			return $this->attributes[$name];
 		}
+
 		return $this->$name;
 	}
 
@@ -90,6 +93,7 @@ class DigestNotification extends ElggData {
 			$this->attributes[$name] = $value;
 			return;
 		}
+
 		$this->$name = $value;
 	}
 
@@ -97,6 +101,7 @@ class DigestNotification extends ElggData {
 		if ($this->id) {
 			throw new LogicException('Can not change the recipient of the notification once it is saved');
 		}
+
 		$this->set('recipient_guid', (int) $recipient->guid);
 	}
 
@@ -116,6 +121,7 @@ class DigestNotification extends ElggData {
 		if (!isset($timestamp)) {
 			$timestamp = time();
 		}
+
 		$this->set('time_scheduled', $timestamp);
 		if ($this->id) {
 			$this->save();
@@ -150,7 +156,7 @@ class DigestNotification extends ElggData {
 	 * {@inheritdoc}
 	 */
 	public function getObjectFromID($id) {
-		$svc = DigestNotification::getInstance();
+		$svc = self::getInstance();
 		$svc->getTable()->get($id);
 	}
 

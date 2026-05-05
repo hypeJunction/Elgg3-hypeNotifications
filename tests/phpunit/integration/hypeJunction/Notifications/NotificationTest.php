@@ -79,7 +79,7 @@ class NotificationTest extends IntegrationTestCase {
 	public function testGetUrlIsFalseBeforeSaveAndStringAfter(): void {
 		$n = new Notification();
 		$n->setRecipient($this->createUser());
-		$this->assertFalse($n->getURL());
+		$this->assertSame('', $n->getURL());
 
 		$this->assertTrue($n->save());
 		$id = (int) $n->id;

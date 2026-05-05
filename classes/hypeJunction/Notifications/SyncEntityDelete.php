@@ -17,7 +17,6 @@ class SyncEntityDelete {
 	 * @param Event $event Event
 	 *
 	 * @return void
-	 * @throws \Elgg\Exceptions\DatabaseException
 	 */
 	public function __invoke(Event $event) {
 
@@ -26,10 +25,14 @@ class SyncEntityDelete {
 
 		$object = $event->getObject();
 
-		if ($object instanceof ElggEntity) {
-			$svc->getTable()->deleteByEntityGUID($object->guid);
-		} else if ($object instanceof ElggExtender || $object instanceof ElggRelationship) {
-			$svc->getTable()->deleteByExtenderID($object->id, $object->getType());
+		try {
+			if ($object instanceof ElggEntity) {
+				$svc->getTable()->deleteByEntityGUID($object->guid);
+			} else if ($object instanceof ElggExtender || $object instanceof ElggRelationship) {
+				$svc->getTable()->deleteByExtenderID($object->id, $object->getType());
+			}
+		} catch (\Elgg\Exceptions\DatabaseException $e) {
+			// Table may not exist yet if plugin is not yet activated
 		}
 	}
 }
