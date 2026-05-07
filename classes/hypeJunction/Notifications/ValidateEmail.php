@@ -5,12 +5,15 @@ namespace hypeJunction\Notifications;
 use Elgg\Email;
 use Elgg\Event;
 
+/**
+ * ValidateEmail class.
+ */
 class ValidateEmail {
 
 	/**
 	 * Validate whitelisted email
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Event
 	 * @return bool|null
 	 */
 	public function __invoke(Event $event) {

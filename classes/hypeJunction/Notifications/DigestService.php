@@ -25,7 +25,7 @@ class DigestService {
 	/**
 	 * @var self
 	 */
-	static $_instance;
+	public static $_instance;
 
 	/**
 	 * @var DigestTable

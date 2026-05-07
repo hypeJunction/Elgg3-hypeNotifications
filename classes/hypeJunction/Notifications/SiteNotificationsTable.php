@@ -33,6 +33,8 @@ class SiteNotificationsTable {
 
 	/**
 	 * Constructor
+	 *
+	 * @param Database $db Database service
 	 */
 	public function __construct(Database $db) {
 		$this->db = $db;
@@ -140,7 +142,7 @@ class SiteNotificationsTable {
 	/**
 	 * Count user notifications
 	 *
-	 * @param array $options
+	 * @param array $options Query options
 	 *
 	 * @return int
 	 * @throws \Elgg\Exceptions\DatabaseException

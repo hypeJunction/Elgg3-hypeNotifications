@@ -11,6 +11,9 @@ use Laminas\Mail\Transport\Smtp;
 use Laminas\Mail\Transport\SmtpOptions;
 use Laminas\Mail\Transport\TransportInterface;
 
+/**
+ * EmailTransport class.
+ */
 class EmailTransport {
 
 	/**

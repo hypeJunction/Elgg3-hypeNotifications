@@ -4,6 +4,9 @@ namespace hypeJunction\Notifications;
 
 use Elgg\Event;
 
+/**
+ * SetClientConfig class.
+ */
 class SetClientConfig {
 
 	/**
@@ -11,7 +14,7 @@ class SetClientConfig {
 	 *
 	 * @elgg_plugin_hook elgg.data site
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Event
 	 *
 	 * @return array
 	 */

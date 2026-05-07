@@ -6,12 +6,15 @@ use Elgg\Event;
 use ElggMenuItem;
 use ElggUser;
 
+/**
+ * PageMenu class.
+ */
 class PageMenu {
 
 	/**
 	 * Setup page menu
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Event
 	 * @return ElggMenuItem[]
 	 */
 	public function __invoke(Event $event) {

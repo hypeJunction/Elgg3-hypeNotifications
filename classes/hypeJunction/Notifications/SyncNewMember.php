@@ -4,6 +4,9 @@ namespace hypeJunction\Notifications;
 
 use Elgg\Event;
 
+/**
+ * SyncNewMember class.
+ */
 class SyncNewMember {
 
 	/**

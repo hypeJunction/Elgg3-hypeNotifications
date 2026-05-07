@@ -5,6 +5,9 @@ namespace hypeJunction\Notifications;
 use Elgg\Upgrade\AsynchronousUpgrade;
 use Elgg\Upgrade\Result;
 
+/**
+ * MigrateNotifier class.
+ */
 class MigrateNotifier extends AsynchronousUpgrade {
 
 	/**

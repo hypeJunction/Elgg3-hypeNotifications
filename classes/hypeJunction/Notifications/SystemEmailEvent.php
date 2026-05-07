@@ -8,6 +8,9 @@ use ElggData;
 use ElggEntity;
 use stdClass;
 
+/**
+ * SystemEmailEvent class.
+ */
 class SystemEmailEvent implements NotificationEvent {
 
 	use EventSerialization;

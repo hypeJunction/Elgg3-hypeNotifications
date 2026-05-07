@@ -27,6 +27,8 @@ class DigestTable {
 
 	/**
 	 * Constructor
+	 *
+	 * @param Database $database Database service
 	 */
 	public function __construct(Database $database) {
 		$this->db = $database;

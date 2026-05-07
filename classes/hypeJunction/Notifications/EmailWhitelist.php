@@ -2,6 +2,9 @@
 
 namespace hypeJunction\Notifications;
 
+/**
+ * EmailWhitelist class.
+ */
 class EmailWhitelist {
 
 	/**

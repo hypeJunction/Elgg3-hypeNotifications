@@ -6,12 +6,15 @@ use Elgg\Email;
 use Elgg\Email\Address;
 use Elgg\Event;
 
+/**
+ * PrepareEmail class.
+ */
 class PrepareEmail {
 
 	/**
 	 * Prepare email
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Event
 	 *
 	 * @return bool|null
 	 */
@@ -34,7 +37,8 @@ class PrepareEmail {
 			}
 		}
 
-		if ($from_email = elgg_get_plugin_setting('from_email', 'hypenotifications')) {
+		$from_email = elgg_get_plugin_setting('from_email', 'hypenotifications');
+		if ($from_email) {
 			$from = $email->getFrom();
 
 			$params = $email->getParams();

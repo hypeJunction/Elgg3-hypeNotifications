@@ -4,8 +4,14 @@ namespace hypeJunction\Notifications;
 
 use Elgg\DefaultPluginBootstrap;
 
+/**
+ * Bootstrap class.
+ */
 class Bootstrap extends DefaultPluginBootstrap {
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function activate() {
 		$sql_file = $this->plugin->getPath() . 'install/mysql.sql';
 		if (!file_exists($sql_file)) {
@@ -22,6 +28,9 @@ class Bootstrap extends DefaultPluginBootstrap {
 		}
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function init() {
 		// Site notifications
 		\elgg_register_notification_method('site');

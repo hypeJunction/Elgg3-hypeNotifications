@@ -9,6 +9,9 @@ use Laminas\Mail;
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\Mime\Mime;
 
+/**
+ * SendGridEmailTransport class.
+ */
 class SendGridEmailTransport implements TransportInterface {
 
 	/**
@@ -28,7 +31,7 @@ class SendGridEmailTransport implements TransportInterface {
 	/**
 	 * Send a mail message
 	 *
-	 * @param \Laminas\Mail\Message $message
+	 * @param \Laminas\Mail\Message $message Mail message to send
 	 *
 	 * @return void
 	 */

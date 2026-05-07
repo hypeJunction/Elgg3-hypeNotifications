@@ -141,7 +141,7 @@ class Notification extends ElggData {
 		}
 
 		$this->set('recipient_guid', (int) $recipient->guid);
-		if (null == $this->access_guid) {
+		if ($this->access_guid == null) {
 			$this->set('access_guid', (int) $recipient->guid);
 			$this->set('access_owner_guid', (int) $recipient->guid);
 			$this->set('access_id', ACCESS_PRIVATE);

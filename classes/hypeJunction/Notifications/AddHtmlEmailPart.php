@@ -7,12 +7,15 @@ use Laminas\Mail\Message;
 use Laminas\Mime\Mime;
 use Laminas\Mime\Part;
 
+/**
+ * AddHtmlEmailPart class.
+ */
 class AddHtmlEmailPart {
 
 	/**
 	 * Add HTML email part
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Event
 	 * @return Message
 	 */
 	public function __invoke(Event $event) {

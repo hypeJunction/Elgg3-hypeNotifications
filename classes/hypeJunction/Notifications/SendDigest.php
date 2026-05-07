@@ -5,6 +5,9 @@ namespace hypeJunction\Notifications;
 use Elgg\Event;
 use Elgg\Traits\TimeUsing;
 
+/**
+ * SendDigest class.
+ */
 class SendDigest {
 
 	use TimeUsing;
@@ -14,7 +17,7 @@ class SendDigest {
 	 *
 	 * @elgg_plugin_hook cron hourly
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Event
 	 * @return void
 	 * @throws \Elgg\Exceptions\DatabaseException
 	 * @throws \NotificationException

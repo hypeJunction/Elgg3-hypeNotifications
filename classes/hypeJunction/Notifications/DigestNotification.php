@@ -97,6 +97,13 @@ class DigestNotification extends ElggData {
 		$this->$name = $value;
 	}
 
+	/**
+	 * Set the recipient of the digest notification
+	 *
+	 * @param ElggEntity $recipient Recipient entity
+	 * @return void
+	 * @throws LogicException
+	 */
 	public function setRecipient(ElggEntity $recipient) {
 		if ($this->id) {
 			throw new LogicException('Can not change the recipient of the notification once it is saved');
@@ -105,18 +112,40 @@ class DigestNotification extends ElggData {
 		$this->set('recipient_guid', (int) $recipient->guid);
 	}
 
+	/**
+	 * Get the recipient entity
+	 *
+	 * @return \ElggEntity|false
+	 */
 	public function getRecipient() {
 		return get_entity($this->recipient_guid);
 	}
 
+	/**
+	 * Set notification data payload
+	 *
+	 * @param mixed $data Notification data
+	 * @return void
+	 */
 	public function setData($data) {
 		$this->set('data', $data);
 	}
 
+	/**
+	 * Get notification data payload
+	 *
+	 * @return mixed
+	 */
 	public function getData() {
 		return $this->data;
 	}
 
+	/**
+	 * Set scheduled delivery timestamp
+	 *
+	 * @param int|null $timestamp Unix timestamp; defaults to now
+	 * @return void
+	 */
 	public function setTimeScheduled($timestamp = null) {
 		if (!isset($timestamp)) {
 			$timestamp = time();

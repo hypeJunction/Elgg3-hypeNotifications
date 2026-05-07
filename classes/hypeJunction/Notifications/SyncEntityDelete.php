@@ -7,6 +7,9 @@ use ElggEntity;
 use ElggExtender;
 use ElggRelationship;
 
+/**
+ * SyncEntityDelete class.
+ */
 class SyncEntityDelete {
 
 	/**

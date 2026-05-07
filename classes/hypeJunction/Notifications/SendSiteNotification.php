@@ -5,6 +5,9 @@ namespace hypeJunction\Notifications;
 use Elgg\Event;
 use Elgg\Notifications\NotificationEvent;
 
+/**
+ * SendSiteNotification class.
+ */
 class SendSiteNotification {
 
 	/**
@@ -12,7 +15,7 @@ class SendSiteNotification {
 	 *
 	 * @elgg_plugin_hook send notification:site
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Event
 	 *
 	 * @return bool|null
 	 */

@@ -8,6 +8,9 @@ use Laminas\Mail;
 use Laminas\Mail\Transport\TransportInterface;
 use Laminas\Mime\Mime;
 
+/**
+ * MailgunEmailTransport class.
+ */
 class MailgunEmailTransport implements TransportInterface {
 
 	/**
@@ -24,6 +27,7 @@ class MailgunEmailTransport implements TransportInterface {
 	 * Constructor
 	 *
 	 * @param string $api_key API key
+	 * @param string $domain  Mailgun domain
 	 */
 	public function __construct($api_key, $domain) {
 		$this->api_key = $api_key;
@@ -33,7 +37,7 @@ class MailgunEmailTransport implements TransportInterface {
 	/**
 	 * Send a mail message
 	 *
-	 * @param \Laminas\Mail\Message $message
+	 * @param \Laminas\Mail\Message $message Mail message to send
 	 *
 	 * @return void
 	 */

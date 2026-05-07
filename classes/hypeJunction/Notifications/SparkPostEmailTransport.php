@@ -9,6 +9,9 @@ use GuzzleHttp\Client;
 use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
 use Laminas\Mime\Mime;
 
+/**
+ * SparkPostEmailTransport class.
+ */
 class SparkPostEmailTransport implements TransportInterface {
 
 	/**
@@ -28,7 +31,7 @@ class SparkPostEmailTransport implements TransportInterface {
 	/**
 	 * Send a mail message
 	 *
-	 * @param \Laminas\Mail\Message $message
+	 * @param \Laminas\Mail\Message $message Mail message to send
 	 *
 	 * @return void
 	 */

@@ -4,6 +4,9 @@ namespace hypeJunction\Notifications;
 
 use Elgg\Event;
 
+/**
+ * FormatEmailNotification class.
+ */
 class FormatEmailNotification {
 
 	/**
@@ -12,7 +15,7 @@ class FormatEmailNotification {
 	 *
 	 * @elgg_plugin_hook format notification:email
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Event
 	 *
 	 * @return \Elgg\Notifications\Notification|null
 	 */

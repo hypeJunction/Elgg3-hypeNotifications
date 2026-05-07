@@ -5,12 +5,15 @@ namespace hypeJunction\Notifications;
 use Elgg\Event;
 use ElggMenuItem;
 
+/**
+ * TopbarMenu class.
+ */
 class TopbarMenu {
 
 	/**
 	 * Setup topbar menu
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Event
 	 *
 	 * @return ElggMenuItem[]|null
 	 * @throws \Elgg\Exceptions\DatabaseException

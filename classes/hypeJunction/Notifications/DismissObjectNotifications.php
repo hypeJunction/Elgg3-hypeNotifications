@@ -4,6 +4,9 @@ namespace hypeJunction\Notifications;
 
 use Elgg\Event;
 
+/**
+ * DismissObjectNotifications class.
+ */
 class DismissObjectNotifications {
 
 	/**
@@ -11,7 +14,7 @@ class DismissObjectNotifications {
 	 *
 	 * @elgg_plugin_hook view <view_name>
 	 *
-	 * @param Hook $hook Hook
+	 * @param Event $event Event
 	 *
 	 * @return void
 	 * @throws \Elgg\Exceptions\DatabaseException

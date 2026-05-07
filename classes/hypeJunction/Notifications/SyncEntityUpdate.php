@@ -6,6 +6,9 @@ use Elgg\Event;
 use ElggData;
 use ElggEntity;
 
+/**
+ * SyncEntityUpdate class.
+ */
 class SyncEntityUpdate {
 
 	/**
