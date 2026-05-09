@@ -4,7 +4,7 @@ if (!elgg_is_logged_in()) {
 	return;
 }
 
-elgg_require_js('notifications/popup');
+elgg_import_esm('notifications/popup');
 
 $list = elgg_format_element('div', [
 	'id' => 'notifications-messages'

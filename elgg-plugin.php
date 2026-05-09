@@ -2,7 +2,7 @@
 
 return [
 	'plugin' => [
-		'version' => '5.0.0',
+		'version' => '6.0.0',
 	],
 	'bootstrap' => \hypeJunction\Notifications\Bootstrap::class,
 	'actions' => [
@@ -70,7 +70,7 @@ return [
 			],
 		],
 		'elgg.data' => [
-			'site' => [
+			'page' => [
 				\hypeJunction\Notifications\SetClientConfig::class => [],
 			],
 		],

@@ -1,3 +1,20 @@
+<a name="6.0.0"></a>
+# 6.0.0 (2026-05-09)
+
+### Breaking Changes
+
+* Requires Elgg ^6.0
+* AMD JavaScript modules converted to ES modules (import/export)
+* `elgg_require_js()` replaced with `elgg_import_esm()` throughout
+* `'elgg.data', 'site'` event renamed to `'elgg.data', 'page'`
+
+### Changed
+
+* Updated `composer.json` to require `elgg/elgg ^6.0`
+* Converted `notifications/popup.js`, `forms/admin/notifications/methods.js`,
+  and `plugins/hypenotifications/settings.js` from AMD to ESM
+* `jquery-ui` AMD module replaced with `jquery-ui/progressbar` ESM import
+
 <a name="5.0.0"></a>
 # 5.0.0 (2026-05-05)
 

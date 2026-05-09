@@ -1,6 +1,6 @@
 <?php
 
-elgg_require_js('forms/admin/notifications/methods');
+elgg_import_esm('forms/admin/notifications/methods');
 
 echo elgg_format_element('p', [
 	'class' => 'elgg-text-help',

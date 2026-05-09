@@ -1,10 +1,8 @@
-define(function(require) {
-	var $ = require('jquery');
+import $ from 'jquery';
 
-	$(document).on('change', '.notifications-transport-selector', function() {
+$(document).on('change', '.notifications-transport-selector', function() {
 
-		var val = $(this).val();
+	var val = $(this).val();
 
-		$('.notifications-settings-tabs').find('[rel="' + val + '"]').trigger('click');
-	});
+	$('.notifications-settings-tabs').find('[rel="' + val + '"]').trigger('click');
 });

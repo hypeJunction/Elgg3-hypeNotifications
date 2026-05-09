@@ -31,7 +31,7 @@
         "guzzlehttp/guzzle": "^7.0",
         "sparkpost/sparkpost": "^2.1",
         "mailgun/mailgun-php": "^4.0",
-        "elgg/elgg": "^5.0"
+        "elgg/elgg": "^6.0"
     },
     "autoload": {
         "psr-0": {
