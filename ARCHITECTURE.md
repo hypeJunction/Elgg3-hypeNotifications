@@ -178,3 +178,7 @@ Properties: `recipient_guid`, `time_created`, `time_scheduled`, `data` (JSON).
 
 5. **Without MigratePluginId upgrade** — plugin settings (transport type, API keys, test
    whitelist) are lost and notifications default to unstyled plain text.
+
+## Seeding
+
+No seeder required. This plugin owns no entity types, subtypes, or persistent relationship schemas — it is a pure UI/utility/admin plugin with no persisted entity surface of its own.
