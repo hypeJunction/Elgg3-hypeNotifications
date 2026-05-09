@@ -7,7 +7,6 @@
 		"elgg",
 		"plugin",
 		"notifications"
-		
 	],
 	"license": "proprietary",
 	"authors": [
@@ -21,7 +20,7 @@
 	},
 	"require": {
 		"php": ">=5.5",
-		"composer/installers": "~1.0",
+		"composer/installers": "^1.0 || ^2.0",
 		"zendframework/zend-mail": "~2.4",
 		"zendframework/zend-servicemanager": "~2.4",
 		"pelago/emogrifier": "~1.0",
