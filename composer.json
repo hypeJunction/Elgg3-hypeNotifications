@@ -22,7 +22,8 @@
         }
     },
     "require": {
-        "php": ">=8.2",
+        "php": ">=8.3",
+        "ext-intl": "*",
         "composer/installers": "^2.0",
         "laminas/laminas-mail": "^2.26",
         "laminas/laminas-servicemanager": "^3.22",
@@ -31,7 +32,7 @@
         "guzzlehttp/guzzle": "^7.0",
         "sparkpost/sparkpost": "^2.1",
         "mailgun/mailgun-php": "^4.0",
-        "elgg/elgg": "^6.0"
+        "elgg/elgg": "~7.0.0"
     },
     "autoload": {
         "psr-0": {

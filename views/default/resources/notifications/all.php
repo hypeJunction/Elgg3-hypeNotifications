@@ -22,7 +22,7 @@ elgg_register_menu_item('title', [
 	'href' => elgg_generate_action_url('notifications/mark_all_read', [
 		'guid' => $user->guid,
 	]),
-	'class' => 'elgg-button elgg-button-action',
+	'class' => 'elgg-button',
 ]);
 
 elgg_push_breadcrumb(elgg_echo('notifications'));

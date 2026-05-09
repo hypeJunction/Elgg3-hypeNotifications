@@ -16,14 +16,14 @@
 	padding: 0;
 }
 
-@media $(media-tablet-up) {
+@media var(--elgg-media-tablet-up) {
 	.elgg-notifications-popup {
 		width: 25rem;
 	}
 }
 
 .elgg-notifications-popup .elgg-foot {
-	border-top: 1px solid $(border-color-mild);
+	border-top: 1px solid var(--elgg-border-color-mild);
 }
 
 .elgg-notifications-popup .elgg-foot a {
@@ -71,11 +71,11 @@
 }
 
 .notification-new {
-	background: $(state-notice-background-color);
+	background: var(--elgg-state-notice-background-color);
 }
 
 .notification-time {
-	color: $(text-color-mild);
+	color: var(--elgg-text-color-mild);
 	font-size: 90%;
 	margin: 0;
 }
