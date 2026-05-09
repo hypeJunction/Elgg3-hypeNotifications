@@ -1,6 +1,6 @@
 # hypeNotifications for Elgg
 
-![Elgg 3.0](https://img.shields.io/badge/Elgg-3.0-orange.svg?style=flat-square)
+![Elgg 5.0](https://img.shields.io/badge/Elgg-5.0-orange.svg?style=flat-square)
 
 ![Popup](https://raw.github.com/hypeJunction/hypeNotifications/master/screenshots/popup.png "Popup")
 ![Digest](https://raw.github.com/hypeJunction/hypeNotifications/master/screenshots/digest.png "Email Digest")
@@ -22,7 +22,6 @@
 
 Go to Admin > Administer > Utilities > Notification Methods to update personal
 and subscription notification preferences globally.
-
 
 ## Developer Notes
 
@@ -58,7 +57,6 @@ https://support.google.com/accounts/answer/6010255?hl=en
 - Auth: SMTP with AUTH LOGIN
 - Username: apikey
 - Password: <your api key>
-
 
 ### File Attachments
 
