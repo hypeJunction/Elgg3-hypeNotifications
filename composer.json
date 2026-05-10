@@ -44,5 +44,5 @@
             "composer/installers": true
         }
     },
-    "version": "2.1.2"
+    "version": "7.0.0"
 }
