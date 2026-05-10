@@ -28,8 +28,8 @@
 		"laminas/laminas-servicemanager": "^3.4",
 		"pelago/emogrifier": "^6.0",
 		"sendgrid/sendgrid": "^6.0",
-		"guzzlehttp/guzzle": "^6.3",
-		"php-http/guzzle6-adapter": "^1.1",
+		"guzzlehttp/guzzle": "^7.0",
+		"php-http/guzzle7-adapter": "^1.0",
 		"sparkpost/sparkpost": "^2.1",
 		"mailgun/mailgun-php": "^2.4",
 		"elgg/elgg": "^4.0"

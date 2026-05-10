@@ -6,7 +6,7 @@ use Laminas\Mail;
 use Laminas\Mail\Transport\TransportInterface;
 use SparkPost\SparkPost;
 use GuzzleHttp\Client;
-use Http\Adapter\Guzzle6\Client as GuzzleAdapter;
+use Http\Adapter\Guzzle7\Client as GuzzleAdapter;
 use Laminas\Mime\Mime;
 
 class SparkPostEmailTransport implements TransportInterface {
