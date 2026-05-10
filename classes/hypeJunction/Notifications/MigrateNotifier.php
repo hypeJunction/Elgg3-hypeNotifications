@@ -21,7 +21,7 @@ class MigrateNotifier implements Batch {
 	 *
 	 * @return int E.g. 2016123101
 	 */
-	public function getVersion() {
+	public function getVersion(): int {
 		return 20180308000;
 	}
 
