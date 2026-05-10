@@ -32,7 +32,7 @@ class MigrateNotifier implements Batch {
 	 *
 	 * @return bool
 	 */
-	public function shouldBeSkipped() {
+	public function shouldBeSkipped(): bool {
 		return !$this->countItems();
 	}
 
@@ -49,7 +49,7 @@ class MigrateNotifier implements Batch {
 	 *
 	 * @return bool
 	 */
-	public function needsIncrementOffset() {
+	public function needsIncrementOffset(): bool {
 		return true;
 	}
 
@@ -61,7 +61,7 @@ class MigrateNotifier implements Batch {
 	 *
 	 * @return int
 	 */
-	public function countItems() {
+	public function countItems(): int {
 $count = elgg_get_entities([
 			'types' => 'object',
 			'subtypes' => 'notification',
@@ -82,7 +82,7 @@ $count = elgg_get_entities([
 	 *
 	 * @return Result Instance of \Elgg\Upgrade\Result
 	 */
-	public function run(Result $result, $offset) {
+	public function run(Result $result, $offset): Result {
 
 $entities = elgg_get_entities([
 			'types' => 'object',
