@@ -1,6 +1,6 @@
 # hypeNotifications for Elgg
 
-![Elgg 5.0](https://img.shields.io/badge/Elgg-5.0-orange.svg?style=flat-square)
+![Elgg 7.x](https://img.shields.io/badge/Elgg-7.x-orange.svg?style=flat-square)
 
 ![Popup](https://raw.github.com/hypeJunction/hypeNotifications/master/screenshots/popup.png "Popup")
 ![Digest](https://raw.github.com/hypeJunction/hypeNotifications/master/screenshots/digest.png "Email Digest")
@@ -69,3 +69,9 @@ notify_user($to, $from, $subject, $body, array(
 	)
 ));
 ```
+
+## Compatibility
+
+| Plugin version | Elgg version |
+|---|---|
+| current | 7.x |
