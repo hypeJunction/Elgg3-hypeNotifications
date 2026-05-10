@@ -2,7 +2,7 @@
     "name": "hypejunction/hypenotifications",
     "type": "elgg-plugin",
     "description": "Enhanced on-site and off-site notifications",
-    "homepage": "https://github.com/hypeJunction/hypenotifications",
+    "homepage": "https://github.com/hypeJunction/Elgg3-hypeNotifications",
     "keywords": [
         "elgg",
         "plugin",
@@ -11,8 +11,8 @@
     "license": "GPL-2.0-or-later",
     "authors": [
         {
-            "name": "hypeJunction",
-            "homepage": "https://github.com/hypeJunction"
+            "name": "Ismayil Khayredinov",
+            "email": "ismayil.khayredinov@gmail.com"
         }
     ],
     "extra": {
@@ -43,5 +43,6 @@
         "allow-plugins": {
             "composer/installers": true
         }
-    }
+    },
+    "version": "2.1.2"
 }
