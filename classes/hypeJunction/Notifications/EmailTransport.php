@@ -78,7 +78,11 @@ class EmailTransport {
 				break;
 
 			case 'sparkpost' :
-				$transport = new SparkPostEmailTransport($this->config->{'email.sparkpost_apikey'});
+				if (class_exists(SparkPostEmailTransport::class)) {
+					$transport = new SparkPostEmailTransport($this->config->{'email.sparkpost_apikey'});
+				} else {
+					$transport = new Sendmail();
+				}
 				break;
 
 			case 'mailgun' :
