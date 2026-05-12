@@ -27,7 +27,7 @@
         "composer/installers": "^2.0",
         "laminas/laminas-mail": "^2.26",
         "laminas/laminas-servicemanager": "^3.22",
-        "pelago/emogrifier": "^7.0",
+        "pelago/emogrifier": "^8.0",
         "sendgrid/sendgrid": "^8.0",
         "guzzlehttp/guzzle": "^7.0",
         "sparkpost/sparkpost": "^2.1",
