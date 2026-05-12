@@ -1,5 +1,7 @@
 # hypeNotifications for Elgg
 
+![Elgg 4.x](https://img.shields.io/badge/Elgg-4.x-orange.svg?style=flat-square)
+
 ![Elgg 3.0](https://img.shields.io/badge/Elgg-3.0-orange.svg?style=flat-square)
 
 ![Popup](https://raw.github.com/hypeJunction/hypeNotifications/master/screenshots/popup.png "Popup")
