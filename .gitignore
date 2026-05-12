@@ -10,5 +10,7 @@ robots.txt
 /releases/
 /vendor/
 composer.lock
+tests/playwright/node_modules/
+tests/vitest/node_modules/
 Gemfile.lock
 /yarn.lock
