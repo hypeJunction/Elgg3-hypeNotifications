@@ -1,44 +1,44 @@
 {
-	"name": "hypejunction/hypenotifications",
-	"type": "elgg-plugin",
-	"description": "Enhanced on-site and off-site notifications",
-	"homepage": "http://hypejunction.com",
-	"keywords": [
-		"elgg",
-		"plugin",
-		"notifications"
-	],
-	"license": "proprietary",
-	"authors": [
-		{
-			"name": "Ismayil Khayredinov",
-			"email": "info@hypejunction.com"
-		}
-	],
-	"extra": {
-		"installer-name": "hypeNotifications",
-		"elgg-plugin": {
-			"id": "hypenotifications"
-		}
-	},
-	"require": {
-		"php": ">=7.4",
-		"composer/installers": "^2.0",
-		"laminas/laminas-mail": "^2.10",
-		"laminas/laminas-servicemanager": "^3.4",
-		"pelago/emogrifier": "^6.0",
-		"sendgrid/sendgrid": "^6.0",
-		"mailgun/mailgun-php": "^2.4",
-		"elgg/elgg": "^4.0"
-	},
-	"autoload": {
-		"psr-0": {
-			"": "classes/"
-		}
-	},
-	"config": {
-		"allow-plugins": {
-			"composer/installers": true
-		}
-	}
+    "name": "hypejunction/hypenotifications",
+    "type": "elgg-plugin",
+    "description": "Enhanced on-site and off-site notifications",
+    "homepage": "http://hypejunction.com",
+    "keywords": [
+        "elgg",
+        "plugin",
+        "notifications"
+    ],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Ismayil Khayredinov",
+            "email": "info@hypejunction.com"
+        }
+    ],
+    "extra": {
+        "installer-name": "hypenotifications",
+        "elgg-plugin": {
+            "id": "hypenotifications"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "composer/installers": "^2.0",
+        "laminas/laminas-mail": "^2.10",
+        "laminas/laminas-servicemanager": "^3.4",
+        "pelago/emogrifier": "^6.0",
+        "sendgrid/sendgrid": "^6.0",
+        "mailgun/mailgun-php": "^2.4",
+        "elgg/elgg": "^4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "": "classes/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
 }
