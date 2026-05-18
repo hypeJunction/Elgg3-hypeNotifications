@@ -36,7 +36,10 @@
     "autoload": {
         "psr-0": {
             "": "classes/"
-        }
+        },
+        "files": [
+            "lib/functions.php"
+        ]
     },
     "config": {
         "allow-plugins": {
