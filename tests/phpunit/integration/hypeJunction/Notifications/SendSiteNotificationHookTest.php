@@ -37,11 +37,11 @@ class SendSiteNotificationHookTest extends IntegrationTestCase {
 		$this->assertTrue($result, 'Handler should signal delivery success');
 
 		\elgg_call(ELGG_IGNORE_ACCESS, function () use ($recipient, $object) {
-			_elgg_services()->session_manager->setLoggedInUser($recipient);
+			\_elgg_services()->session_manager->setLoggedInUser($recipient);
 			$rows = \elgg()->{'notifications.site'}->getTable()->getAll([
 				'recipient_guid' => $recipient->guid,
 			]);
-			_elgg_services()->session_manager->removeLoggedInUser();
+			\_elgg_services()->session_manager->removeLoggedInUser();
 			$this->assertNotEmpty($rows);
 			$found = false;
 			foreach ($rows as $row) {
@@ -67,11 +67,11 @@ class SendSiteNotificationHookTest extends IntegrationTestCase {
 		$this->assertTrue($result);
 
 		\elgg_call(ELGG_IGNORE_ACCESS, function () use ($recipient) {
-			_elgg_services()->session_manager->setLoggedInUser($recipient);
+			\_elgg_services()->session_manager->setLoggedInUser($recipient);
 			$count = \elgg()->{'notifications.site'}->getTable()->count([
 				'recipient_guid' => $recipient->guid,
 			]);
-			_elgg_services()->session_manager->removeLoggedInUser();
+			\_elgg_services()->session_manager->removeLoggedInUser();
 			$this->assertSame(0, $count, 'No row should be inserted on short-circuit');
 		});
 	}

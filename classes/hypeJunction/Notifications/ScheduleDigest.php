@@ -61,7 +61,7 @@ class ScheduleDigest {
 		$event_type = $notification_event instanceof InstantNotificationEvent ? 'instant' : 'subscriptions';
 
 		$setting_name = "$event_type:$action:$entity_type:$entity_subtype";
-		$setting_value = elgg_get_plugin_user_setting($setting_name, $recipient_guid, 'hypenotifications', DigestService::INSTANT);
+		$setting_value = \elgg_get_plugin_user_setting($setting_name, $recipient_guid, 'hypenotifications', DigestService::INSTANT);
 
 		if ($setting_value == DigestService::NEVER) {
 			// set notification as sent

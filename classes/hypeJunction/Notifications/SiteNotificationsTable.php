@@ -78,11 +78,11 @@ class SiteNotificationsTable {
 	 */
 	public function getAll(array $options = []) {
 
-		$recipient_guid = elgg_extract('recipient_guid', $options);
-		$limit = (int) elgg_extract('limit', $options, 25);
-		$offset = (int) elgg_extract('offset', $options, 0);
-		$status = elgg_extract('status', $options);
-		$count = elgg_extract('count', $options);
+		$recipient_guid = \elgg_extract('recipient_guid', $options);
+		$limit = (int) \elgg_extract('limit', $options, 25);
+		$offset = (int) \elgg_extract('offset', $options, 0);
+		$status = \elgg_extract('status', $options);
+		$count = \elgg_extract('count', $options);
 
 		$qb = Select::fromTable('site_notifications', 'nt');
 		$qb->where($qb->compare('nt.recipient_guid', '=', $recipient_guid, ELGG_VALUE_GUID));
@@ -333,7 +333,7 @@ class SiteNotificationsTable {
 	public function markReadByEntityGUID($guid, $recipient_guid = null) {
 
 		if (!isset($recipient_guid)) {
-			$recipient_guid = elgg_get_logged_in_user_guid();
+			$recipient_guid = \elgg_get_logged_in_user_guid();
 		}
 
 		$time = $this->getCurrentTime()->getTimestamp();
@@ -361,7 +361,7 @@ class SiteNotificationsTable {
 	public function markReadByExtenderID($id, $type, $recipient_guid = null) {
 
 		if (!isset($recipient_guid)) {
-			$recipient_guid = elgg_get_logged_in_user_guid();
+			$recipient_guid = \elgg_get_logged_in_user_guid();
 		}
 
 		$time = $this->getCurrentTime()->getTimestamp();

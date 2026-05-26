@@ -39,7 +39,7 @@ class SystemEmailEvent implements NotificationEvent {
 
 		$this->actor = $actor;
 		if (!isset($actor)) {
-			$this->actor = _elgg_services()->session->getLoggedInUser();
+			$this->actor = \_elgg_services()->session->getLoggedInUser();
 		}
 
 		$this->action = $action ?: self::DEFAULT_ACTION_NAME;
