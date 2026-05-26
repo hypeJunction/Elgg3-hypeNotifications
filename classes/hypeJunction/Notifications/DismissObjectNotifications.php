@@ -26,12 +26,12 @@ class DismissObjectNotifications {
 
 		$vars = $hook->getParam('vars');
 
-		$entity = elgg_extract('entity', $vars);
+		$entity = \elgg_extract('entity', $vars);
 		if (!$entity instanceof \ElggEntity) {
 			return;
 		}
 
-		$full_view = elgg_extract('full_view', $vars, false);
+		$full_view = \elgg_extract('full_view', $vars, false);
 		if (!$full_view) {
 			return;
 		}

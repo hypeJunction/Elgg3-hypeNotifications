@@ -23,11 +23,11 @@ class FormatEmailNotification {
 			return null;
 		}
 
-		if (!elgg_get_plugin_setting('enable_html_emails', 'hypenotifications')) {
+		if (!\elgg_get_plugin_setting('enable_html_emails', 'hypenotifications')) {
 			return null;
 		}
 
-$body = elgg_view('notifications/wrapper/html/post', [
+$body = \elgg_view('notifications/wrapper/html/post', [
 			'notification' => $notification,
 		]);
 

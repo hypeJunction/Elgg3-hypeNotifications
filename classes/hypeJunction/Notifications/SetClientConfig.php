@@ -18,7 +18,7 @@ class SetClientConfig {
 	public function __invoke(Hook $hook) {
 		$return = $hook->getValue();
 
-		$return['notifications']['ticker'] = (int) elgg_get_plugin_setting('ticker', 'hypenotifications', 60);
+		$return['notifications']['ticker'] = (int) \elgg_get_plugin_setting('ticker', 'hypenotifications', 60);
 
 		return $return;
 	}

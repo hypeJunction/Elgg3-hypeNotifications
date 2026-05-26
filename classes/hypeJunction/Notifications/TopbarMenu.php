@@ -17,7 +17,7 @@ class TopbarMenu {
 	 */
 	public function __invoke(Hook $hook) {
 
-		$user = elgg_get_logged_in_user_entity();
+		$user = \elgg_get_logged_in_user_entity();
 		if (!$user) {
 			return null;
 		}
@@ -36,7 +36,7 @@ $count = hypeapps_count_notifications([
 				$count = '99+';
 			}
 
-$counter = elgg_format_element('span', [
+$counter = \elgg_format_element('span', [
 				'id' => 'notifications-new',
 				'class' => $count ? 'notifications-unread-count messages-new' : 'notifications-unread-count messages-new hidden',
 			], $count);
@@ -49,7 +49,7 @@ $menu[] = ElggMenuItem::factory([
 			'icon' => 'bell',
 			'badge' => $counter,
 			'priority' => 600,
-			'tooltip' => elgg_echo('notifications:thread:unread', [$count]),
+			'tooltip' => \elgg_echo('notifications:thread:unread', [$count]),
 			'rel' => 'popup',
 			'id' => 'notifications-popup-link',
 'data-position' => json_encode([

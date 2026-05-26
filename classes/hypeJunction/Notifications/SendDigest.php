@@ -45,8 +45,8 @@ $notifications = $svc->getTable()->getAll([
 				return;
 			}
 
-			$subject = elgg_echo('notifications:digest:subject');
-$message = elgg_view('notifications/digest', [
+			$subject = \elgg_echo('notifications:digest:subject');
+$message = \elgg_view('notifications/digest', [
 				'notifications' => $notifications,
 			]);
 

@@ -79,7 +79,7 @@ class SparkPostEmailTransport implements TransportInterface {
 
 		$options = [];
 
-		if (elgg_get_plugin_setting('mode', 'hypenotifications') == 'staging') {
+		if (\elgg_get_plugin_setting('mode', 'hypenotifications') == 'staging') {
 			$options['sandbox'] = true;
 		}
 
@@ -105,7 +105,7 @@ $promise = $sparky->transmissions->post([
 				throw new Mail\Exception\RuntimeException($response->getBody(), $code);
 			}
 		} catch (\Exception $e) {
-			elgg_log("SparkPost: " . $e->getMessage(), 'ERROR');
+			\elgg_log("SparkPost: " . $e->getMessage(), 'ERROR');
 			throw new Mail\Exception\RuntimeException($e->getMessage(), $e->getCode());
 		}
 

@@ -248,9 +248,9 @@ class Notification extends ElggData {
 			case 'site' :
 				return get_entity($this->object_id);
 			case 'annotation' :
-				return elgg_get_annotation_from_id($this->object_id);
+				return \elgg_get_annotation_from_id($this->object_id);
 			case 'metadata' :
-				return elgg_get_metadata_from_id($this->object_id);
+				return \elgg_get_metadata_from_id($this->object_id);
 			case 'relationship' :
 				return get_relationship($this->object_id);
 		}
@@ -394,7 +394,7 @@ return implode(':', array_filter([
 			return false;
 		}
 
-return elgg_generate_url('view:notification', [
+return \elgg_generate_url('view:notification', [
 			'id' => $id,
 		]);
 	}
@@ -415,8 +415,8 @@ return elgg_generate_url('view:notification', [
 			}
 		}
 
-		$url = elgg_normalize_url($url);
-		if ($url == elgg_get_site_url()) {
+		$url = \elgg_normalize_url($url);
+		if ($url == \elgg_get_site_url()) {
 			$url = false;
 		}
 
@@ -424,7 +424,7 @@ return elgg_generate_url('view:notification', [
 			'notification' => $this,
 		];
 
-		return elgg_trigger_plugin_hook('target:url', 'notification', $params, $url);
+		return \elgg_trigger_plugin_hook('target:url', 'notification', $params, $url);
 	}
 
 	/**
@@ -455,7 +455,7 @@ return elgg_generate_url('view:notification', [
 
 		$subject_link = '';
 		if ($actor) {
-$subject_link = elgg_view('output/url', [
+$subject_link = \elgg_view('output/url', [
 				'href' => $actor->getURL(),
 				'text' => $actor->getDisplayName(),
 			]);
@@ -465,7 +465,7 @@ $subject_link = elgg_view('output/url', [
 			$object = $object->getEntity();
 		}
 		if ($object instanceof ElggEntity) {
-$object_link = elgg_view('output/url', [
+$object_link = \elgg_view('output/url', [
 				'href' => $object->getURL(),
 				'text' => $object->getDisplayName(),
 			]);
@@ -473,8 +473,8 @@ $object_link = elgg_view('output/url', [
 
 		$summary = '';
 		foreach ($keys as $key) {
-			if (elgg_language_key_exists($key)) {
-				$summary = elgg_echo($key, [$subject_link, $object_link]);
+			if (\elgg_language_key_exists($key)) {
+				$summary = \elgg_echo($key, [$subject_link, $object_link]);
 				break;
 			}
 		}
@@ -491,7 +491,7 @@ $object_link = elgg_view('output/url', [
 			'notification' => $this,
 		];
 
-		return elgg_trigger_plugin_hook('format:body', 'notification', $params, $summary);
+		return \elgg_trigger_plugin_hook('format:body', 'notification', $params, $summary);
 	}
 
 	/**
@@ -515,7 +515,7 @@ $object_link = elgg_view('output/url', [
 
 		$subject_link = '';
 		if ($actor) {
-$subject_link = elgg_view('output/url', [
+$subject_link = \elgg_view('output/url', [
 				'href' => $actor->getURL(),
 				'text' => $actor->getDisplayName(),
 			]);
@@ -525,7 +525,7 @@ $subject_link = elgg_view('output/url', [
 			$object = $object->getEntity();
 		}
 		if ($object instanceof ElggEntity) {
-$object_link = elgg_view('output/url', [
+$object_link = \elgg_view('output/url', [
 				'href' => $object->getURL(),
 				'text' => $object->getDisplayName(),
 			]);
@@ -533,8 +533,8 @@ $object_link = elgg_view('output/url', [
 
 		$summary = '';
 		foreach ($keys as $key) {
-			if (elgg_language_key_exists($key)) {
-				$summary = elgg_echo($key, [$subject_link, $object_link]);
+			if (\elgg_language_key_exists($key)) {
+				$summary = \elgg_echo($key, [$subject_link, $object_link]);
 				break;
 			}
 		}
@@ -542,7 +542,7 @@ $object_link = elgg_view('output/url', [
 		if (!$summary) {
 			$summary = $this->data['summary'] ? : $this->data['subject'];
 			if (!preg_match_all('/<a.*\/a>/i', $summary)) {
-				$summary = elgg_view('output/url', [
+				$summary = \elgg_view('output/url', [
 					'text' => $summary,
 					'href' => $this->getURL(),
 					'class' => 'notification-summary',
@@ -554,7 +554,7 @@ $object_link = elgg_view('output/url', [
 			'notification' => $this,
 		];
 
-		return elgg_trigger_plugin_hook('format:summary', 'notification', $params, $summary);
+		return \elgg_trigger_plugin_hook('format:summary', 'notification', $params, $summary);
 	}
 
 }
