@@ -23,8 +23,8 @@ class AddHtmlEmailPart {
 		$message = $event->getValue();
 		/* @var $message Message */
 
-		if (elgg_get_plugin_setting('enable_html_emails', 'hypenotifications')) {
-			$html_body = elgg_view('notifications/wrapper/html', [
+		if (\elgg_get_plugin_setting('enable_html_emails', 'hypenotifications')) {
+			$html_body = \elgg_view('notifications/wrapper/html', [
 				'email' => $event->getParam('email'),
 			]);
 

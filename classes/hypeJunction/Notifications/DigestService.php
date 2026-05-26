@@ -63,7 +63,7 @@ class DigestService {
 			'remove_admin',
 		];
 
-		$subscriptions = _elgg_services()->notifications->getEvents();
+		$subscriptions = \_elgg_services()->notifications->getEvents();
 
 		foreach ($subscriptions as $object_type => $object_subtypes) {
 			foreach ($object_subtypes as $object_subtype => $events) {
@@ -79,23 +79,23 @@ class DigestService {
 
 		// Add instant notifications that can be batched
 		$notification_events['instant']['user']['default'][] = 'add_friend';
-		if (elgg_is_active_plugin('friend_request')) {
+		if (\elgg_is_active_plugin('friend_request')) {
 			$notification_events['instant']['user']['default'][] = 'friend_request';
 			$notification_events['instant']['user']['default'][] = 'friend_request_decline';
 		}
 
 		$notification_events['instant']['object']['comment'][] = 'create';
 
-		if (elgg_is_active_plugin('likes')) {
+		if (\elgg_is_active_plugin('likes')) {
 			$notification_events['instant']['annotation']['likes'][] = 'create';
 		}
 
-		if (elgg_is_active_plugin('groups')) {
+		if (\elgg_is_active_plugin('groups')) {
 			$notification_events['instant']['group']['default'][] = 'add_membership';
 			$notification_events['instant']['group']['default'][] = 'invite';
 		}
 
-		return elgg_trigger_event_results('notification_events', 'notifications', [], $notification_events);
+		return \elgg_trigger_event_results('notification_events', 'notifications', [], $notification_events);
 	}
 
 	/**

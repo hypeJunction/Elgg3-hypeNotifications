@@ -29,6 +29,6 @@ class SyncNewMember {
 			return;
 		}
 
-		elgg_add_subscription($relationship->guid_one, 'notifysite', $relationship->guid_two);
+		\elgg_add_subscription($relationship->guid_one, 'notifysite', $relationship->guid_two);
 	}
 }

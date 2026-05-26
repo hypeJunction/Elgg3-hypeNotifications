@@ -27,15 +27,15 @@ class DismissProfileNotifications {
 			return;
 		}
 
-		if (elgg_in_context('action')) {
+		if (\elgg_in_context('action')) {
 			return;
 		}
 
 		$vars = $event->getParam('vars');
 
-		$entity = elgg_extract('entity', $vars);
+		$entity = \elgg_extract('entity', $vars);
 		if (!$entity) {
-			$entity = elgg_get_page_owner_entity();
+			$entity = \elgg_get_page_owner_entity();
 		}
 
 		if (!$entity instanceof \ElggEntity) {

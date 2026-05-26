@@ -73,8 +73,8 @@ class DigestTable {
 	 */
 	public function getAll(array $options = []) {
 
-		$recipient_guid = elgg_extract('recipient_guid', $options);
-		$time_scheduled = elgg_extract('time_scheduled', $options, time());
+		$recipient_guid = \elgg_extract('recipient_guid', $options);
+		$time_scheduled = \elgg_extract('time_scheduled', $options, time());
 
 		$qb = Select::fromTable('digest');
 		$qb->select('*')
@@ -97,7 +97,7 @@ class DigestTable {
 
 		$recipients = [];
 
-		$time_scheduled = elgg_extract('time_scheduled', $options, time());
+		$time_scheduled = \elgg_extract('time_scheduled', $options, time());
 
 		$qb = Select::fromTable('digest');
 		$qb->select('recipient_guid')

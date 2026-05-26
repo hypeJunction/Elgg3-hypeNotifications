@@ -24,7 +24,7 @@ class ValidateEmail {
 			return null;
 		}
 
-		if (elgg_get_plugin_setting('mode', 'hypenotifications') == 'staging') {
+		if (\elgg_get_plugin_setting('mode', 'hypenotifications') == 'staging') {
 			$to_address = $email->getTo()->getEmail();
 
 			if (!EmailWhitelist::isWhitelisted($to_address)) {
