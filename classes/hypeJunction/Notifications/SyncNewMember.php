@@ -29,6 +29,7 @@ class SyncNewMember {
 			return;
 		}
 
+		// TODO(6.x): elgg_add_subscription removed — port to \Elgg\Notifications\SubscriptionsService->addSubscription()
 		\elgg_add_subscription($relationship->guid_one, 'notifysite', $relationship->guid_two);
 	}
 }
