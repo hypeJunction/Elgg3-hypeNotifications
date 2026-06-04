@@ -38,8 +38,7 @@ foreach ($users as $user) {
 
 		foreach ($friends as $friend) {
 			foreach ($friends_methods as $method) {
-				// TODO(6.x): elgg_add_subscription removed — port to \Elgg\Notifications\SubscriptionsService->addSubscription()
-				elgg_add_subscription($user->guid, $method, $friend->guid);
+				_elgg_services()->subscriptions->addSubscription($user->guid, $method, $friend->guid);
 			}
 		}
 	}
@@ -57,8 +56,7 @@ foreach ($users as $user) {
 
 		foreach ($groups as $group) {
 			foreach ($groups_methods as $method) {
-				// TODO(6.x): elgg_add_subscription removed — port to \Elgg\Notifications\SubscriptionsService->addSubscription()
-				elgg_add_subscription($user->guid, $method, $group->guid);
+				_elgg_services()->subscriptions->addSubscription($user->guid, $method, $group->guid);
 			}
 		}
 	}
