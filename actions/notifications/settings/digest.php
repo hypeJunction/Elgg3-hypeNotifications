@@ -10,7 +10,7 @@ if (!$user instanceof ElggUser || !$user->canEdit()) {
 $params = get_input('params');
 
 foreach ($params as $key => $value) {
-	elgg_set_plugin_user_setting($key, $value, $user->guid, 'hypenotifications');
+	$user->setPluginSetting('hypenotifications', $key, $value);
 }
 
 elgg_ok_response('', elgg_echo('notifications:settings:digest:success'));
