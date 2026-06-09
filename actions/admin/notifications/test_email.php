@@ -21,9 +21,16 @@ if (!empty($uploads)) {
 	}
 }
 
-$result = elgg_send_email(null, $recipient, $subject, $body, [
-	'attachments' => $attachments,
-], 'email');
+$email = \Elgg\Email::factory([
+	'to' => $recipient,
+	'subject' => $subject,
+	'body' => $body,
+	'params' => [
+		'attachments' => $attachments,
+	],
+]);
+
+$result = elgg_send_email($email);
 
 foreach ($attachments as $attachment) {
 	$attachment->delete();

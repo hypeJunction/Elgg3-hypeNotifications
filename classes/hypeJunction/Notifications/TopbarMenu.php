@@ -29,7 +29,7 @@ class TopbarMenu {
 
 		$counter = '';
 
-		$count = hypeapps_count_notifications([
+		$count = \hypeapps_count_notifications([
 			'status' => 'unseen',
 			'recipient_guid' => $user->guid,
 		]);

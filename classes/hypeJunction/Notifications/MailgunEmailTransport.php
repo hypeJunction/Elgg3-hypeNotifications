@@ -88,7 +88,7 @@ class MailgunEmailTransport implements TransportInterface {
 			]);
 		} catch (HttpClientException $ex) {
 			$body = $ex->getResponseBody();
-			elgg_log('Mailgun: ' . $ex->getMessage() . ' ' .json_encode($body), 'ERROR');
+			elgg_log('Mailgun: ' . $ex->getMessage() . ' ' .json_encode($body), 'error');
 
 			throw new Mail\Exception\RuntimeException($ex->getMessage() . ' ' .json_encode($body), $ex->getCode());
 		}

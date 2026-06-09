@@ -108,7 +108,7 @@ class SparkPostEmailTransport implements TransportInterface {
 				throw new Mail\Exception\RuntimeException($response->getBody(), $code);
 			}
 		} catch (\Exception $e) {
-			elgg_log('SparkPost: ' . $e->getMessage(), 'ERROR');
+			elgg_log('SparkPost: ' . $e->getMessage(), 'error');
 			throw new Mail\Exception\RuntimeException($e->getMessage(), $e->getCode());
 		}
 	}

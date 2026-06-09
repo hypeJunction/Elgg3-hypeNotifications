@@ -91,6 +91,7 @@ class SiteNotificationsTable {
 		$access->guid_column = 'access_guid';
 		$access->owner_guid_column = 'access_owner_guid';
 		$access->use_enabled_clause = false;
+		$access->use_deleted_clause = false;
 
 		$access_where = $access->prepare($qb, 'nt');
 		if (!empty($access_where)) {
