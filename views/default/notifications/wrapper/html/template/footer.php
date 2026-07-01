@@ -7,12 +7,10 @@ if (!$email instanceof \Elgg\Email) {
 }
 
 $to = $email->getTo()->getEmail();
-$users = elgg_get_user_by_email($to);
-if (!$users) {
+$recipient = elgg_get_user_by_email($to);
+if (!$recipient instanceof \ElggUser) {
 	return;
 }
-
-$recipient = array_shift($users);
 
 $site = elgg_get_site_entity();
 

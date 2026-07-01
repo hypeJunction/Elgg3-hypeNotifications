@@ -13,11 +13,14 @@ $actor = $notification->getActor();
 $object = $notification->getObject();
 
 $size = elgg_extract('size', $vars, 'small');
-$icon = elgg_view_entity_icon($actor, $size, [
-	'use_hover' => false,
-	'use_link' => false,
-	'href' => false,
-]);
+$icon = '';
+if ($actor instanceof \ElggEntity) {
+	$icon = elgg_view_entity_icon($actor, $size, [
+		'use_hover' => false,
+		'use_link' => false,
+		'href' => false,
+	]);
+}
 
 if (!$notification->isSeen()) {
 	$notification->markAsSeen();

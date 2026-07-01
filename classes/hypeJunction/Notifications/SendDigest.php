@@ -39,6 +39,11 @@ class SendDigest {
 		}
 
 		foreach ($recipients as $recipient) {
+			$recipient_entity = $recipient ? get_entity((int) $recipient) : null;
+			if (!$recipient_entity instanceof \ElggUser) {
+				continue;
+			}
+
 			$notifications = $svc->getTable()->getAll([
 				'recipient_guid' => $recipient,
 				'time_scheduled' => $time,
@@ -53,7 +58,13 @@ class SendDigest {
 				'notifications' => $notifications,
 			]);
 
-			$sent = notify_user($recipient, 0, $subject, $message, [], 'email');
+			$email = \Elgg\Email::factory([
+				'to' => $recipient_entity,
+				'subject' => $subject,
+				'body' => $message,
+			]);
+
+			$sent = elgg_send_email($email);
 			if ($sent) {
 				foreach ($notifications as $notification) {
 					$notification->delete();

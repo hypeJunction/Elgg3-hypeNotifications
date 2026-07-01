@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import 'jquery-ui/progressbar';
+import 'jquery-ui';
 import Ajax from 'elgg/Ajax';
 
 const ajax = new Ajax();

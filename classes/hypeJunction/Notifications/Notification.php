@@ -154,7 +154,7 @@ class Notification extends ElggData {
 	 * @return ElggEntity|false
 	 */
 	public function getRecipient() {
-		return get_entity($this->recipient_guid);
+		return $this->recipient_guid ? get_entity((int) $this->recipient_guid) : false;
 	}
 
 	/**
@@ -185,7 +185,7 @@ class Notification extends ElggData {
 	 * @return ElggEntity|false
 	 */
 	public function getActor() {
-		return get_entity($this->actor_guid);
+		return $this->actor_guid ? get_entity((int) $this->actor_guid) : false;
 	}
 
 	/**
@@ -254,13 +254,13 @@ class Notification extends ElggData {
 			case 'user':
 			case 'group':
 			case 'site':
-				return get_entity($this->object_id);
+				return $this->object_id ? get_entity((int) $this->object_id) : false;
 			case 'annotation':
-				return elgg_get_annotation_from_id($this->object_id);
+				return elgg_get_annotation_from_id((int) $this->object_id);
 			case 'metadata':
-				return elgg_get_metadata_from_id($this->object_id);
+				return elgg_get_metadata_from_id((int) $this->object_id);
 			case 'relationship':
-				return get_relationship($this->object_id);
+				return $this->object_id ? elgg_get_relationship((int) $this->object_id) : false;
 		}
 	}
 

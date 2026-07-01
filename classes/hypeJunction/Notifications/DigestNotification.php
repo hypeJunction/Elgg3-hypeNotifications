@@ -53,7 +53,7 @@ class DigestNotification extends ElggData {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function save() {
+	public function save(): bool {
 		$id = $this->id;
 
 		$table = elgg()->{'db.digest'};
@@ -61,9 +61,9 @@ class DigestNotification extends ElggData {
 
 		if (!$id) {
 			$this->set('time_created', time());
-			return $table->insert($this);
+			return (bool) $table->insert($this);
 		} else {
-			return $table->update($this);
+			return (bool) $table->update($this);
 		}
 	}
 
@@ -118,7 +118,7 @@ class DigestNotification extends ElggData {
 	 * @return \ElggEntity|false
 	 */
 	public function getRecipient() {
-		return get_entity($this->recipient_guid);
+		return $this->recipient_guid ? get_entity((int) $this->recipient_guid) : false;
 	}
 
 	/**
@@ -160,11 +160,11 @@ class DigestNotification extends ElggData {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function delete() {
+	public function delete(): bool {
 		$table = elgg()->{'db.digest'};
 		/* @var $table DigestTable */
 
-		return $table->delete($this->id);
+		return (bool) $table->delete($this->id);
 	}
 
 	/**
@@ -178,35 +178,37 @@ class DigestNotification extends ElggData {
 	 * {@inheritdoc}
 	 */
 	public function getExportableValues() {
-		return array_key($this->attributes);
+		return array_keys($this->attributes);
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getObjectFromID($id) {
-		$svc = self::getInstance();
-		$svc->getTable()->get($id);
+	public function getObjectFromID(int $id): mixed {
+		$svc = elgg()->{'notifications.digest'};
+		/* @var $svc DigestService */
+
+		return $svc->getTable()->get($id);
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getSubtype() {
+	public function getSubtype(): string {
 		return 'digest';
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getSystemLogID() {
-		return $this->id;
+	public function getSystemLogID(): int {
+		return (int) $this->id;
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getType() {
+	public function getType(): string {
 		return 'notification';
 	}
 
@@ -220,7 +222,7 @@ class DigestNotification extends ElggData {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function getURL() {
-		return false;
+	public function getURL(): string {
+		return '';
 	}
 }

@@ -10,7 +10,9 @@ if ($username) {
 	$user = elgg_get_logged_in_user_entity();
 }
 
-elgg_entity_gatekeeper($user->guid);
+if (!$user instanceof \ElggUser) {
+	throw new \Elgg\Exceptions\Http\EntityNotFoundException();
+}
 
 if (!$user->canEdit()) {
 	throw new \Elgg\Exceptions\Http\EntityPermissionsException();
