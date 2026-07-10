@@ -3,7 +3,11 @@
 namespace hypeJunction\Notifications;
 
 use Elgg\Email;
-use Elgg\Email\Address;
+// Elgg 6 dropped \Elgg\Email\Address; \Elgg\Email now takes Symfony's Address
+// directly (setFrom/setTo declare Symfony\Component\Mime\Address). The old class
+// only resolved here because a stray composer install had vendored an Elgg 5.1 core
+// into mod/hypefaker/vendor — with that gone, every email fataled on a missing class.
+use Symfony\Component\Mime\Address;
 use Elgg\Event;
 
 /**
@@ -45,7 +49,7 @@ class PrepareEmail {
 			$params['original_from'] = $from;
 			$email->setParams($params);
 
-			$email->setFrom(new Address($from_email, $from->getName()));
+			$email->setFrom(new Address($from_email, (string) $from->getName()));
 		}
 
 		return $email;
